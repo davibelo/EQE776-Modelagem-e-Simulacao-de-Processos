@@ -41,6 +41,7 @@ for i in range(len(Tgrid)-1):
             else:
                 a, fa = m, fm
         roots.append(0.5*(a+b))
+
 # Mostrar soluções (escrever em arquivo)
 output_path = Path(__file__).with_name('resultados_estados_estacionarios.txt')
 lines = ["Estados estacionários (T em K, CA em kmol/m^3, r em kmol/(m^3.h)):"]
