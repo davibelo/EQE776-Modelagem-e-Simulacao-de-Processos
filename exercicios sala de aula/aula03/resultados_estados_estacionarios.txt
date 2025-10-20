@@ -1,0 +1,4 @@
+Estados estacionários (T em K, CA em kmol/m^3, r em kmol/(m^3.h)):
+T=310.204 K, CA=8.635449, r=1.364551
+T=340.865 K, CA=5.291609, r=4.708391
+T=366.882 K, CA=2.454178, r=7.545822

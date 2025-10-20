@@ -1,3 +1,4 @@
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -40,13 +41,14 @@ for i in range(len(Tgrid)-1):
             else:
                 a, fa = m, fm
         roots.append(0.5*(a+b))
-
-# Mostrar soluções
-print("Estados estacionários (T em K, CA em kmol/m^3, r em kmol/(m^3.h)):")
+# Mostrar soluções (escrever em arquivo)
+output_path = Path(__file__).with_name('resultados_estados_estacionarios.txt')
+lines = ["Estados estacionários (T em K, CA em kmol/m^3, r em kmol/(m^3.h)):"]
 for Tsol in roots:
     CAsol = CA(Tsol)
     rsol  = r(Tsol)
-    print(f"T={Tsol:.3f} K, CA={CAsol:.6f}, r={rsol:.6f}")
+    lines.append(f"T={Tsol:.3f} K, CA={CAsol:.6f}, r={rsol:.6f}")
+output_path.write_text("\n".join(lines), encoding='utf-8')
 
 # Gráfico: calor gerado x removido
 plt.figure(figsize=(8,5))
@@ -62,4 +64,5 @@ plt.title('Estados estacionários: interseções Qgerado x Qremovido')
 plt.legend()
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.show()
+figure_path = Path(__file__).with_name('estados_estacionarios.png')
+plt.savefig(figure_path, dpi=300)
