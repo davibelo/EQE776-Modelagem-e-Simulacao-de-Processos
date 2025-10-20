@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+from scipy.optimize import brentq
 import os
 
 try:
@@ -34,35 +36,30 @@ k  = lambda T: k0*np.exp(-E/(R*T))
 def odes(t, y):
     CA, T = y
     r = k(T) * CA
-    dCAdt = (q/V)*(CAf - CA) - r
-    dTdt  = (q*Cp*(Tf - T) + V*r*dH - hA*(T - Tcf)) / (V*Cp)
+    dCAdt = q*CAf/V - q*CA/V - r
+    dTdt  = q*Tf/V - q*T/V + r*dH/Cp - (hA*(T - Tcf))/(V*Cp)
     return np.array([dCAdt, dTdt])
 
-# Integrador RK4
+# Integração numérica com solver pronto
 
-def rk4(f, y0, t):
-    y = np.zeros((len(t), len(y0)))
-    y[0] = y0
-    for i in range(len(t)-1):
-        h = t[i+1]-t[i]
-        k1 = f(t[i], y[i])
-        k2 = f(t[i]+0.5*h, y[i]+0.5*h*k1)
-        k3 = f(t[i]+0.5*h, y[i]+0.5*h*k2)
-        k4 = f(t[i]+h, y[i]+h*k3)
-        y[i+1] = y[i] + (h/6.0)*(k1 + 2*k2 + 2*k3 + k4)
-    return y
-
-# Tempo e condições iniciais
 T_end = 10.0  # h
-n = 18000
+n = 1000
 Ttime = np.linspace(0, T_end, n)
 T0_list = [300, 320, 340, 360, 380, 400]
 CA0 = CAf
 
 sols = []
 for T0 in T0_list:
-    Y = rk4(odes, np.array([CA0, float(T0)]), Ttime)
-    sols.append((T0, Ttime, Y))
+    sol = solve_ivp(
+        odes,
+        (Ttime[0], Ttime[-1]),
+        np.array([CA0, float(T0)]),
+        t_eval=Ttime,
+    )
+    if not sol.success:
+        raise RuntimeError(f"Falha na integração para T0={T0}: {sol.message}")
+    sols.append((T0, sol.t, sol.y.T))
+
 # Estados estacionários para marcar no plano de fase
 CA_ss = lambda T: ((q/V)*CAf) / (k(T) + (q/V))
 F = lambda T: V*k(T)*CA_ss(T)*dH - (q*Cp*(T-Tf) + hA*(T-Tcf))
@@ -71,17 +68,17 @@ F = lambda T: V*k(T)*CA_ss(T)*dH - (q*Cp*(T-Tf) + hA*(T-Tcf))
 Ts = np.linspace(250, 900, 3000)
 Fv = F(Ts)
 roots = []
+from scipy.optimize import brentq
 for i in range(len(Ts) - 1):
     if Fv[i] * Fv[i + 1] < 0:
         a, b = Ts[i], Ts[i + 1]
-        # bisseção refinada
-        for _ in range(80):
-            m = 0.5 * (a + b)
-            if F(a) * F(m) <= 0:
-                b = m
-            else:
-                a = m
-        roots.append(0.5 * (a + b))
+        try:
+            root = brentq(F, a, b)
+            # evitar raízes duplicadas devido a resoluções numéricas
+            if not any(abs(root - r) < 1e-6 for r in roots):
+                roots.append(root)
+        except ValueError:
+            continue
 roots = sorted(roots)
 
 # Plot T(t)
