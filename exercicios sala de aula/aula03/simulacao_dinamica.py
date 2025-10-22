@@ -61,8 +61,8 @@ for T0 in T0_list:
     sols.append((T0, sol.t, sol.y.T))
 
 # Estados estacionários para marcar no plano de fase
-CA_ss = lambda T: ((q/V)*CAf) / (k(T) + (q/V))
-F = lambda T: V*k(T)*CA_ss(T)*dH - (q*Cp*(T-Tf) + hA*(T-Tcf))
+CA_ss = lambda T: CAf / (1 + (V/q)*k(T))
+F = lambda T: V*k(T)*CA_ss(T)*dH - q*Cp*(T - Tf) - hA*(T - Tcf)
 
 # Encontrar raízes de F(T) (pontos de equilíbrio de temperatura)
 Ts = np.linspace(250, 900, 3000)
