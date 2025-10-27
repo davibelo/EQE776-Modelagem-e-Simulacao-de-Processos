@@ -1,0 +1,379 @@
+\documentclass{article}
+\setlength{\headheight}{36pt}
+\addtolength{\topmargin}{-24pt}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{listingsutf8}
+\usepackage[portuguese]{babel}
+\usepackage{textcomp}
+
+% Estilo para códigos em Python
+\lstset{
+  language=Python,
+  inputencoding=utf8/latin1,
+  extendedchars=true,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!70!black},
+  commentstyle=\color{teal!70!black},
+  stringstyle=\color{orange!60!black},
+  showstringspaces=false,
+  columns=fullflexible,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=4,
+  captionpos=b
+}
+
+% Estilo para códigos em MATLAB
+\lstdefinestyle{matlab}{
+  language=Matlab,
+  inputencoding=utf8/latin1,
+  extendedchars=true,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!70!black},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red!60!black},
+  showstringspaces=false,
+  columns=fullflexible,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=4,
+  captionpos=b,
+  morekeywords={function,end,if,else,elseif,for,while,switch,case,otherwise,try,catch,return,break,continue}
+}
+
+\title{Resolução da Lista 3}
+\author{Francisco Davi Belo Rodrigues}
+\date{2025-08}
+
+\begin{document}
+
+% Cabeçalho institucional
+\fancyhead{}
+\fancyhead[C]{%
+  {\large\textbf{Universidade Federal do Rio de Janeiro}}\\
+  {\normalsize Programa de Pós Graduação em Engenharia de Processos Químicos e Bioquímicos} \\
+  {\normalsize Disciplina EQE768 - Dinâmica e Controle de Processos Químicos}%
+}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section*{a) Equações de Estado Estacionário para o Reator van de Vusse}
+
+As equações de balanço de massa e energia no estado estacionário são obtidas zerando as derivadas:
+
+Para \( C_A \):
+\begin{equation}
+0 = (C_{A0} - C_A) \cdot r - k_1(T) \cdot C_A - 2 \cdot k_3(T) \cdot C_A^2
+\end{equation}
+
+Para \( C_B \):
+\begin{equation}
+C_B = \frac{k_1(T) \cdot C_A}{r + k_2(T)}
+\end{equation}
+
+Para \( T \):
+\begin{equation}
+0 = r \cdot (T_0 - T) + \frac{(-\Delta H_{AB}) \cdot k_1(T) \cdot C_A + (-\Delta H_{BC}) \cdot k_2(T) \cdot C_B + (-\Delta H_{AD}) \cdot 2 \cdot k_3(T) \cdot C_A^2}{\rho \cdot c_p} - h \cdot (T - T_k)
+\end{equation}
+
+onde \( r = F/V \), \( h = K_w \cdot A_R / (V \cdot \rho \cdot c_p) \), e as constantes de taxa seguem Arrhenius:
+\begin{align}
+k_1(T) &= k_{10} \exp\left( -\frac{E_1}{R(T + 273.15)} \right), \\
+k_2(T) &= k_{20} \exp\left( -\frac{E_2}{R(T + 273.15)} \right), \\
+k_3(T) &= k_{30} \exp\left( -\frac{E_3}{R(T + 273.15)} \right).
+\end{align}
+
+Para plotar \( C_{B,e} \) vs. \( r \), varia-se \( r \) de 160 h$^{-1}$ a próximo de zero, resolvendo o sistema não-linear para cada \( r \) com o auxílio do seguinte código em python:
+
+\lstinputlisting[]{letra_a.py}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{Cb_vs_FV_plot.png}
+  \caption{Cb x F/V em estado estacionário}
+\end{figure}
+
+\section*{b) Funções de transferência para o Reator van de Vusse}
+
+Partimos do modelo dinâmico não linear (mesmo utilizado na letra a), em termos de $r = F/V$ e do coeficiente térmico $h = K_w A_R/(V\,\rho\,c_p)$:
+\begin{align}
+\frac{dC_A}{dt} &= (C_{A0} - C_A)\,r - k_1(T)\,C_A - \,k_3(T)\,C_A^2, \label{eq:f1}\\
+\frac{dC_B}{dt} &= -C_B\,r + k_1(T)\,C_A - k_2(T)\,C_B, \label{eq:f2}\\
+\frac{dT}{dt} &= (T_0 - T)\,r + \frac{(-\Delta H_{AB})\,k_1(T)\,C_A + (-\Delta H_{BC})\,k_2(T)\,C_B + (-\Delta H_{AD})\,k_3(T)\,C_A^2}{\rho\,c_p} - h\,(T - T_k). \label{eq:f3}
+\end{align}
+
+Assim, denotamos por
+\[
+f_1 \equiv \text{Lado direito de } \eqref{eq:f1}, \qquad
+f_2 \equiv \text{Lado direito de } \eqref{eq:f2}, \qquad
+f_3 \equiv \text{Lado direito de } \eqref{eq:f3},
+\]
+
+As constantes de taxa seguem a lei de Arrhenius:
+\[
+k_i(T) = k_{i0}\,\exp\!\left(-\frac{E_i}{R(T + 273{,}15)}\right)
+\]
+
+Definimos os estados, entradas e saídas como:
+\[
+x = \begin{bmatrix} C_A \\ C_B \\ T \end{bmatrix}, \quad
+u = \begin{bmatrix} r \\ T_k \end{bmatrix}, \quad
+y = \begin{bmatrix} y_1 \\ y_2 \end{bmatrix} =
+\begin{bmatrix} C_B \\ T \end{bmatrix}.
+\]
+
+Linearizando em torno de um estado estacionário $(x_e,u_e)$, obtemos o modelo incremental
+\[
+\Delta\dot{x} = A\,\Delta x + B\,\Delta u, \quad
+\Delta y = C\,\Delta x + D\,\Delta u, \quad \text{ com: } A = \left.\dfrac{\partial f}{\partial x}\right|_{(x_e,u_e)} \text{ e } B = \left.\dfrac{\partial f}{\partial u}\right|_{(x_e,u_e)}
+\]
+
+Para montar $A$, calculamos as derivadas parciais seguintes.
+
+Para $f_1$:
+\begin{align}
+\frac{\partial f_1}{\partial C_A} &= -r - k_1(T) - 2\,k_3(T)\,C_A, &
+\frac{\partial f_1}{\partial C_B} &= 0, &
+\frac{\partial f_1}{\partial T} &= -C_A\,\frac{dk_1}{dT} - C_A^2\,\frac{dk_3}{dT}.
+\end{align}
+
+Para $f_2$:
+\begin{align}
+\frac{\partial f_2}{\partial C_A} &= k_1(T), &
+\frac{\partial f_2}{\partial C_B} &= -r - k_2(T), &
+\frac{\partial f_2}{\partial T} &= C_A\,\frac{dk_1}{dT} - C_B\,\frac{dk_2}{dT}.
+\end{align}
+
+Para $f_3$:
+\begin{align}
+\frac{\partial f_3}{\partial C_A} &= \frac{1}{\rho\,c_p}\Big[(-\Delta H_{AB})\,k_1(T) + (-\Delta H_{AD})\,2\,k_3(T)\,C_A\Big], \\
+\frac{\partial f_3}{\partial C_B} &= \frac{1}{\rho\,c_p}\Big[(-\Delta H_{BC})\,k_2(T)\Big], \\
+\frac{\partial f_3}{\partial T} &= -r - h + \frac{1}{\rho\,c_p}\!\left[(-\Delta H_{AB})\,C_A\,\frac{dk_1}{dT} + (-\Delta H_{BC})\,C_B\,\frac{dk_2}{dT} + (-\Delta H_{AD})\,C_A^2\,\frac{dk_3}{dT}\right].
+\end{align}
+
+As derivadas de Arrhenius são
+\[
+\frac{dk_i}{dT} = k_i(T)\,\frac{E_i/R}{(T + 273{,}15)^2}, \quad i=1,2,3.
+\]
+
+Para a matriz $B$:
+
+Derivadas de f1: 
+\begin{align}
+\frac{\partial f_1}{\partial r} = C_{A0} - C_A, \qquad
+\frac{\partial f_1}{\partial T_k} = 0
+\end{align}
+
+Derivadas de f2:
+\begin{align}
+\frac{\partial f_2}{\partial r} = -C_B, \qquad
+\frac{\partial f_2}{\partial T_k} = 0
+\end{align}
+
+Derivadas de f3:
+
+\begin{align}
+\frac{\partial f_3}{\partial r} = T_0 - T, \qquad
+\frac{\partial f_3}{\partial T_k} = h
+\end{align}
+
+Para determinar as matrizes de saída, temos:
+\[
+y_1 = C_B, \qquad y_2 = T,
+\]
+as quais são componentes do vetor de estados
+\[
+x = \begin{bmatrix} C_A \\ C_B \\ T \end{bmatrix}.
+\]
+Logo, a função de saída é linear e independe diretamente das entradas $u = [\,r,\;T_k\,]^T$:
+\[
+g(x,u) = \begin{bmatrix} C_B \\ T \end{bmatrix}
+= \underbrace{\begin{bmatrix} 0 & 1 & 0 \\[3pt] 0 & 0 & 1 \end{bmatrix}}_{C}\,x
+\;+\; \underbrace{\begin{bmatrix} 0 & 0 \\[3pt] 0 & 0 \end{bmatrix}}_{D}\,u.
+\]
+Portanto, as matrizes da saída são
+\[
+C = \begin{bmatrix} 0 & 1 & 0 \\[3pt] 0 & 0 & 1 \end{bmatrix}, 
+\qquad
+D = \begin{bmatrix} 0 & 0 \\[3pt] 0 & 0 \end{bmatrix}.
+\]
+
+A matriz $D = 0$, significa que $g(x,u)$ não depende diretamente de $u$, pois não há termo de ação direta das entradas nas saídas.
+
+A relação entre a saída e a entrada no domínio de Laplace é dada pela matriz de funções de transferência $G(s)$. Partindo do modelo linearizado no espaço de estados em variáveis de desvio:
+\begin{align*}
+\Delta\dot{x} &= A\,\Delta x + B\,\Delta u \\
+\Delta y &= C\,\Delta x + D\,\Delta u
+\end{align*}
+Aplicando a transformada de Laplace em ambas as equações, considerando condições iniciais nulas, obtemos:
+\begin{align*}
+s\,\Delta X(s) &= A\,\Delta X(s) + B\,\Delta U(s) \\
+\Delta Y(s) &= C\,\Delta X(s) + D\,\Delta U(s)
+\end{align*}
+Rearranjando a primeira equação para isolar $\Delta X(s)$:
+\begin{align*}
+sI\,\Delta X(s) - A\,\Delta X(s) &= B\,\Delta U(s) \\
+(sI - A)\,\Delta X(s) &= B\,\Delta U(s) \\
+\Delta X(s) &= (sI - A)^{-1} B\,\Delta U(s)
+\end{align*}
+Substituindo $\Delta X(s)$ na equação da saída:
+\begin{align*}
+\Delta Y(s) &= C \left( (sI - A)^{-1} B\,\Delta U(s) \right) + D\,\Delta U(s) \\
+\Delta Y(s) &= \left( C(sI - A)^{-1} B + D \right) \Delta U(s)
+\end{align*}
+A matriz de funções de transferência $G(s)$ é definida como $\Delta Y(s) = G(s) \Delta U(s)$, portanto:
+
+A matriz de funções de transferência é
+\[
+G(s) = C\,(sI - A)^{-1} B + D =
+\begin{bmatrix}
+G_{11}(s) & G_{12}(s)\\
+G_{21}(s) & G_{22}(s)
+\end{bmatrix},
+\]
+onde $G_{11}(s) = \dfrac{C_B}{r}$, $G_{12}(s) = \dfrac{C_B}{T_k}$, $G_{21}(s) = \dfrac{T}{r}$ e $G_{22}(s) = \dfrac{T}{T_k}$, todas avaliadas no estado estacionário correspondente a cada valor de $r$.
+
+\medskip
+
+O código abaixo utiliza este equacionamento para calcular os estados estacionários, montar $A$, $B$, $C$, $D$ e, então, obter as FTs por $G(s) = C(sI-A)^{-1}B + D$:
+
+\lstinputlisting[]{letra_b.py}
+
+Para cada valor de $r$, o código acima calculou os estados estacionários (EE) e as funções de transferência $G(s)$. Note que o denominador é o mesmo para todas as $G_{ij}(s)$ de um dado $r$.
+
+\paragraph{Para $r = 20$ h$^{-1}$:}
+EE: $C_{A_e} = 1.28$, $C_{B_e} = 0.92$, $T_e = 134.31$.
+
+\begin{align*}
+G_{11}(s) &= \frac{-0.9186\,s^2 + 75.23\,s + 4823}{s^3 + 196.9\,s^2 + 1.283\times 10^{4}\,s + 3.177\times 10^{5}}, \\
+G_{12}(s) &= \frac{33.29\,s - 4008}{s^3 + 196.9\,s^2 + 1.283\times 10^{4}\,s + 3.177\times 10^{5}}, \\
+G_{21}(s) &= \frac{-4.310\,s^2 - 174.7\,s + 45260}{s^3 + 196.9\,s^2 + 1.283\times 10^{4}\,s + 3.177\times 10^{5}}, \\
+G_{22}(s) &= \frac{30.83\,s^2 + 4921\,s + 1.941\times 10^{5}}{s^3 + 196.9\,s^2 + 1.283\times 10^{4}\,s + 3.177\times 10^{5}}.
+\end{align*}
+
+\paragraph{Para $r = 45$ h$^{-1}$:}
+EE: $C_{A_e} = 1.96$, $C_{B_e} = 1.10$, $T_e = 136.28$.
+
+\begin{align*}
+G_{11}(s) &= \frac{-1.098\,s^2 - 36.86\,s + 2330}{s^3 + 283.5\,s^2 + 2.723\times 10^{4}\,s + 9.735\times 10^{5}}, \\
+G_{12}(s) &= \frac{88.69\,s - 2489}{s^3 + 283.5\,s^2 + 2.723\times 10^{4}\,s + 9.735\times 10^{5}}, \\
+G_{21}(s) &= \frac{-6.280\,s^2 - 608.2\,s + 36710}{s^3 + 283.5\,s^2 + 2.723\times 10^{4}\,s + 9.735\times 10^{5}}, \\
+G_{22}(s) &= \frac{30.83\,s^2 + 7221\,s + 4.161\times 10^{5}}{s^3 + 283.5\,s^2 + 2.723\times 10^{4}\,s + 9.735\times 10^{5}}.
+\end{align*}
+
+\paragraph{Para $r = 60$ h$^{-1}$:}
+EE: $C_{A_e} = 2.25$, $C_{B_e} = 1.11$, $T_e = 136.65$.
+
+\begin{align*}
+G_{11}(s) &= \frac{-1.113\,s^2 - 93.77\,s - 257.0}{s^3 + 329.8\,s^2 + 3.715\times 10^{4}\,s + 1.535\times 10^{6}}, \\
+G_{12}(s) &= \frac{119.6\,s + 872.8}{s^3 + 329.8\,s^2 + 3.715\times 10^{4}\,s + 1.535\times 10^{6}}, \\
+G_{21}(s) &= \frac{-6.654\,s^2 - 849.1\,s + 22400}{s^3 + 329.8\,s^2 + 3.715\times 10^{4}\,s + 1.535\times 10^{6}}, \\
+G_{22}(s) &= \frac{30.83\,s^2 + 8379\,s + 5.602\times 10^{5}}{s^3 + 329.8\,s^2 + 3.715\times 10^{4}\,s + 1.535\times 10^{6}}.
+\end{align*}
+
+\paragraph{Para $r = 120$ h$^{-1}$:}
+EE: $C_{A_e} = 3.04$, $C_{B_e} = 0.99$, $T_e = 136.47$.
+
+\begin{align*}
+G_{11}(s) &= \frac{-0.9916\,s^2 - 246.6\,s - 14810}{s^3 + 501.9\,s^2 + 8.677\times 10^{4}\,s + 5.292\times 10^{6}}, \\
+G_{12}(s) &= \frac{213.3\,s + 2.307\times 10^{4}}{s^3 + 501.9\,s^2 + 8.677\times 10^{4}\,s + 5.292\times 10^{6}}, \\
+G_{21}(s) &= \frac{-6.471\,s^2 - 1591\,s - 6.141\times 10^{4}}{s^3 + 501.9\,s^2 + 8.677\times 10^{4}\,s + 5.292\times 10^{6}}, \\
+G_{22}(s) &= \frac{30.83\,s^2 + 1.240\times 10^{4}\,s + 1.231\times 10^{6}}{s^3 + 501.9\,s^2 + 8.677\times 10^{4}\,s + 5.292\times 10^{6}}.
+\end{align*}
+
+\section*{c) Análise RGA e Interações para o Reator van de Vusse}
+
+A Análise de Ganhos Relativos (RGA) é uma técnica utilizada para determinar a melhor forma de parear as variáveis controladas e manipuladas em um sistema multivariável. A análise é baseada na matriz de ganhos estacionários do processo, $K = G(0)$.
+
+O ganho estacionário de uma função de transferência $G(s)$ representa a razão entre a variação da saída e a variação da entrada após o sistema atingir um novo estado estacionário. Pelo Teorema do Valor Final, a resposta estacionária de uma variável de saída $y(t)$ a uma entrada em degrau $u(t)$ (cuja transformada de Laplace é $U(s) = \Delta u/s$) é dada por:
+\[
+\lim_{t \to \infty} y(t) = \lim_{s \to 0} s Y(s) = \lim_{s \to 0} s G(s) U(s) = \lim_{s \to 0} s G(s) \frac{\Delta u}{s} = G(0) \Delta u
+\]
+Assim, o ganho estacionário, que é a razão $\Delta y / \Delta u$ em regime permanente, é obtido simplesmente fazendo $s=0$ na função de transferência, desde que o sistema seja estável.
+
+A matriz de ganhos estacionários $K$ é obtida avaliando-se $G(s)$ em $s=0$:
+\[
+K = G(0) = C(0 \cdot I - A)^{-1}B + D = C(-A)^{-1}B + D
+\]
+
+Em seguida, obtemos o \textit{Relative Gain Array} (RGA) como $ \Lambda = K \odot (K^{-1})^T $, onde $\odot$ denota o produto de Hadamard (elemento a elemento). O elemento de interesse é $\lambda_{11}$, que indica a interação relativa entre $y_1 = C_B$ e $u_1 = r$.
+
+Valores de $\lambda_{11}$ próximos de 1 sugerem pouca interação e favorecem o emparelhamento diagonal ($y_1-u_1$ e $y_2-u_2$). Valores próximos de 0 indicam forte interação, e valores negativos ou maiores que 1 podem indicar problemas de controle ou instabilidade.
+
+Ademais, para verificar a estabilidade integral do emparelhamento sugerido, calculamos o Índice de Niederlinski (NI) para o emparelhamento diagonal: $ NI = \det(K) / (K_{11} K_{22}) $. Se $NI > 0$, o emparelhamento é potencialmente estável; caso contrário, pode levar a instabilidade.
+
+Para plotar $\lambda_{11}$ vs. $r$ (de 160 h$^{-1}$ a próximo de zero), estendemos o código da letra b) para varrer $r$, calcular $K$ e $\Lambda$ em cada ponto, e gerar o gráfico. O código Python com essa implementação é:
+
+\lstinputlisting[]{letra_c.py}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.5\textwidth]{lambda11_vs_r_plot.png}
+  \caption{$\lambda_{11}$ vs. $r = F/V$ em estado estacionário}
+\end{figure}
+
+O gráfico de $\lambda_{11}$ vs. $r$ mostra que $\lambda_{11}$ começa próximo de 1 em $r$ baixos, diminui para um mínimo de $\approx 0.83$ em $r \approx 18$ h$^{-1}$, e apresenta uma descontinuidade (salto de $+\infty$ para $-\infty$) perto de $r \approx 60$ h$^{-1}$, devido a uma singularidade na matriz de ganhos $K$ (det(K) $\approx 0$). Após o salto, $\lambda_{11}$ sobe de valores negativos para positivos acima de 1 em $r$ altos (próximo a 160 h$^{-1}$), com um comportamento logarítmico de $\approx 0.9$ a 1.1.
+
+Especificamente:
+\begin{itemize}
+  \item Para $r$ baixo (próximo a 0), $\lambda_{11} \approx 1$, com pouca interação.
+  \item Em $r \approx 18-20$ h$^{-1}$, $\lambda_{11} \approx 0.83$, indicando interações moderadas.
+  \item Perto de $r \approx 60$ h$^{-1}$, ocorre um salto para valores muito positivos e muito negativos indicando forte interação e possível instabilidade no emparelhamento diagonal.
+  \item Perto de $r \approx 80$ h$^{-1}$, $\lambda_{11}$ apresenta valores próximos de 1, indicando baixa interação e estabilidade potencial
+  \item Para valores de $r$ acima de 120 ($\approx 120-160$ h$^{-1}$), $\lambda_{11}$ está próximo de 1.1, indicando iterações moderadas.
+\end{itemize}
+
+De acordo com o método de Bristol, o emparelhamento sugerido é aquele com $\lambda_{ij}$ mais próximo de 1 e positivo. Assim, o emparelhamento diagonal é preferível em faixas onde $\lambda_{11} \approx 1$ (ex: $r$ baixo a intermediário), mas para regiões com $\lambda_{11} < 0$ ou $>1$ (após o salto), o emparelhamento off-diagonal ($y_1-u_2$ e $y_2-u_1$) pode ser melhor.
+
+Quanto à estabilidade via Índice de Niederlinski:
+
+Calculamos NI para os pontos da letra b):
+\begin{itemize}
+  \item Para $r=20$ h$^{-1}$: NI $\approx 1.19 > 0$ (estável).
+  \item Para $r=45$ h$^{-1}$: NI $\approx 1.09 > 0$ (estável).
+  \item Para $r=60$ h$^{-1}$: NI $\approx 1.14 > 0$ (estável, mas próximo da singularidade).
+  \item Para $r=120$ h$^{-1}$: NI $\approx 0.92 > 0$ (estável).
+\end{itemize}
+Todos NI positivos sugerem estabilidade para emparelhamento diagonal nesses pontos, mas a singularidade em $r \approx 60$ indica risco de instabilidade em faixas próximas.
+
+Em resumo, o sistema tem interações significativas, especialmente na singularidade em $r \approx 60$, com valores negativos de $\lambda_{11}$ indicando forte acoplamento. Controle descentralizado é viável em $r$ baixos, $r < 40$, ideal em $r = 80$ e viável em $r > 100$ com emparelhamento diagonal, mas estratégias avançadas (ex: MPC) são recomendadas em regiões extremas (acima de $r > 160$ ) ou próximas à singularidade ($r \approx 60$).
+
+\section*{d) Simulação Dinâmica do Reator van de Vusse}
+
+Para a implementação da simulação dinâmica do Reator van de Vusse no ambiente Matlab/Simulink, desenvolveu-se uma S-function de nível 2 em linguagem Matlab, a qual representa o sistema conforme as equações diferenciais previamente apresentadas.
+
+As condições iniciais e os parâmetros de entrada foram definidos como parâmetros configuráveis da S-function, de modo a possibilitar a parametrização direta no bloco Simulink, dispensando a necessidade de modificações no código-fonte da função.
+
+\lstinputlisting[
+  style=matlab,
+]{reator_s_fun_level2.m}
+
+Com a S-function devidamente implementada, elaborou-se um diagrama no Simulink para simular a partida do reator, conforme ilustrado na figura a seguir:
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=1\textwidth]{simulink.png}
+  \caption{Simulação no Matlab/Simulink do Reator de van de Vusse.}
+\end{figure}
+
+Na simulação realizada, consideraram-se as seguintes condições iniciais para o reator: $C_A = 0$, $C_B = 0$, $T = 30^\circ$C, com uma razão $r = \frac{F}{V} = 50$. Além disso, foi aplicada uma rampa de aquecimento na temperatura do fluido de resfriamento ($T_k$), variando de 30°C até 340°C.
+
+\end{document}
