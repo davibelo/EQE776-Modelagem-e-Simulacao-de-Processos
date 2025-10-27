@@ -13,6 +13,27 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{listingsutf8}
+
+% Estilo para códigos em Python
+\lstset{
+  language=Python,
+  inputencoding=utf8/latin1,
+  extendedchars=true,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!70!black},
+  commentstyle=\color{teal!70!black},
+  stringstyle=\color{orange!60!black},
+  showstringspaces=false,
+  columns=fullflexible,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  breaklines=true,
+  tabsize=4,
+  captionpos=b
+}
 \usepackage[portuguese]{babel}
 \usepackage{textcomp}
 
@@ -58,8 +79,6 @@ Consideram-se dois tanques cilíndricos interligados em série. O tanque 1 receb
 
 \subsection*{Formulação do modelo}
 
-\subsection*{Formulação do modelo}
-
 O modelo dinâmico é obtido a partir dos balanços de volume nos tanques e da relação empírica das válvulas. Considerando $t$ em horas e mantendo as unidades fornecidas na Tabela~\ref{tab:dados-q1}, têm-se:
 \begin{align}
   A_i &= \frac{\pi D_i^2}{4}, \quad i = 1,2, \\
@@ -73,14 +92,7 @@ com condições iniciais $h_1(0) = 3\ \mathrm{m}$ e $h_2(0) = 2\ \mathrm{m}$. Es
 \subsection*{Resolução numérica}
 O sistema diferencial foi integrado em $0 \leq t \leq 20\ \mathrm{h}$ empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo equivalente a $10\ \mathrm{s}$ após conversão interna de unidades no script de apoio. A implementação registra também as trajetórias discretizadas $(t, h_1, h_2)$ em arquivo auxiliar para rastreabilidade.
 
-\subsection*{Resultados}
-% ... existing code ...
-
-\subsection*{Resolução numérica}
-O sistema diferencial foi integrado em $0 \leq t \leq 20\ \mathrm{h}$ (equivalente a $72\,000\ \mathrm{s}$) empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo de $10\ \mathrm{s}$. A implementação registra também as trajetórias discretizadas $(t, h_1, h_2)$ em arquivo auxiliar para rastreabilidade.
-
-\subsection*{Resultados}
-As curvas temporais obtidas para os níveis de líquido encontram-se na Figura~\ref{fig:questao1}. Observa-se que $h_1$ decai de $3\ \mathrm{m}$ para $2{,}04\ \mathrm{m}$, enquanto $h_2$ aumenta para $2{,}78\ \mathrm{m}$ ao final das 20 horas de operação, aproximando-se de um estado quase estacionário.
+\lstinputlisting[caption={Script Python utilizado para a integracao numerica da Questao 1.},label={lst:python-q1}]{solucao_questao1.py}
 
 \begin{figure}[h!]
   \centering

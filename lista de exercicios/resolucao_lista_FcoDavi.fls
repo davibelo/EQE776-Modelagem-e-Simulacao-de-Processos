@@ -1,6 +1,6 @@
-PWD C:\Users\davib\Downloads\EQE776 - Modelagem e Simulacao de Processos\lista de exercicios
+PWD c:\Users\davib\Downloads\EQE776 - Modelagem e Simulacao de Processos\lista de exercicios
 INPUT C:\Users\davib\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT resolucao_lista_FcoDavi.tex
+INPUT c:\Users\davib\Downloads\EQE776 - Modelagem e Simulacao de Processos\lista de exercicios\resolucao_lista_FcoDavi.tex
 OUTPUT resolucao_lista_FcoDavi.log
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
@@ -123,6 +123,9 @@ INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\listings\listings.c
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\listings\listings.cfg
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\listingsutf8\listingsutf8.sty
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\listingsutf8\listingsutf8.sty
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\babel\babel.sty
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\babel\babel.sty
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\babel\txtbabel.def
@@ -199,7 +202,23 @@ INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\sym
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1000.tfm
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1000.tfm
+INPUT .\solucao_questao1.py
+INPUT .\solucao_questao1.py
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt0900.tfm
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\base\latin1.def
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\base\latin1.def
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\base\latin1.def
+INPUT .\solucao_questao1.py
+INPUT .\solucao_questao1.py
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-utf8.def
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-utf8.def
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-utf8.def
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-iso-8859-1.def
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-iso-8859-1.def
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-iso-8859-1.def
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm0900.tfm
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm0500.tfm
 INPUT .\figuras\questao1_niveis.png
 INPUT .\figuras\questao1_niveis.png
 INPUT .\figuras\questao1_niveis.png
@@ -213,6 +232,10 @@ INPUT .\resolucao_lista_FcoDavi.out
 INPUT .\resolucao_lista_FcoDavi.out
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk
+INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt0900.pk
+INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt0900.pk
+INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0500.pk
+INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0500.pk
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1000.pk
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1000.pk
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk
