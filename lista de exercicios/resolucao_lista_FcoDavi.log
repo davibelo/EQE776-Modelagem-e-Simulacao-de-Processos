@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  27 OCT 2025 17:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  27 OCT 2025 19:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -428,7 +428,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1{C:/Users/davib/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
 
 ]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 95.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 114.
  (C:\Users\davib\AppData\Local\Programs\MiKTeX\tex/latex/base\latin1.def
 File: latin1.def 2024/02/08 v1.3d Input encoding file
 LaTeX Encoding Info:    Ignoring declaration for text command \textdegree (encoding ?) on input line 47.
@@ -444,18 +444,14 @@ File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 ) (C:\Users\davib\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\se-iso-8859-1.def
 File: se-iso-8859-1.def 2019/11/29 v1.12 stringenc: ISO-8859-1
 )
-<figuras/questao1_niveis.png, id=37, 433.62pt x 289.08pt>
-File: figuras/questao1_niveis.png Graphic file (type png)
-<use figuras/questao1_niveis.png>
-Package pdftex.def Info: figuras/questao1_niveis.png  used on input line 99.
-(pdftex.def)             Requested size: 328.82707pt x 219.22668pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
 
 [2]
+<figuras/questao1_niveis.png, id=79, 433.62pt x 289.08pt>
+File: figuras/questao1_niveis.png Graphic file (type png)
+<use figuras/questao1_niveis.png>
+Package pdftex.def Info: figuras/questao1_niveis.png  used on input line 118.
+(pdftex.def)             Requested size: 328.82707pt x 219.22668pt.
+
 
 [3 <./figuras/questao1_niveis.png>] (resolucao_lista_FcoDavi.aux)
  ***********
@@ -466,17 +462,17 @@ Package rerunfilecheck Info: File `resolucao_lista_FcoDavi.out' has not changed.
 (rerunfilecheck)             Checksum: 378F82E9C5C027513778E7ACE4A81DFC;104.
  ) 
 Here is how much of TeX's memory you used:
- 14279 strings out of 468221
- 219562 string characters out of 5432891
- 1143600 words of memory out of 5000000
- 42545 multiletter control sequences out of 15000+600000
- 641402 words of font info for 78 fonts, out of 8000000 for 9000
+ 14288 strings out of 468221
+ 219694 string characters out of 5432891
+ 999600 words of memory out of 5000000
+ 42553 multiletter control sequences out of 15000+600000
+ 642170 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,546b,1762s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0500.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on resolucao_lista_FcoDavi.pdf (3 pages, 257319 bytes).
+ 75i,12n,79p,546b,2599s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0500.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on resolucao_lista_FcoDavi.pdf (3 pages, 260886 bytes).
 PDF statistics:
- 421 PDF objects out of 1000 (max. 8388607)
+ 430 PDF objects out of 1000 (max. 8388607)
  72 named destinations out of 1000 (max. 500000)
  14 words of extra memory for PDF output out of 10000 (max. 10000000)
 

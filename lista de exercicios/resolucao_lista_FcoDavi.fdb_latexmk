@@ -1,10 +1,11 @@
 # Fdb version 4
-["pdflatex"] 1761598538.6793 "c:/Users/davib/Downloads/EQE776 - Modelagem e Simulacao de Processos/lista de exercicios/resolucao_lista_FcoDavi.tex" "resolucao_lista_FcoDavi.pdf" "resolucao_lista_FcoDavi" 1761598539.43115 0
+["pdflatex"] 1761604072.84969 "c:/Users/davib/Downloads/EQE776 - Modelagem e Simulacao de Processos/lista de exercicios/resolucao_lista_FcoDavi.tex" "resolucao_lista_FcoDavi.pdf" "resolucao_lista_FcoDavi" 1761604073.61239 0
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1757684796 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1000.pk" 1754916744 25420 0a60f6ba35ab1b6bd34d8db04db53a65 ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1754916749 31952 4ce0323d254a0b61692714482fecf80b ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1440.pk" 1754916746 40136 ad2f66d27fea2fc5fab68bc4b900b1f2 ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm0500.pk" 1754916743 12520 b087bedfb702db51b72ee21442b6c146 ""
+  "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm0700.pk" 1754916745 17000 fce02ed1c3a4082a76cee0016d0590cf ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1000.pk" 1754916748 23808 2a1fa637332cef0af23fcc5ba6c5d0a7 ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1200.pk" 1754916746 28440 4bc74f6e21a4d00913058430327f5ad0 ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecrm1728.pk" 1754916747 42516 26beae30d32d50efcf39fd4f8ef24aa1 ""
@@ -16,6 +17,7 @@
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecbx1200.tfm" 993061958 3200 b8d69bc738e5ef3e08cefeef3109ff56 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecbx1440.tfm" 993061960 3196 0b37fa3083e15c57cfa8c4ff52f2807a ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm0500.tfm" 993062114 3160 7643a152c0e9200a0a8161b2bb3a452d ""
+  "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm0700.tfm" 993062116 3168 c739b83da3134ef1007979877c1089cf ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm0900.tfm" 993062120 3156 6d4f5755d77638125f6f89de4f3bb757 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm1000.tfm" 993062122 3148 7e594c8240c71e432203f65ab5f95a51 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm1200.tfm" 993062126 3152 4850ff0163852b7fab34bd55e1197f28 ""
@@ -120,11 +122,11 @@
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/tex/latex/tools/indentfirst.sty" 1749468414 1618 30b01152766afcef2ed8f904cfdd3cc6 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/davib/Downloads/EQE776 - Modelagem e Simulacao de Processos/lista de exercicios/resolucao_lista_FcoDavi.tex" 1761598536 4055 cfe720ac601bb9c75a3353490137a326 ""
+  "c:/Users/davib/Downloads/EQE776 - Modelagem e Simulacao de Processos/lista de exercicios/resolucao_lista_FcoDavi.tex" 1761598754 5033 a21246b2bb05d7e1d014cbad08c0e699 ""
   "figuras/questao1_niveis.png" 1761591097 93578 e92c39eb9fd2eb3d1584174b4bc80c62 ""
-  "resolucao_lista_FcoDavi.aux" 1761598539 1240 58406ac048508e259d2d85741d9993f5 "pdflatex"
-  "resolucao_lista_FcoDavi.out" 1761598539 104 378f82e9c5c027513778e7ace4a81dfc "pdflatex"
-  "resolucao_lista_FcoDavi.tex" 1761598536 4055 cfe720ac601bb9c75a3353490137a326 ""
+  "resolucao_lista_FcoDavi.aux" 1761604073 1570 c054a4270c64f2ddc5513a8fbeb5873e "pdflatex"
+  "resolucao_lista_FcoDavi.out" 1761604073 104 378f82e9c5c027513778e7ace4a81dfc "pdflatex"
+  "resolucao_lista_FcoDavi.tex" 1761598754 5033 a21246b2bb05d7e1d014cbad08c0e699 ""
   "solucao_questao1.py" 1761591097 1249 2d109cb0e522fa3f2011465046f530ae ""
   (generated)
   "resolucao_lista_FcoDavi.aux"

@@ -79,13 +79,32 @@ Consideram-se dois tanques cilíndricos interligados em série. O tanque 1 receb
 
 \subsection*{Formulação do modelo}
 
-O modelo dinâmico é obtido a partir dos balanços de volume nos tanques e da relação empírica das válvulas. Considerando $t$ em horas e mantendo as unidades fornecidas na Tabela~\ref{tab:dados-q1}, têm-se:
+O modelo dinâmico é obtido a partir dos balanços de massa (ou volume, dado que a densidade é constante) em cada tanque. Para um volume de controle genérico com densidade constante $\rho$, tem-se
+\begin{equation*}
+  \frac{d(\rho V)}{dt} = \rho Q_{\text{in}} - \rho Q_{\text{out}},
+\end{equation*}
+o que conduz ao balanço volumétrico
+\begin{equation*}
+  \frac{dV}{dt} = Q_{\text{in}} - Q_{\text{out}}.
+\end{equation*}
+
+No tanque 1, o volume contido é $V_1 = A_1 h_1$, com $A_1$ indicado na Eq.~\eqref{eq:area1}. O balanço volumétrico resulta em
+\begin{equation*}
+  A_1\,\frac{dh_1}{dt} = Q_0 - Q_1,
+\end{equation*}
+em que $Q_0$ é a vazão de alimentação e $Q_1$ a vazão de saída do tanque 1. De modo análogo, para o tanque 2 obtém-se $V_2 = A_2 h_2$ e
+\begin{equation*}
+  A_2\,\frac{dh_2}{dt} = Q_1 - Q_2,
+\end{equation*}
+com $Q_1$ proveniente do tanque 1 e $Q_2$ a descarga para o ambiente.
+
+As vazões de saída seguem a correlação empírica das válvulas e as áreas dos tanques são calculadas pela geometria cilíndrica. Mantendo $t$ em horas, têm-se as equações numeradas finais:
 \begin{align}
-  A_i &= \frac{\pi D_i^2}{4}, \quad i = 1,2, \\
-  Q_1 &= k_1 \sqrt{h_1}, \\
-  Q_2 &= k_2 \sqrt{h_2}, \\
-  A_1\,\frac{dh_1}{dt} &= Q_0 - Q_1, \\
-  A_2\,\frac{dh_2}{dt} &= Q_1 - Q_2,
+  A_i &= \frac{\pi D_i^2}{4}, \quad i = 1,2, \label{eq:area1} \\
+  Q_1 &= k_1 \sqrt{h_1}, \label{eq:Q1} \\
+  Q_2 &= k_2 \sqrt{h_2}, \label{eq:Q2} \\
+  A_1\,\frac{dh_1}{dt} &= Q_0 - Q_1, \label{eq:balanco1} \\
+  A_2\,\frac{dh_2}{dt} &= Q_1 - Q_2, \label{eq:balanco2}
 \end{align}
 com condições iniciais $h_1(0) = 3\ \mathrm{m}$ e $h_2(0) = 2\ \mathrm{m}$. Este conjunto de equações está pronto para utilização em ambientes de simulação como o EMSO, onde os parâmetros podem ser definidos separadamente sem substituição numérica antecipada.
 

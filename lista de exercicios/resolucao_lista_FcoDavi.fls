@@ -201,10 +201,12 @@ INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\sym
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1000.tfm
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm0700.tfm
+INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm0500.tfm
+INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1000.tfm
 INPUT .\solucao_questao1.py
 INPUT .\solucao_questao1.py
-INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt0900.tfm
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\base\latin1.def
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\latex\base\latin1.def
@@ -218,7 +220,6 @@ INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-iso-
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-iso-8859-1.def
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\tex\generic\stringenc\se-iso-8859-1.def
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm0900.tfm
-INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm0500.tfm
 INPUT .\figuras\questao1_niveis.png
 INPUT .\figuras\questao1_niveis.png
 INPUT .\figuras\questao1_niveis.png
@@ -238,6 +239,8 @@ INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecr
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0500.pk
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1000.pk
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1000.pk
+INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0700.pk
+INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0700.pk
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk
 INPUT C:\Users\davib\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk
