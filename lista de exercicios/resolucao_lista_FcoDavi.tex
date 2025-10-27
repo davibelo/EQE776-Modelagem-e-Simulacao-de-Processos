@@ -58,32 +58,23 @@ Consideram-se dois tanques cilíndricos interligados em série. O tanque 1 receb
 
 \subsection*{Formulação do modelo}
 
-a) \textbf{Construção das equações de balanço}
-\begin{enumerate}
-  \item A área transversal de cada tanque é $A_i = \pi D_i^2 / 4$, resultando em $A_1 = 12{,}566\ \mathrm{m^2}$ e $A_2 = 7{,}069\ \mathrm{m^2}$.
-  \item A conservação de volume líquido em cada tanque fornece
-  \begin{align}
-    A_1 \frac{dh_1}{dt} &= Q_0 - Q_1, \\
-    A_2 \frac{dh_2}{dt} &= Q_1 - Q_2.
-  \end{align}
-  \item Substituindo a lei das válvulas, obtém-se o sistema não linear
-  \begin{align}
-    \frac{dh_1}{dt} &= \frac{Q_0 - k_1\sqrt{h_1}}{A_1}, \\
-    \frac{dh_2}{dt} &= \frac{k_1\sqrt{h_1} - k_2\sqrt{h_2}}{A_2}.
-  \end{align}
-\end{enumerate}
+\subsection*{Formulação do modelo}
 
-b) \textbf{Consistência de unidades}
-\begin{enumerate}
-  \item Convertem-se as vazões de $\mathrm{m^3\,h^{-1}}$ para $\mathrm{m^3\,s^{-1}}$: $Q_0^{(s)} = Q_0/3600 = 5{,}556 \times 10^{-3}\ \mathrm{m^3\,s^{-1}}$.
-  \item As constantes de válvula são tratadas como $k_i^{(s)} = k_i/3600$, de forma que $Q_i = k_i^{(s)}\sqrt{h_i}$ em segundos.
-  \item As equações finais utilizadas na simulação tornam-se
-  \begin{align}
-    \frac{dh_1}{dt} &= \frac{Q_0^{(s)} - k_1^{(s)}\sqrt{h_1}}{A_1}, \\
-    \frac{dh_2}{dt} &= \frac{k_1^{(s)}\sqrt{h_1} - k_2^{(s)}\sqrt{h_2}}{A_2},
-  \end{align}
-  com $h_1(0)=3\ \mathrm{m}$ e $h_2(0)=2\ \mathrm{m}$.
-\end{enumerate}
+O modelo dinâmico é obtido a partir dos balanços de volume nos tanques e da relação empírica das válvulas. Considerando $t$ em horas e mantendo as unidades fornecidas na Tabela~\ref{tab:dados-q1}, têm-se:
+\begin{align}
+  A_i &= \frac{\pi D_i^2}{4}, \quad i = 1,2, \\
+  Q_1 &= k_1 \sqrt{h_1}, \\
+  Q_2 &= k_2 \sqrt{h_2}, \\
+  A_1\,\frac{dh_1}{dt} &= Q_0 - Q_1, \\
+  A_2\,\frac{dh_2}{dt} &= Q_1 - Q_2,
+\end{align}
+com condições iniciais $h_1(0) = 3\ \mathrm{m}$ e $h_2(0) = 2\ \mathrm{m}$. Este conjunto de equações está pronto para utilização em ambientes de simulação como o EMSO, onde os parâmetros podem ser definidos separadamente sem substituição numérica antecipada.
+
+\subsection*{Resolução numérica}
+O sistema diferencial foi integrado em $0 \leq t \leq 20\ \mathrm{h}$ empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo equivalente a $10\ \mathrm{s}$ após conversão interna de unidades no script de apoio. A implementação registra também as trajetórias discretizadas $(t, h_1, h_2)$ em arquivo auxiliar para rastreabilidade.
+
+\subsection*{Resultados}
+% ... existing code ...
 
 \subsection*{Resolução numérica}
 O sistema diferencial foi integrado em $0 \leq t \leq 20\ \mathrm{h}$ (equivalente a $72\,000\ \mathrm{s}$) empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo de $10\ \mathrm{s}$. A implementação registra também as trajetórias discretizadas $(t, h_1, h_2)$ em arquivo auxiliar para rastreabilidade.

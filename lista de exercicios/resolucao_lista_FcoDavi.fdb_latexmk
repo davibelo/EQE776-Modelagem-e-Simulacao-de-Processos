@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1761591247.90363 "resolucao_lista_FcoDavi.tex" "resolucao_lista_FcoDavi.pdf" "resolucao_lista_FcoDavi" 1761591248.70599 0
+["pdflatex"] 1761591742.81934 "resolucao_lista_FcoDavi.tex" "resolucao_lista_FcoDavi.pdf" "resolucao_lista_FcoDavi" 1761591743.74944 0
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1757684796 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1000.pk" 1754916744 25420 0a60f6ba35ab1b6bd34d8db04db53a65 ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1754916749 31952 4ce0323d254a0b61692714482fecf80b ""
@@ -37,6 +37,7 @@
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy10.tfm" 1136765053 1124 6c73e740cf17375f03eec0ee63599741 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy6.tfm" 1136765053 1116 933a60c408fc0a863a92debe84b2d294 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/tfm/public/cm/cmsy8.tfm" 1136765053 1120 8b7d695260f3cff42e636090a8002094 ""
+  "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb" 1247596667 30251 6afa5cb1d0204815a708a080681d4674 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1247596667 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1247596667 36281 c355509802a035cadc5f15869451dcee ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1247596667 35752 024fb6c41858982481f6968b5fc26508 ""
@@ -111,9 +112,9 @@
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "figuras/questao1_niveis.png" 1761591097 93578 e92c39eb9fd2eb3d1584174b4bc80c62 ""
-  "resolucao_lista_FcoDavi.aux" 1761591248 959 79bc738a5646ec0277190584db5c69e6 "pdflatex"
-  "resolucao_lista_FcoDavi.out" 1761591248 104 378f82e9c5c027513778e7ace4a81dfc "pdflatex"
-  "resolucao_lista_FcoDavi.tex" 1761591237 4384 533e8e1174390017d0d79eb907bbec7d ""
+  "resolucao_lista_FcoDavi.aux" 1761591743 959 79bc738a5646ec0277190584db5c69e6 "pdflatex"
+  "resolucao_lista_FcoDavi.out" 1761591743 104 378f82e9c5c027513778e7ace4a81dfc "pdflatex"
+  "resolucao_lista_FcoDavi.tex" 1761591738 4302 107004621334d82dfca9ca33121d1450 ""
   (generated)
   "resolucao_lista_FcoDavi.aux"
   "resolucao_lista_FcoDavi.log"
