@@ -165,8 +165,26 @@ Como o tanque é perfeitamente agitado, a composição de saída é igual à com
 \begin{equation}
   x_{i3} = \frac{m_i}{m_{\text{total}}}, \quad m_{\text{total}} = m_A + m_B + m_C. \label{eq:fracao-q2}
 \end{equation}
+Para calcular a densidade da mistura na corrente de saída, considera-se o comportamento de uma mistura ideal, na qual os volumes dos componentes puros são aditivos. Essa hipótese é adequada para misturas líquidas sem interações moleculares significativas (mistura ideal). Assim, o volume total da mistura é dado pela soma dos volumes individuais:
+\begin{equation*}
+  V_{\text{total}} = V_A + V_B + V_C.
+\end{equation*}
 
-A densidade da mistura na corrente de saída segue a regra da mistura considerando volumes aditivos:
+Como cada volume parcial pode ser expresso em termos da massa e densidade do componente ($V_i = m_i/\rho_i$), obtém-se
+\begin{equation*}
+  V_{\text{total}} = \frac{m_A}{\rho_A} + \frac{m_B}{\rho_B} + \frac{m_C}{\rho_C}.
+\end{equation*}
+
+Por outro lado, o volume total relaciona-se com a massa total e a densidade da mistura por $V_{\text{total}} = m_{\text{total}}/\rho_3$. Igualando as duas expressões, tem-se
+\begin{equation*}
+  \frac{m_{\text{total}}}{\rho_3} = \frac{m_A}{\rho_A} + \frac{m_B}{\rho_B} + \frac{m_C}{\rho_C}.
+\end{equation*}
+
+Dividindo ambos os lados por $m_{\text{total}}$ e utilizando a definição de fração mássica $x_i = m_i/m_{\text{total}}$, chega-se a
+\begin{equation*}
+  \frac{1}{\rho_3} = \frac{x_A}{\rho_A} + \frac{x_B}{\rho_B} + \frac{x_C}{\rho_C},
+\end{equation*}
+de onde resulta a densidade da mistura na corrente de saída:
 \begin{equation}
   \rho_3 = \frac{1}{\frac{x_A}{\rho_A} + \frac{x_B}{\rho_B} + \frac{x_C}{\rho_C}}. \label{eq:densidade-q2}
 \end{equation}

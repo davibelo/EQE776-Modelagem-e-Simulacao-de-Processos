@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  28 OCT 2025 08:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  28 OCT 2025 09:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -555,6 +555,261 @@ File: figuras/questao1_niveis.png Graphic file (type png)
 Package pdftex.def Info: figuras/questao1_niveis.png  used on input line 118.
 (pdftex.def)             Requested size: 328.82707pt x 219.22668pt.
 
+! Undefined control sequence.
+l.130   \beginttabular
+                      }{ll}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.131     \hline
+                
+I expect to see \noalign only after the \cr of
+an alignment. Proceed, and I'll ignore this case.
+
+! Undefined control sequence.
+<recently read> \textbi 
+                        
+l.132     \textbi
+                 {Parâmetro} & \textbf{Valor} \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Misplaced alignment tab character &.
+l.132     \textbi{Parâmetro} &
+                                \textbf{Valor} \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.133     \hline
+                
+I expect to see \noalign only after the \cr of
+an alignment. Proceed, and I'll ignore this case.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 132--133
+
+ []
+
+! Misplaced alignment tab character &.
+l.134     Vazão da corrente 1 $F_1$ &
+                                       $10\ \mathrm{kg\,min^{-1}}$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.135 ...�o mássica de A na corrente 1 $x_{A1}$ &
+                                                   $0{,}6$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.136 ...�o mássica de B na corrente 1 $x_{B1}$ &
+                                                   $0{,}0$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.137 ...�o mássica de C na corrente 1 $x_{C1}$ &
+                                                   $0{,}4$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.138     Vazão da corrente 2 $F_2$ &
+                                       $8\ \mathrm{kg\,min^{-1}}$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.139 ...�o mássica de A na corrente 2 $x_{A2}$ &
+                                                   $0{,}0$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.140 ...�o mássica de B na corrente 2 $x_{B2}$ &
+                                                   $0{,}7$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.141 ...�o mássica de C na corrente 2 $x_{C2}$ &
+                                                   $0{,}3$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.142     Densidade do componente A $\rho_A$ &
+                                               $1200\ \mathrm{kg\,m^{-3}}$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.143     Densodade do componente B $\rho_B$ &
+                                               $1400\ \mathrm{kn\,m^{-3}}$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.144     Densidade do componente C $\rho_C$ &
+                                               $1000\ \mathrm{kg\,m^{-3}}$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.145     Área da seção transversal $A$ &
+                                             $0{,}2\ \mathrm{m^2}$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.146     Parâmetro da válv{la $k$ &
+                                       $0{,}02\ \mathrm{m^{2.5}\,min^{-1}}$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.147     Massa inicial de A $m_{A0}$ &
+                                        $20\ \mathrm{kg}$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.148     Massa inicial de B $m_{B0}$ &
+                                        $20\ \mathrm{kg}$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Misplaced alignment tab character &.
+l.149     Massa inicial de C $m_{C0}$ &
+                                        $40\ \mathEm{kg}$ \\
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Undefined control sequence.
+l.149 ...assa inicial de C $m_{C0}$ & $40\ \mathEm
+                                                  {kg}$ \\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Misplaced \noalign.
+\hline ->\noalign 
+                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
+l.150     \hline
+                
+I expect to see \noalign only after the \cr of
+an alignment. Proceed, and I'll ignore this case.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 134--150
+
+ []
+
+! Undefined control sequence.
+<recently read> \xnd 
+                     
+l.151   \xnd
+            {tabulare
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.154 \end{table}
+                 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -583,18 +838,14 @@ ncoding ?) on input line 57.
 )
 
 [5]
-<figuras/questao2_tanque.png, id=188, 433.62pt x 433.62pt>
-File: figuras/questao2_tanque.png Graphic file (type png)
-<use figuras/questao2_tanque.png>
-Package pdftex.def Info: figuras/questao2_tanque.png  used on input line 203.
-(pdftex.def)             Requested size: 328.82707pt x 328.84004pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
 
 [6]
+<figuras/questao2_tanque.png, id=224, 433.62pt x 433.62pt>
+File: figuras/questao2_tanque.png Graphic file (type png)
+<use figuras/questao2_tanque.png>
+Package pdftex.def Info: figuras/questao2_tanque.png  used on input line 221.
+(pdftex.def)             Requested size: 328.82707pt x 328.84004pt.
+
 
 [7 <./figuras/questao2_tanque.png>] (resolucao_lista_FcoDavi.aux)
  ***********
@@ -606,10 +857,10 @@ Package rerunfilecheck Info: File `resolucao_lista_FcoDavi.out' has not changed
 (rerunfilecheck)             Checksum: 41001928E2DEDE960F5B228236A16B06;208.
  ) 
 Here is how much of TeX's memory you used:
- 14462 strings out of 468221
- 221862 string characters out of 5432891
- 1081600 words of memory out of 5000000
- 42621 multiletter control sequences out of 15000+600000
+ 14464 strings out of 468221
+ 221871 string characters out of 5432891
+ 1242600 words of memory out of 5000000
+ 42623 multiletter control sequences out of 15000+600000
  642170 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,12n,79p,462b,2599s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -634,9 +885,9 @@ s/cm/cmmi5.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public
 nts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/davib/AppData/Local/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/davib/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on resolucao_lista_FcoDavi.pdf (7 pages, 439137 bytes).
+Output written on resolucao_lista_FcoDavi.pdf (7 pages, 441327 bytes).
 PDF statistics:
- 600 PDF objects out of 1000 (max. 8388607)
+ 601 PDF objects out of 1000 (max. 8388607)
  178 named destinations out of 1000 (max. 500000)
  27 words of extra memory for PDF output out of 10000 (max. 10000000)
 
