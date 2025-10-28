@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  28 OCT 2025 09:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  28 OCT 2025 10:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -417,12 +417,6 @@ Package babel Info: 'portuguese' activates 'portuges' shorthands.
 (babel)             Reported  on input line 8.
 
 
-LaTeX Warning: Label `eq:r1-q3' multiply defined.
-
-
-LaTeX Warning: Label `eq:r2-q3' multiply defined.
-
-
 LaTeX Warning: Label `eq:rnet-q3' multiply defined.
 
 
@@ -445,6 +439,9 @@ LaTeX Warning: Label `eq:conversao-q3' multiply defined.
 
 
 LaTeX Warning: Label `lst:python-q3' multiply defined.
+
+
+LaTeX Warning: Label `fig:questao3' multiply defined.
 
 )
 \openout1 = `resolucao_lista_FcoDavi.aux'.
@@ -902,10 +899,10 @@ ncoding ?) on input line 57.
 [8]
 
 [9]
-<figuras/questao3_reator.png, id=334, 433.62pt x 578.16pt>
+<figuras/questao3_reator.png, id=328, 433.62pt x 578.16pt>
 File: figuras/questao3_reator.png Graphic file (type png)
 <use figuras/questao3_reator.png>
-Package pdftex.def Info: figuras/questao3_reator.png  used on input line 294.
+Package pdftex.def Info: figuras/questao3_reator.png  used on input line 298.
 (pdftex.def)             Requested size: 328.82707pt x 438.45338pt.
 
 
@@ -939,12 +936,8 @@ ncoding ?) on input line 57.
 [12]
 File: figuras/questao3_reator.png Graphic file (type png)
 <use figuras/questao3_reator.png>
-Package pdftex.def Info: figuras/questao3_reator.png  used on input line 360.
+Package pdftex.def Info: figuras/questao3_reator.png  used on input line 364.
 (pdftex.def)             Requested size: 328.82707pt x 438.45338pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 
 
 [13]
@@ -963,10 +956,10 @@ Package rerunfilecheck Info: File `resolucao_lista_FcoDavi.out' has not changed
 (rerunfilecheck)             Checksum: 30DE0E3D8BA75D9F089920BF9753B69A;416.
  ) 
 Here is how much of TeX's memory you used:
- 14722 strings out of 468221
- 225586 string characters out of 5432891
+ 14735 strings out of 468221
+ 225747 string characters out of 5432891
  1242600 words of memory out of 5000000
- 42679 multiletter control sequences out of 15000+600000
+ 42682 multiletter control sequences out of 15000+600000
  642505 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,12n,79p,567b,2599s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -993,9 +986,9 @@ TeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/davib/AppData/Local/Progr
 ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/davib/AppData/Lo
 cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/davib/Ap
 pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on resolucao_lista_FcoDavi.pdf (14 pages, 688120 bytes).
+Output written on resolucao_lista_FcoDavi.pdf (14 pages, 699631 bytes).
 PDF statistics:
- 893 PDF objects out of 1000 (max. 8388607)
- 375 named destinations out of 1000 (max. 500000)
+ 906 PDF objects out of 1000 (max. 8388607)
+ 385 named destinations out of 1000 (max. 500000)
  48 words of extra memory for PDF output out of 10000 (max. 10000000)
 

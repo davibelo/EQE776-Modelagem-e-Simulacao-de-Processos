@@ -232,10 +232,14 @@ Um reator do tipo BSTR (batelada) é utilizado para executar a seguinte reação
 \end{equation*}
 As taxas [mol·L$^{-1}$·min$^{-1}$] das reações direta e inversa podem ser estimadas segundo as seguintes equações:
 \begin{align}
-  r_1 &= 1{,}5 \times 10^8 \exp\left(-\frac{10\,000}{T}\right) C_A C_B, \label{eq:r1-q3} \\
-  r_2 &= 2{,}0 \times 10^9 \exp\left(-\frac{12\,000}{T}\right) C_C C_D, \label{eq:r2-q3}
+  r_d &= k_d C_A^{1{,}1} C_B^{1{,}4}, \label{eq:rd-q3} \\
+  r_i &= k_i C_C^{1{,}31} C_D^{1{,}2}, \label{eq:ri-q3}
 \end{align}
-em que $C_A$, $C_B$, $C_C$ e $C_D$ são as concentrações [mol·L$^{-1}$] e $T$ é a temperatura [K].
+em que $C_A$, $C_B$, $C_C$ e $C_D$ são as concentrações [mol·L$^{-1}$], $T$ é a temperatura [K], e as constantes cinéticas $k_d$ e $k_i$ são dadas por
+\begin{align}
+  k_d &= 50\,000 \exp\left(-\frac{4\,000}{T}\right), \label{eq:kd-q3} \\
+  k_i &= 30\,000 \exp\left(-\frac{5\,000}{T}\right). \label{eq:ki-q3}
+\end{align}
 
 Inicialmente são colocados no reator somente os reagentes A e B, com concentrações de $0{,}5\ \mathrm{mol\,L^{-1}}$ e $0{,}8\ \mathrm{mol\,L^{-1}}$, respectivamente. O reator apresenta um sistema de ajuste de temperatura que inicialmente está fixado em $400\ \mathrm{K}$. Essa temperatura é mantida constante durante os primeiros $5$ minutos de batelada. Passado esse tempo, inicia-se uma rampa de diminuição da temperatura de forma que ao final da batelada a temperatura alcance o valor de $350\ \mathrm{K}$.
 
@@ -316,22 +320,22 @@ Inicialmente são colocados no reator somente os reagentes A e B, com concentra�
 
 O modelo dinâmico é obtido a partir dos balanços de massa para cada componente no reator em batelada. Para um reator em batelada, não há termos de entrada ou saída de massa, logo o balanço de massa para cada componente é dado por
 \begin{equation*}
-  \frac{dC_i}{dt} = r_i,
+  \frac{dC_j}{dt} = r_j,
 \end{equation*}
-onde $C_i$ é a concentração do componente $i$ e $r_i$ é a taxa líquida de geração/consumo.
+onde $C_j$ é a concentração do componente $j$ e $r_j$ é a taxa líquida de geração/consumo do respectivo componente.
 
-Para a reação reversível $\mathrm{A} + \mathrm{B} \rightleftharpoons \mathrm{C} + \mathrm{D}$, a taxa líquida de reação é dada por
+Para a reação reversível $\mathrm{A} + \mathrm{B} \rightleftharpoons \mathrm{C} + \mathrm{D}$, as velocidades das reações direta e inversa são dadas em \eqref{eq:rd-q3} e \eqref{eq:ri-q3}, e a taxa líquida de reação é
 \begin{equation}
-  r_{\text{net}} = r_1 - r_2, \label{eq:rnet-q3}
+  r_{\text{net}} = r_d - r_i, \label{eq:rnet-q3}
 \end{equation}
-onde $r_1$ é a taxa da reação direta e $r_2$ a taxa da reação inversa.
+onde $r_d$ é a velocidade da reação direta e $r_i$ a da reação inversa.
 
-Os balanços de massa para cada componente são:
+Os balanços de massa para cada componente seguem a estequiometria da reação:
 \begin{align}
   \frac{dC_A}{dt} &= -r_{\text{net}}, \label{eq:balanco-A-q3} \\
   \frac{dC_B}{dt} &= -r_{\text{net}}, \label{eq:balanco-B-q3} \\
-  \frac{dC_C}{dt} &= r_{\text{net}}, \label{eq:balanco-C-q3} \\
-  \frac{dC_D}{dt} &= r_{\text{net}}, \label{eq:balanco-D-q3}
+  \frac{dC_C}{dt} &= \;\;r_{\text{net}}, \label{eq:balanco-C-q3} \\
+  \frac{dC_D}{dt} &= \;\;r_{\text{net}}, \label{eq:balanco-D-q3}
 \end{align}
 com condições iniciais $C_A(0) = 0{,}5\ \mathrm{mol\,L^{-1}}$, $C_B(0) = 0{,}8\ \mathrm{mol\,L^{-1}}$, $C_C(0) = 0\ \mathrm{mol\,L^{-1}}$ e $C_D(0) = 0\ \mathrm{mol\,L^{-1}}$.
 

@@ -15,9 +15,13 @@ def model(t, y):
         T = 400.0
     else:
         T = 400.0 - (400.0 - 350.0) * (t - 5.0) / (T_sim - 5.0)
-    r1 = 1.5e8 * np.exp(-10000.0 / T) * CA * CB
-    r2 = 2.0e9 * np.exp(-12000.0 / T) * CC * CD
-    r_net = r1 - r2
+    # constantes de velocidade direta e inversa atualizadas
+    kd = 50000.0 * np.exp(-4000.0 / T)
+    ki = 30000.0 * np.exp(-5000.0 / T)
+    # taxas com os expoentes especificados
+    rd = kd * (CA ** 1.1) * (CB ** 1.4)
+    ri = ki * (CC ** 1.31) * (CD ** 1.2)
+    r_net = rd - ri
     dCAdt = -r_net
     dCBdt = -r_net
     dCCdt = r_net
