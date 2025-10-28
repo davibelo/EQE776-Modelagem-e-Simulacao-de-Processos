@@ -29,7 +29,13 @@ def model(t, y):
     dh2dt = (q1 - q2) / A2
     return [dh1dt, dh2dt]
 
-sol = solve_ivp(model, (0.0, Te), [h1_0, h2_0], max_step=10.0, dense_output=True)
+sol = solve_ivp(
+    fun=model, 
+    t_span=(0.0, Te), 
+    y0=[h1_0, h2_0],
+    max_step=10.0, 
+    dense_output=True
+    )
 
 t_hours = np.linspace(0.0, T_sim, 1000)
 h1 = sol.sol(t_hours * 3600.0)[0]
