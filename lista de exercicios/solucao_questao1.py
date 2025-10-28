@@ -14,12 +14,7 @@ h2_0 = 2.0  # m
 A1 = pi * (D1 ** 2) / 4.0
 A2 = pi * (D2 ** 2) / 4.0
 
-Q0 /= 3600.0
-k1 /= 3600.0
-k2 /= 3600.0
-
 T_sim = 20.0
-Te = T_sim * 3600.0
 
 def model(t, y):
     h1, h2 = y
@@ -30,16 +25,16 @@ def model(t, y):
     return [dh1dt, dh2dt]
 
 sol = solve_ivp(
-    fun=model, 
-    t_span=(0.0, Te), 
+    fun=model,
+    t_span=(0.0, T_sim),
     y0=[h1_0, h2_0],
-    max_step=10.0, 
+    max_step=0.01,
     dense_output=True
     )
 
 t_hours = np.linspace(0.0, T_sim, 1000)
-h1 = sol.sol(t_hours * 3600.0)[0]
-h2 = sol.sol(t_hours * 3600.0)[1]
+h1 = sol.sol(t_hours)[0]
+h2 = sol.sol(t_hours)[1]
 
 plt.figure(figsize=(6, 4))
 plt.plot(t_hours, h1, label="h1 (m)")
