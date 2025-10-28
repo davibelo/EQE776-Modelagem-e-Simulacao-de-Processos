@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1761659815.00839 "c:/Users/davib/Downloads/EQE776 - Modelagem e Simulacao de Processos/lista de exercicios/resolucao_lista_FcoDavi.tex" "resolucao_lista_FcoDavi.pdf" "resolucao_lista_FcoDavi" 1761659816.50911 0
+["pdflatex"] 1761659873.59149 "c:/Users/davib/Downloads/EQE776 - Modelagem e Simulacao de Processos/lista de exercicios/resolucao_lista_FcoDavi.tex" "resolucao_lista_FcoDavi.pdf" "resolucao_lista_FcoDavi" 1761659875.10929 0
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1757684796 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1000.pk" 1754916744 25420 0a60f6ba35ab1b6bd34d8db04db53a65 ""
   "C:/Users/davib/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1754916749 31952 4ce0323d254a0b61692714482fecf80b ""
@@ -126,13 +126,13 @@
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/tex/latex/tools/indentfirst.sty" 1749468414 1618 30b01152766afcef2ed8f904cfdd3cc6 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/davib/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/davib/Downloads/EQE776 - Modelagem e Simulacao de Processos/lista de exercicios/resolucao_lista_FcoDavi.tex" 1761659777 15203 59e65db40f2451a583ca8e36773b9754 ""
+  "c:/Users/davib/Downloads/EQE776 - Modelagem e Simulacao de Processos/lista de exercicios/resolucao_lista_FcoDavi.tex" 1761659860 15197 5a20689b9f65b173d4d335b671bdb8dd ""
   "figuras/questao1_niveis.png" 1761651046 93957 a438184b41b7287e5de7f720900d0aeb ""
   "figuras/questao2_tanque.png" 1761651474 136177 073aba90faaf3621fc7541a93cb23974 ""
   "figuras/questao3_reator.png" 1761656662 199616 610608cabae82dd0a7df62cecfe159ca ""
-  "resolucao_lista_FcoDavi.aux" 1761659816 4680 21d0d30c24f2a957f2c78af31a32e05e "pdflatex"
-  "resolucao_lista_FcoDavi.out" 1761659816 312 9076fc0a32aabd504c1d1b0c15112bae "pdflatex"
-  "resolucao_lista_FcoDavi.tex" 1761659777 15203 59e65db40f2451a583ca8e36773b9754 ""
+  "resolucao_lista_FcoDavi.aux" 1761659874 4674 e0b64ef4184da3d4af675dadd856d336 "pdflatex"
+  "resolucao_lista_FcoDavi.out" 1761659874 282 f57ab9ee843d38dff7036225dc3a6368 "pdflatex"
+  "resolucao_lista_FcoDavi.tex" 1761659860 15197 5a20689b9f65b173d4d335b671bdb8dd ""
   "solucao_questao1.py" 1761651043 1213 b14e423f677fba4fbcde76a969b1c2db ""
   "solucao_questao2.py" 1761652735 1917 7421182c2792c801e917f7ce05de6475 ""
   "solucao_questao3.py" 1761655748 2206 dbb066cd5f943683088958aa021af5a7 ""
