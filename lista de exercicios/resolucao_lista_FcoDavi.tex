@@ -127,9 +127,9 @@ Um tanque de mistura perfeitamente agitado recebe duas correntes de entrada e te
 
 \begin{table}[h!]
   \centering
-  \beginttabular}{ll}
+  \begin{tabular}{ll}
     \hline
-    \textbi{Parâmetro} & \textbf{Valor} \\
+    \textbf{Parâmetro} & \textbf{Valor} \\
     \hline
     Vazão da corrente 1 $F_1$ & $10\ \mathrm{kg\,min^{-1}}$ \\
     Fração mássica de A na corrente 1 $x_{A1}$ & $0{,}6$ \\
@@ -140,15 +140,15 @@ Um tanque de mistura perfeitamente agitado recebe duas correntes de entrada e te
     Fração mássica de B na corrente 2 $x_{B2}$ & $0{,}7$ \\
     Fração mássica de C na corrente 2 $x_{C2}$ & $0{,}3$ \\
     Densidade do componente A $\rho_A$ & $1200\ \mathrm{kg\,m^{-3}}$ \\
-    Densodade do componente B $\rho_B$ & $1400\ \mathrm{kn\,m^{-3}}$ \\
+    Densidade do componente B $\rho_B$ & $1400\ \mathrm{kg\,m^{-3}}$ \\
     Densidade do componente C $\rho_C$ & $1000\ \mathrm{kg\,m^{-3}}$ \\
     Área da seção transversal $A$ & $0{,}2\ \mathrm{m^2}$ \\
-    Parâmetro da válv{la $k$ & $0{,}02\ \mathrm{m^{2.5}\,min^{-1}}$ \\
+    Parâmetro da válvula $k$ & $0{,}02\ \mathrm{m^{2.5}\,min^{-1}}$ \\
     Massa inicial de A $m_{A0}$ & $20\ \mathrm{kg}$ \\
     Massa inicial de B $m_{B0}$ & $20\ \mathrm{kg}$ \\
-    Massa inicial de C $m_{C0}$ & $40\ \mathEm{kg}$ \\
+    Massa inicial de C $m_{C0}$ & $40\ \mathrm{kg}$ \\
     \hline
-  \xnd{tabulare
+  \end{tabular}
   \caption{Dados operacionais da Questão 2.}
   \label{tab:dados-q2}
 \end{table}
@@ -251,11 +251,11 @@ O modelo dinâmico é obtido a partir dos balanços de massa para cada component
 \end{equation*}
 onde $C_i$ é a concentração do componente $i$ e $r_i$ é a taxa líquida de geração/consumo do respectivo componente.
 
-Para a reação reversível $\mathrm{A} + \mathrm{B} \rightleftharpoons \mathrm{C} + \mathrm{D}$, as velocidades das reações direta e inversa são dadas em \eqref{eq:r1-q3} e \eqref{eq:r2-q3}, e a taxa líquida de reação é
+Para a reação reversível $\mathrm{A} + \mathrm{B} \rightleftharpoons \mathrm{C} + \mathrm{D}$, as velocidades das reações direta e inversa são dadas em \eqref{eq:rd-q3} e \eqref{eq:ri-q3}, e a taxa líquida de reação é
 \begin{equation}
-  r_{\text{net}} = r_1 - r_2, \label{eq:rnet-q3}
+  r_{\text{net}} = r_d - r_i, \label{eq:rnet-q3}
 \end{equation}
-onde $r_1$ é a velocidade da reação direta e $r_2$ a da reação inversa.
+onde $r_d$ é a velocidade da reação direta e $r_i$ a da reação inversa.
 
 Os balanços de massa para cada componente seguem a estequiometria da reação:
 \begin{align}
@@ -300,71 +300,7 @@ O sistema de equações ordinais foi integrado em $0 \leq t \leq 15\ \mathrm{min
   \label{fig:questao3}
 \end{figure}
 
-\section{Exercício 3}
 
-\subsection*{Enunciado e dados}
-Um reator do tipo BSTR (batelada) é utilizado para executar a seguinte reação reversível:
-\begin{equation*}
-  \mathrm{A} + \mathrm{B} \rightleftharpoons \mathrm{C} + \mathrm{D}.
-\end{equation*}
-As taxas [mol·L$^{-1}$·min$^{-1}$] das reações direta e inversa podem ser estimadas segundo as seguintes equações:
-\begin{align}
-  r_1 &= 1{,}5 \times 10^8 \exp\left(-\frac{10\,000}{T}\right) C_A C_B, \label{eq:r1-q3} \\
-  r_2 &= 2{,}0 \times 10^9 \exp\left(-\frac{12\,000}{T}\right) C_C C_D, \label{eq:r2-q3}
-\end{align}
-em que $C_A$, $C_B$, $C_C$ e $C_D$ são as concentrações [mol/L] e $T$ é a temperatura [K].
-
-Inicialmente são colocados no reator somente os reagentes A e B, com concentrações de $0{,}5\ \mathrm{mol\,L^{-1}}$ e $0{,}8\ \mathrm{mol\,L^{-1}}$, respectivamente. O reator apresenta um sistema de ajuste de temperatura que inicialmente está fixado em $400\ \mathrm{K}$. Essa temperatura é mantida constante durante os primeiros $5$ minutos de batelada. Passado esse tempo, inicia-se uma rampa de diminuição da temperatura de forma que ao final da batelada a temperatura alcance o valor de $350\ \mathrm{K}$.
-
-\subsection*{Formulação do modelo}
-
-O modelo dinâmico é obtido a partir dos balanços de massa para cada componente no reator em batelada. Para um reator em batelada, não há termos de entrada ou saída de massa, logo o balanço de massa para cada componente é dado por
-\begin{equation*}
-  \frac{dC_j}{dt} = r_j,
-\end{equation*}
-onde $C_j$ é a concentração do componente $j$ e $r_j$ é a taxa líquida de geração/consumo do respectivo componente.
-
-Para a reação reversível $\mathrm{A} + \mathrm{B} \rightleftharpoons \mathrm{C} + \mathrm{D}$, as velocidades das reações direta e inversa são dadas em \eqref{eq:rd-q3} e \eqref{eq:ri-q3}, e a taxa líquida de reação é
-\begin{equation}
-  r_{\text{net}} = r_d - r_i, \label{eq:rnet-q3}
-\end{equation}
-onde $r_d$ é a velocidade da reação direta e $r_i$ a da reação inversa.
-
-Os balanços de massa para cada componente seguem a estequiometria da reação:
-\begin{align}
-  \frac{dC_A}{dt} &= -r_{\text{net}}, \label{eq:balanco-A-q3} \\
-  \frac{dC_B}{dt} &= -r_{\text{net}}, \label{eq:balanco-B-q3} \\
-  \frac{dC_C}{dt} &= \;\;r_{\text{net}}, \label{eq:balanco-C-q3} \\
-  \frac{dC_D}{dt} &= \;\;r_{\text{net}}, \label{eq:balanco-D-q3}
-\end{align}
-com condições iniciais $C_A(0) = 0{,}5\ \mathrm{mol\,L^{-1}}$, $C_B(0) = 0{,}8\ \mathrm{mol\,L^{-1}}$, $C_C(0) = 0\ \mathrm{mol\,L^{-1}}$ e $C_D(0) = 0\ \mathrm{mol\,L^{-1}}$.
-
-A temperatura do reator segue o perfil de operação especificado:
-\begin{equation}
-  T(t) = \begin{cases}
-    400\ \mathrm{K}, & \text{se } t \leq 5\ \mathrm{min}, \\
-    400 - \frac{50}{10}(t - 5)\ \mathrm{K}, & \text{se } t > 5\ \mathrm{min}.
-  \end{cases}
-  \label{eq:temperatura-q3}
-\end{equation}
-
-A conversão do reagente A é definida como
-\begin{equation}
-  X_A = \frac{C_{A0} - C_A}{C_{A0}}, \label{eq:conversao-q3}
-\end{equation}
-onde $C_{A0} = 0{,}5\ \mathrm{mol\,L^{-1}}$ é a concentração inicial de A.
-
-\subsection*{Resolução numérica}
-O sistema diferencial foi integrado em $0 \leq t \leq 15\ \mathrm{min}$ empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo equivalente a $0{,}01\ \mathrm{min}$. A implementação registra também as trajetórias discretizadas $(t, T, C_A, C_B, C_C, C_D, X_A)$ em arquivo auxiliar para rastreabilidade.
-
-\lstinputlisting[caption={Script Python utilizado para a integracao numerica da Questao 3.},label={lst:python-q3}]{solucao_questao3.py}
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.7\textwidth]{figuras/questao3_reator.png}
-  \caption{Perfis temporais simulados da temperatura, concentrações e conversão do reagente A durante 15 minutos de batelada.}
-  \label{fig:questao3}
-\end{figure}
 
 \begin{thebibliography}{9}
   \bibitem{referencia-exemplo}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  28 OCT 2025 10:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  28 OCT 2025 10:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -415,34 +415,6 @@ File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 ) (resolucao_lista_FcoDavi.aux
 Package babel Info: 'portuguese' activates 'portuges' shorthands.
 (babel)             Reported  on input line 8.
-
-
-LaTeX Warning: Label `eq:rnet-q3' multiply defined.
-
-
-LaTeX Warning: Label `eq:balanco-A-q3' multiply defined.
-
-
-LaTeX Warning: Label `eq:balanco-B-q3' multiply defined.
-
-
-LaTeX Warning: Label `eq:balanco-C-q3' multiply defined.
-
-
-LaTeX Warning: Label `eq:balanco-D-q3' multiply defined.
-
-
-LaTeX Warning: Label `eq:temperatura-q3' multiply defined.
-
-
-LaTeX Warning: Label `eq:conversao-q3' multiply defined.
-
-
-LaTeX Warning: Label `lst:python-q3' multiply defined.
-
-
-LaTeX Warning: Label `fig:questao3' multiply defined.
-
 )
 \openout1 = `resolucao_lista_FcoDavi.aux'.
 
@@ -577,266 +549,11 @@ File: se-iso-8859-1.def 2019/11/29 v1.12 stringenc: ISO-8859-1
 )
 
 [2]
-<figuras/questao1_niveis.png, id=91, 433.62pt x 289.08pt>
+<figuras/questao1_niveis.png, id=87, 433.62pt x 289.08pt>
 File: figuras/questao1_niveis.png Graphic file (type png)
 <use figuras/questao1_niveis.png>
 Package pdftex.def Info: figuras/questao1_niveis.png  used on input line 118.
 (pdftex.def)             Requested size: 328.82707pt x 219.22668pt.
-
-! Undefined control sequence.
-l.130   \beginttabular
-                      }{ll}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Misplaced \noalign.
-\hline ->\noalign 
-                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
-l.131     \hline
-                
-I expect to see \noalign only after the \cr of
-an alignment. Proceed, and I'll ignore this case.
-
-! Undefined control sequence.
-<recently read> \textbi 
-                        
-l.132     \textbi
-                 {Parâmetro} & \textbf{Valor} \\
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Misplaced alignment tab character &.
-l.132     \textbi{Parâmetro} &
-                                \textbf{Valor} \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced \noalign.
-\hline ->\noalign 
-                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
-l.133     \hline
-                
-I expect to see \noalign only after the \cr of
-an alignment. Proceed, and I'll ignore this case.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
-
- []
-
-! Misplaced alignment tab character &.
-l.134     Vazão da corrente 1 $F_1$ &
-                                       $10\ \mathrm{kg\,min^{-1}}$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.135 ...�o mássica de A na corrente 1 $x_{A1}$ &
-                                                   $0{,}6$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.136 ...�o mássica de B na corrente 1 $x_{B1}$ &
-                                                   $0{,}0$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.137 ...�o mássica de C na corrente 1 $x_{C1}$ &
-                                                   $0{,}4$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.138     Vazão da corrente 2 $F_2$ &
-                                       $8\ \mathrm{kg\,min^{-1}}$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.139 ...�o mássica de A na corrente 2 $x_{A2}$ &
-                                                   $0{,}0$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.140 ...�o mássica de B na corrente 2 $x_{B2}$ &
-                                                   $0{,}7$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.141 ...�o mássica de C na corrente 2 $x_{C2}$ &
-                                                   $0{,}3$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.142     Densidade do componente A $\rho_A$ &
-                                               $1200\ \mathrm{kg\,m^{-3}}$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.143     Densodade do componente B $\rho_B$ &
-                                               $1400\ \mathrm{kn\,m^{-3}}$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.144     Densidade do componente C $\rho_C$ &
-                                               $1000\ \mathrm{kg\,m^{-3}}$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.145     Área da seção transversal $A$ &
-                                             $0{,}2\ \mathrm{m^2}$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.146     Parâmetro da válv{la $k$ &
-                                       $0{,}02\ \mathrm{m^{2.5}\,min^{-1}}$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.147     Massa inicial de A $m_{A0}$ &
-                                        $20\ \mathrm{kg}$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.148     Massa inicial de B $m_{B0}$ &
-                                        $20\ \mathrm{kg}$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-l.149     Massa inicial de C $m_{C0}$ &
-                                        $40\ \mathEm{kg}$ \\
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Undefined control sequence.
-l.149 ...assa inicial de C $m_{C0}$ & $40\ \mathEm
-                                                  {kg}$ \\
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Misplaced \noalign.
-\hline ->\noalign 
-                  {\ifnum 0=`}\fi \hrule \@height \arrayrulewidth \futurelet...
-l.150     \hline
-                
-I expect to see \noalign only after the \cr of
-an alignment. Proceed, and I'll ignore this case.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 134--150
-
- []
-
-! Undefined control sequence.
-<recently read> \xnd 
-                     
-l.151   \xnd
-            {tabulare
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.154 \end{table}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -868,7 +585,7 @@ ncoding ?) on input line 57.
 [5]
 
 [6]
-<figuras/questao2_tanque.png, id=232, 433.62pt x 433.62pt>
+<figuras/questao2_tanque.png, id=228, 433.62pt x 433.62pt>
 File: figuras/questao2_tanque.png Graphic file (type png)
 <use figuras/questao2_tanque.png>
 Package pdftex.def Info: figuras/questao2_tanque.png  used on input line 221.
@@ -876,6 +593,12 @@ Package pdftex.def Info: figuras/questao2_tanque.png  used on input line 221.
 
 
 [7 <./figuras/questao2_tanque.png>]
+
+LaTeX Warning: Reference `eq:r1-q3' on page 8 undefined on input line 254.
+
+
+LaTeX Warning: Reference `eq:r2-q3' on page 8 undefined on input line 254.
+
 (C:\Users\davib\AppData\Local\Programs\MiKTeX\tex/latex/base\latin1.def
 File: latin1.def 2024/02/08 v1.3d Input encoding file
 LaTeX Encoding Info:    Ignoring declaration for text command \textdegree (enco
@@ -899,7 +622,7 @@ ncoding ?) on input line 57.
 [8]
 
 [9]
-<figuras/questao3_reator.png, id=328, 433.62pt x 578.16pt>
+<figuras/questao3_reator.png, id=320, 433.62pt x 578.16pt>
 File: figuras/questao3_reator.png Graphic file (type png)
 <use figuras/questao3_reator.png>
 Package pdftex.def Info: figuras/questao3_reator.png  used on input line 298.
@@ -912,54 +635,24 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [10]
 
-[11 <./figuras/questao3_reator.png>]
-(C:\Users\davib\AppData\Local\Programs\MiKTeX\tex/latex/base\latin1.def
-File: latin1.def 2024/02/08 v1.3d Input encoding file
-LaTeX Encoding Info:    Ignoring declaration for text command \textdegree (enco
-ding ?) on input line 47.
-LaTeX Encoding Info:    Ignoring declaration for text command \textonehalf (enc
-oding ?) on input line 48.
-LaTeX Encoding Info:    Ignoring declaration for text command \textonequarter (
-encoding ?) on input line 49.
-LaTeX Encoding Info:    Ignoring declaration for text command \textthreequarter
-s (encoding ?) on input line 50.
-LaTeX Encoding Info:    Ignoring declaration for text command \textcent (encodi
-ng ?) on input line 51.
-LaTeX Encoding Info:    Ignoring declaration for text command \textyen (encodin
-g ?) on input line 53.
-LaTeX Encoding Info:    Ignoring declaration for text command \textcurrency (en
-coding ?) on input line 55.
-LaTeX Encoding Info:    Ignoring declaration for text command \textbrokenbar (e
-ncoding ?) on input line 57.
-)
-
-[12]
-File: figuras/questao3_reator.png Graphic file (type png)
-<use figuras/questao3_reator.png>
-Package pdftex.def Info: figuras/questao3_reator.png  used on input line 364.
-(pdftex.def)             Requested size: 328.82707pt x 438.45338pt.
-
-
-[13]
-
-[14] (resolucao_lista_FcoDavi.aux)
+[11 <./figuras/questao3_reator.png>] (resolucao_lista_FcoDavi.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-06-09>
  ***********
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `resolucao_lista_FcoDavi.out' has not changed
 .
-(rerunfilecheck)             Checksum: 30DE0E3D8BA75D9F089920BF9753B69A;416.
+(rerunfilecheck)             Checksum: 9076FC0A32AABD504C1D1B0C15112BAE;312.
  ) 
 Here is how much of TeX's memory you used:
- 14735 strings out of 468221
- 225747 string characters out of 5432891
+ 14628 strings out of 468221
+ 224238 string characters out of 5432891
  1242600 words of memory out of 5000000
- 42682 multiletter control sequences out of 15000+600000
+ 42679 multiletter control sequences out of 15000+600000
  642505 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,12n,79p,567b,2599s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -986,9 +679,9 @@ TeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/davib/AppData/Local/Progr
 ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/davib/AppData/Lo
 cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/davib/Ap
 pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on resolucao_lista_FcoDavi.pdf (14 pages, 699631 bytes).
+Output written on resolucao_lista_FcoDavi.pdf (11 pages, 675235 bytes).
 PDF statistics:
- 906 PDF objects out of 1000 (max. 8388607)
- 385 named destinations out of 1000 (max. 500000)
- 48 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 767 PDF objects out of 1000 (max. 8388607)
+ 283 named destinations out of 1000 (max. 500000)
+ 40 words of extra memory for PDF output out of 10000 (max. 10000000)
 
