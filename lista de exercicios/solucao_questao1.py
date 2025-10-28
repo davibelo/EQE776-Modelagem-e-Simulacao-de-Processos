@@ -32,7 +32,7 @@ sol = solve_ivp(
     dense_output=True
     )
 
-t_hours = np.linspace(0.0, T_sim, 1000)
+t_hours = np.linspace(0.0, T_sim, 100)
 h1 = sol.sol(t_hours)[0]
 h2 = sol.sol(t_hours)[1]
 
