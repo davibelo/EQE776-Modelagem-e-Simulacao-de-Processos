@@ -159,10 +159,10 @@ INPUT .\resolucao_lista_FcoDavi.out
 INPUT .\resolucao_lista_FcoDavi.out
 INPUT resolucao_lista_FcoDavi.out
 INPUT resolucao_lista_FcoDavi.out
-OUTPUT resolucao_lista_FcoDavi.pdf
 INPUT .\resolucao_lista_FcoDavi.out
 INPUT .\resolucao_lista_FcoDavi.out
 OUTPUT resolucao_lista_FcoDavi.out
+OUTPUT resolucao_lista_FcoDavi.pdf
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1728.tfm
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1200.tfm
 INPUT C:\Users\davib\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.tfm

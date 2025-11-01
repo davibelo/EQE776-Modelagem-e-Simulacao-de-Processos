@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  1 NOV 2025 11:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  1 NOV 2025 11:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -446,7 +446,7 @@ File: se-iso-8859-1.def 2019/11/29 v1.12 stringenc: ISO-8859-1
 )
 
 [2]
-<figuras/questao1_niveis.png, id=93, 433.62pt x 289.08pt>
+<figuras/questao1_niveis.png, id=78, 433.62pt x 289.08pt>
 File: figuras/questao1_niveis.png Graphic file (type png)
 <use figuras/questao1_niveis.png>
 Package pdftex.def Info: figuras/questao1_niveis.png  used on input line 118.
@@ -470,7 +470,7 @@ LaTeX Encoding Info:    Ignoring declaration for text command \textbrokenbar (en
 [5]
 
 [6]
-<figuras/questao2_tanque.png, id=232, 433.62pt x 433.62pt>
+<figuras/questao2_tanque.png, id=218, 433.62pt x 433.62pt>
 File: figuras/questao2_tanque.png Graphic file (type png)
 <use figuras/questao2_tanque.png>
 Package pdftex.def Info: figuras/questao2_tanque.png  used on input line 221.
@@ -492,7 +492,7 @@ LaTeX Encoding Info:    Ignoring declaration for text command \textbrokenbar (en
 [8]
 
 [9]
-<figuras/questao3_reator.png, id=326, 433.62pt x 578.16pt>
+<figuras/questao3_reator.png, id=313, 433.62pt x 578.16pt>
 File: figuras/questao3_reator.png Graphic file (type png)
 <use figuras/questao3_reator.png>
 Package pdftex.def Info: figuras/questao3_reator.png  used on input line 298.
@@ -514,7 +514,7 @@ LaTeX Encoding Info:    Ignoring declaration for text command \textbrokenbar (en
 )
 
 [12]
-<figuras/questao4_reator_dispersao.png, id=437, 578.16pt x 578.16pt>
+<figuras/questao4_reator_dispersao.png, id=425, 578.16pt x 578.16pt>
 File: figuras/questao4_reator_dispersao.png Graphic file (type png)
 <use figuras/questao4_reator_dispersao.png>
 Package pdftex.def Info: figuras/questao4_reator_dispersao.png  used on input line 393.
@@ -531,20 +531,20 @@ LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-06-09>
  ***********
 Package rerunfilecheck Info: File `resolucao_lista_FcoDavi.out' has not changed.
-(rerunfilecheck)             Checksum: 5F6359F182EC5FEE75C21137CF31579B;376.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 14803 strings out of 468221
- 226947 string characters out of 5432891
+ 14796 strings out of 468221
+ 226897 string characters out of 5432891
  1242600 words of memory out of 5000000
- 42735 multiletter control sequences out of 15000+600000
+ 42728 multiletter control sequences out of 15000+600000
  641819 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,749b,2599s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,749b,2598s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0500.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on resolucao_lista_FcoDavi.pdf (15 pages, 931181 bytes).
+Output written on resolucao_lista_FcoDavi.pdf (15 pages, 929945 bytes).
 PDF statistics:
- 933 PDF objects out of 1000 (max. 8388607)
+ 920 PDF objects out of 1000 (max. 8388607)
  399 named destinations out of 1000 (max. 500000)
- 53 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
