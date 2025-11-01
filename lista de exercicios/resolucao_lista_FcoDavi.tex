@@ -106,7 +106,7 @@ As vazões de saída seguem a correlação empírica das válvulas e as áreas d
   A_1\,\frac{dh_1}{dt} &= Q_0 - Q_1, \label{eq:balanco1} \\
   A_2\,\frac{dh_2}{dt} &= Q_1 - Q_2, \label{eq:balanco2}
 \end{align}
-com condições iniciais $h_1(0) = 3\ \mathrm{m}$ e $h_2(0) = 2\ \mathrm{m}$. Este conjunto de equações está pronto para utilização em ambientes de simulação como o EMSO, onde os parâmetros podem ser definidos separadamente sem substituição numérica antecipada.
+com condições iniciais $h_1(0) = 3\ \mathrm{m}$ e $h_2(0) = 2\ \mathrm{m}$. 
 
 \subsection*{Resolução numérica}
 O sistema diferencial foi integrado em $0 \leq t \leq 20\ \mathrm{h}$ empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo equivalente a $10\ \mathrm{s}$ após conversão interna de unidades no script de apoio. A implementação registra também as trajetórias discretizadas $(t, h_1, h_2)$ em arquivo auxiliar para rastreabilidade.
