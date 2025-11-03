@@ -148,7 +148,7 @@ ax3.set_title(f'Superfície 3D: Concentração em Função do Tempo e Posição\
 
 fig3.colorbar(surf, ax=ax3, shrink=0.5, aspect=5, label='Concentração')
 
-ax3.view_init(elev=25, azim=45)
+ax3.view_init(elev=20, azim=-60)
 
 fig3.tight_layout()
 fig3.savefig(FIGURE_PATHS["grafico_3d"], dpi=300, bbox_inches='tight')
