@@ -1,0 +1,195 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+import os
+
+try:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+except NameError:
+    BASE_DIR = os.getcwd()
+
+FIGURE_PATHS = {
+    "evolucao_temporal": os.path.join(BASE_DIR, "evolucao_temporal.png"),
+    "perfil_espacial": os.path.join(BASE_DIR, "perfil_espacial.png"),
+}
+RESULTS_PATH = os.path.join(BASE_DIR, "resultados_pfr.txt")
+
+L = 1.0
+Calim = 1.0
+Pe = 15.0
+Da = 1.0
+Np = 60
+
+def simular_pfr(Np, t_span, t_eval):
+    DL = L / Np
+    
+    def sistema_odes(t, C_interior):
+        dCdt = np.zeros(Np)
+        
+        C0 = (Calim + C_interior[0]/(Pe*2*DL)) / (1 + 1/(Pe*2*DL))
+        
+        for i in range(Np):
+            if i == 0:
+                C_prev = C0
+                C_curr = C_interior[0]
+                if Np > 1:
+                    C_next = C_interior[1]
+                else:
+                    C_next = C_curr
+            elif i == Np - 1:
+                C_prev = C_interior[i-1]
+                C_curr = C_interior[i]
+                C_next = C_curr
+            else:
+                C_prev = C_interior[i-1]
+                C_curr = C_interior[i]
+                C_next = C_interior[i+1]
+            
+            dC_dz = (C_next - C_prev) / (2 * DL)
+            d2C_dz2 = (C_next - 2*C_curr + C_prev) / (DL**2)
+            dCdt[i] = (1/Pe) * d2C_dz2 - dC_dz - Da * C_curr
+        
+        return dCdt
+    
+    C0_interior = np.zeros(Np)
+    
+    sol = solve_ivp(
+        sistema_odes,
+        t_span,
+        C0_interior,
+        t_eval=t_eval,
+        method='BDF',
+        rtol=1e-6,
+        atol=1e-8
+    )
+    
+    C_completo = np.zeros((Np + 2, len(sol.t)))
+    C_completo[1:Np+1, :] = sol.y
+    
+    for j in range(len(sol.t)):
+        C_completo[0, j] = (Calim + C_completo[1, j]/(Pe*2*DL)) / (1 + 1/(Pe*2*DL))
+        C_completo[Np+1, j] = C_completo[Np, j]
+    
+    z = np.linspace(0, L, Np + 2)
+    
+    sol_completo = type('obj', (object,), {
+        't': sol.t,
+        'y': C_completo,
+        'success': sol.success,
+        'message': sol.message if hasattr(sol, 'message') else ''
+    })()
+    
+    return sol_completo, z
+
+t_span = (0, 2)
+t_eval = np.linspace(0, 2, 2000)
+
+print(f"Simulando PFR com dispersão axial...")
+print(f"  Np = {Np}")
+print(f"  L = {L}")
+print(f"  Pe = {Pe}")
+print(f"  Da = {Da}")
+print(f"  Calim = {Calim}")
+
+sol, z = simular_pfr(Np, t_span, t_eval)
+
+if not sol.success:
+    print(f"Aviso: {sol.message}")
+else:
+    print("Simulação concluída com sucesso!")
+
+idx_in = 1
+idx_um_quarto = int(1 + Np * 0.25)
+idx_meio = int(1 + Np * 0.5)
+idx_tres_quartos = int(1 + Np * 0.75)
+idx_out = Np
+
+print("\nGerando gráficos...")
+
+fig1, ax1 = plt.subplots(figsize=(12, 7))
+
+posicoes = [
+    (idx_in, z[idx_in], 'black'),
+    (idx_um_quarto, z[idx_um_quarto], 'red'),
+    (idx_meio, z[idx_meio], 'blue'),
+    (idx_tres_quartos, z[idx_tres_quartos], 'green'),
+    (idx_out, z[idx_out], 'cyan'),
+]
+
+for idx, pos, color in posicoes:
+    ax1.plot(sol.t, sol.y[idx, :], linewidth=2.5, color=color, 
+             label=f'C para L={pos:.2f}')
+
+ax1.set_xlabel('t\' (tempo adimensional)', fontsize=13)
+ax1.set_ylabel('C (concentração adimensional)', fontsize=13)
+ax1.set_title(f'Evolução Temporal da Concentração em Diferentes Posições\nPe = {Pe}, Da = {Da}, Np = {Np}', 
+              fontsize=14, fontweight='bold')
+ax1.legend(fontsize=11, loc='right')
+ax1.grid(True, alpha=0.3)
+ax1.set_xlim([0, 2])
+ax1.set_ylim([0, 1.0])
+fig1.tight_layout()
+fig1.savefig(FIGURE_PATHS["evolucao_temporal"], dpi=300, bbox_inches='tight')
+
+fig2, ax2 = plt.subplots(figsize=(12, 7))
+
+tempos = [0, 0.25, 0.5, 1.0, 2.0]
+colors = ['black', 'red', 'blue', 'green', 'cyan']
+
+for tempo, color in zip(tempos, colors):
+    idx_time = np.argmin(np.abs(sol.t - tempo))
+    ax2.plot(z, sol.y[:, idx_time], linewidth=2.5, color=color, 
+             label=f't\' = {tempo:.2f}')
+
+ax2.set_xlabel('L (posição)', fontsize=13)
+ax2.set_ylabel('C (concentração adimensional)', fontsize=13)
+ax2.set_title(f'Perfil Espacial de Concentração em Diferentes Tempos\nPe = {Pe}, Da = {Da}, Np = {Np}', 
+              fontsize=14, fontweight='bold')
+ax2.legend(fontsize=11, loc='upper right')
+ax2.grid(True, alpha=0.3)
+ax2.set_xlim([0, L])
+ax2.set_ylim([0, 1.0])
+fig2.tight_layout()
+fig2.savefig(FIGURE_PATHS["perfil_espacial"], dpi=300, bbox_inches='tight')
+
+plt.show()
+
+result_lines = []
+result_lines.append("="*70)
+result_lines.append("RESULTADOS DA SIMULAÇÃO DO PFR ISOTÉRMICO COM DISPERSÃO AXIAL")
+result_lines.append("="*70)
+result_lines.append(f"Parâmetros:")
+result_lines.append(f"  L (comprimento) = {L}")
+result_lines.append(f"  Calim = {Calim}")
+result_lines.append(f"  Pe (Péclet) = {Pe}")
+result_lines.append(f"  Da (Damköhler) = {Da}")
+result_lines.append(f"  Np (número de pontos) = {Np}")
+result_lines.append(f"  DL = {L/Np:.6f}")
+result_lines.append("="*70)
+result_lines.append("")
+
+result_lines.append("CONCENTRAÇÕES EM DIFERENTES POSIÇÕES (t' = 2.0):")
+for idx, pos, _ in posicoes:
+    C_final = sol.y[idx, -1]
+    result_lines.append(f"  L = {pos:.4f}: C = {C_final:.6f}")
+
+result_lines.append("")
+conversao = (Calim - sol.y[idx_out, -1]) / Calim * 100
+result_lines.append(f"CONVERSÃO NA SAÍDA: {conversao:.2f}%")
+result_lines.append("")
+
+result_lines.append("EVOLUÇÃO TEMPORAL NA SAÍDA (L = 1.0):")
+for tempo in [0, 0.25, 0.5, 1.0, 1.5, 2.0]:
+    idx_time = np.argmin(np.abs(sol.t - tempo))
+    C_out_t = sol.y[idx_out, idx_time]
+    result_lines.append(f"  t' = {tempo:4.2f}: C = {C_out_t:.6f}")
+
+print('\n'.join(result_lines))
+
+with open(RESULTS_PATH, 'w', encoding='utf-8') as results_file:
+    results_file.write('\n'.join(result_lines))
+
+print(f"\nResultados salvos em: {RESULTS_PATH}")
+print("Gráficos salvos:")
+for key, path in FIGURE_PATHS.items():
+    print(f"  - {key}: {path}")
