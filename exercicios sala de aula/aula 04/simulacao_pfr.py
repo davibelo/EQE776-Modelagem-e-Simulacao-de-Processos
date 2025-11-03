@@ -152,9 +152,8 @@ fig3 = plt.figure(figsize=(14, 10))
 ax3 = fig3.add_subplot(111, projection='3d')
 
 T, Z = np.meshgrid(sol.t, z)
-C_plot = C_completo
 
-surf = ax3.plot_surface(Z, T, C_plot, cmap='viridis', edgecolor='none', alpha=0.9)
+surf = ax3.plot_surface(Z, T, C_completo, cmap='viridis', edgecolor='none', alpha=0.9)
 
 ax3.set_xlabel('L (posição)', fontsize=12, labelpad=10)
 ax3.set_ylabel("t' (tempo adimensional)", fontsize=12, labelpad=10)
