@@ -6,23 +6,33 @@ Parâmetros:
   Calim = 1.0
   Pe (Péclet) = 15.0
   Da (Damköhler) = 1.0
-  Np (número de pontos) = 60
-  DL = 0.016667
+  Np (número de pontos internos) = 50
+  DL = 0.020000
+
+Discretização:
+  i=0 (ponto virtual): condição Danköhler
+  i=1 a i=50: pontos internos com EDOs
+  i=51 (ponto virtual): condição Neumann
+
+Equações:
+  dC_i/dt = (1/Pe)*(C_{i+1}-2C_i+C_{i-1})/DL² - (C_{i+1}-C_{i-1})/(2*DL) - Da*C_i
+  C_0 = Calim + (1/Pe)*(C_1-C_0)/(2*DL)
+  C_51 = C_50
 ======================================================================
 
 CONCENTRAÇÕES EM DIFERENTES POSIÇÕES (t' = 2.0):
-  L = 0.0164: C = 0.954728
-  L = 0.2623: C = 0.754591
-  L = 0.5082: C = 0.596327
-  L = 0.7541: C = 0.471334
-  L = 0.9836: C = 0.396491
+  L = 0.0196: C = 0.951784
+  L = 0.2549: C = 0.759379
+  L = 0.5098: C = 0.594490
+  L = 0.7451: C = 0.474283
+  L = 0.9804: C = 0.395893
 
-CONVERSÃO NA SAÍDA: 60.35%
+CONVERSÃO NA SAÍDA: 60.41%
 
-EVOLUÇÃO TEMPORAL NA SAÍDA (L = 1.0):
+EVOLUÇÃO TEMPORAL NA SAÍDA (L ≈ 1.0):
   t' = 0.00: C = 0.000000
-  t' = 0.25: C = 0.000027
-  t' = 0.50: C = 0.024202
-  t' = 1.00: C = 0.284807
-  t' = 1.50: C = 0.383944
-  t' = 2.00: C = 0.396491
+  t' = 0.25: C = 0.000029
+  t' = 0.50: C = 0.024092
+  t' = 1.00: C = 0.283700
+  t' = 1.50: C = 0.383235
+  t' = 2.00: C = 0.395893

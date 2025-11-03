@@ -18,68 +18,26 @@ L = 1.0
 Calim = 1.0
 Pe = 15.0
 Da = 1.0
-Np = 60
+Np = 50
 
-def simular_pfr(Np, t_span, t_eval):
-    DL = L / Np
+DL = L / Np
+
+def sistema_odes(t, C_interior):
+    C0 = (Calim + C_interior[0]/(Pe*2*DL)) / (1 + 1/(Pe*2*DL))
     
-    def sistema_odes(t, C_interior):
-        dCdt = np.zeros(Np)
-        
-        C0 = (Calim + C_interior[0]/(Pe*2*DL)) / (1 + 1/(Pe*2*DL))
-        
-        for i in range(Np):
-            if i == 0:
-                C_prev = C0
-                C_curr = C_interior[0]
-                if Np > 1:
-                    C_next = C_interior[1]
-                else:
-                    C_next = C_curr
-            elif i == Np - 1:
-                C_prev = C_interior[i-1]
-                C_curr = C_interior[i]
-                C_next = C_curr
-            else:
-                C_prev = C_interior[i-1]
-                C_curr = C_interior[i]
-                C_next = C_interior[i+1]
-            
-            dC_dz = (C_next - C_prev) / (2 * DL)
-            d2C_dz2 = (C_next - 2*C_curr + C_prev) / (DL**2)
-            dCdt[i] = (1/Pe) * d2C_dz2 - dC_dz - Da * C_curr
-        
-        return dCdt
+    C = np.zeros(Np + 2)
+    C[0] = C0
+    C[1:Np+1] = C_interior
+    C[Np+1] = C_interior[-1]
     
-    C0_interior = np.zeros(Np)
+    dCdt = np.zeros(Np)
     
-    sol = solve_ivp(
-        sistema_odes,
-        t_span,
-        C0_interior,
-        t_eval=t_eval,
-        method='BDF',
-        rtol=1e-6,
-        atol=1e-8
-    )
+    for i in range(1, Np + 1):
+        dC_dz = (C[i+1] - C[i-1]) / (2 * DL)
+        d2C_dz2 = (C[i+1] - 2*C[i] + C[i-1]) / (DL**2)
+        dCdt[i-1] = (1/Pe) * d2C_dz2 - dC_dz - Da * C[i]
     
-    C_completo = np.zeros((Np + 2, len(sol.t)))
-    C_completo[1:Np+1, :] = sol.y
-    
-    for j in range(len(sol.t)):
-        C_completo[0, j] = (Calim + C_completo[1, j]/(Pe*2*DL)) / (1 + 1/(Pe*2*DL))
-        C_completo[Np+1, j] = C_completo[Np, j]
-    
-    z = np.linspace(0, L, Np + 2)
-    
-    sol_completo = type('obj', (object,), {
-        't': sol.t,
-        'y': C_completo,
-        'success': sol.success,
-        'message': sol.message if hasattr(sol, 'message') else ''
-    })()
-    
-    return sol_completo, z
+    return dCdt
 
 t_span = (0, 2)
 t_eval = np.linspace(0, 2, 2000)
@@ -90,13 +48,33 @@ print(f"  L = {L}")
 print(f"  Pe = {Pe}")
 print(f"  Da = {Da}")
 print(f"  Calim = {Calim}")
+print(f"  DL = {DL:.6f}")
 
-sol, z = simular_pfr(Np, t_span, t_eval)
+C0_interior = np.zeros(Np)
+
+sol = solve_ivp(
+    sistema_odes,
+    t_span,
+    C0_interior,
+    t_eval=t_eval,
+    method='BDF',
+    rtol=1e-6,
+    atol=1e-8
+)
 
 if not sol.success:
     print(f"Aviso: {sol.message}")
 else:
     print("Simulação concluída com sucesso!")
+
+C_completo = np.zeros((Np + 2, len(sol.t)))
+for j in range(len(sol.t)):
+    C0 = (Calim + sol.y[0, j]/(Pe*2*DL)) / (1 + 1/(Pe*2*DL))
+    C_completo[0, j] = C0
+    C_completo[1:Np+1, j] = sol.y[:, j]
+    C_completo[Np+1, j] = sol.y[-1, j]
+
+z = np.linspace(0, L, Np + 2)
 
 idx_in = 1
 idx_um_quarto = int(1 + Np * 0.25)
@@ -117,7 +95,7 @@ posicoes = [
 ]
 
 for idx, pos, color in posicoes:
-    ax1.plot(sol.t, sol.y[idx, :], linewidth=2.5, color=color, 
+    ax1.plot(sol.t, C_completo[idx, :], linewidth=2.5, color=color, 
              label=f'C para L={pos:.2f}')
 
 ax1.set_xlabel('t\' (tempo adimensional)', fontsize=13)
@@ -138,7 +116,7 @@ colors = ['black', 'red', 'blue', 'green', 'cyan']
 
 for tempo, color in zip(tempos, colors):
     idx_time = np.argmin(np.abs(sol.t - tempo))
-    ax2.plot(z, sol.y[:, idx_time], linewidth=2.5, color=color, 
+    ax2.plot(z, C_completo[:, idx_time], linewidth=2.5, color=color, 
              label=f't\' = {tempo:.2f}')
 
 ax2.set_xlabel('L (posição)', fontsize=13)
@@ -163,25 +141,35 @@ result_lines.append(f"  L (comprimento) = {L}")
 result_lines.append(f"  Calim = {Calim}")
 result_lines.append(f"  Pe (Péclet) = {Pe}")
 result_lines.append(f"  Da (Damköhler) = {Da}")
-result_lines.append(f"  Np (número de pontos) = {Np}")
-result_lines.append(f"  DL = {L/Np:.6f}")
+result_lines.append(f"  Np (número de pontos internos) = {Np}")
+result_lines.append(f"  DL = {DL:.6f}")
+result_lines.append("")
+result_lines.append("Discretização:")
+result_lines.append(f"  i=0 (ponto virtual): condição Danköhler")
+result_lines.append(f"  i=1 a i={Np}: pontos internos com EDOs")
+result_lines.append(f"  i={Np+1} (ponto virtual): condição Neumann")
+result_lines.append("")
+result_lines.append("Equações:")
+result_lines.append(f"  dC_i/dt = (1/Pe)*(C_{{i+1}}-2C_i+C_{{i-1}})/DL² - (C_{{i+1}}-C_{{i-1}})/(2*DL) - Da*C_i")
+result_lines.append(f"  C_0 = Calim + (1/Pe)*(C_1-C_0)/(2*DL)")
+result_lines.append(f"  C_{Np+1} = C_{Np}")
 result_lines.append("="*70)
 result_lines.append("")
 
 result_lines.append("CONCENTRAÇÕES EM DIFERENTES POSIÇÕES (t' = 2.0):")
 for idx, pos, _ in posicoes:
-    C_final = sol.y[idx, -1]
+    C_final = C_completo[idx, -1]
     result_lines.append(f"  L = {pos:.4f}: C = {C_final:.6f}")
 
 result_lines.append("")
-conversao = (Calim - sol.y[idx_out, -1]) / Calim * 100
+conversao = (Calim - C_completo[idx_out, -1]) / Calim * 100
 result_lines.append(f"CONVERSÃO NA SAÍDA: {conversao:.2f}%")
 result_lines.append("")
 
-result_lines.append("EVOLUÇÃO TEMPORAL NA SAÍDA (L = 1.0):")
+result_lines.append("EVOLUÇÃO TEMPORAL NA SAÍDA (L ≈ 1.0):")
 for tempo in [0, 0.25, 0.5, 1.0, 1.5, 2.0]:
     idx_time = np.argmin(np.abs(sol.t - tempo))
-    C_out_t = sol.y[idx_out, idx_time]
+    C_out_t = C_completo[idx_out, idx_time]
     result_lines.append(f"  t' = {tempo:4.2f}: C = {C_out_t:.6f}")
 
 print('\n'.join(result_lines))
