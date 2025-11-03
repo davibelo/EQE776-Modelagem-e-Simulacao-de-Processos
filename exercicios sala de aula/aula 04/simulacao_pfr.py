@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 from scipy.integrate import solve_ivp
 import os
 
@@ -11,6 +12,7 @@ except NameError:
 FIGURE_PATHS = {
     "evolucao_temporal": os.path.join(BASE_DIR, "evolucao_temporal.png"),
     "perfil_espacial": os.path.join(BASE_DIR, "perfil_espacial.png"),
+    "grafico_3d": os.path.join(BASE_DIR, "grafico_3d.png"),
 }
 RESULTS_PATH = os.path.join(BASE_DIR, "resultados_pfr.txt")
 
@@ -24,19 +26,19 @@ DL = L / Np
 
 def sistema_odes(t, C_interior):
     C0 = (Calim + C_interior[0]/(Pe*2*DL)) / (1 + 1/(Pe*2*DL))
-    
+
     C = np.zeros(Np + 2)
     C[0] = C0
     C[1:Np+1] = C_interior
     C[Np+1] = C_interior[-1]
-    
+
     dCdt = np.zeros(Np)
-    
+
     for i in range(1, Np + 1):
         dC_dz = (C[i+1] - C[i-1]) / (2 * DL)
         d2C_dz2 = (C[i+1] - 2*C[i] + C[i-1]) / (DL**2)
         dCdt[i-1] = (1/Pe) * d2C_dz2 - dC_dz - Da * C[i]
-    
+
     return dCdt
 
 t_span = (0, 2)
@@ -95,12 +97,12 @@ posicoes = [
 ]
 
 for idx, pos, color in posicoes:
-    ax1.plot(sol.t, C_completo[idx, :], linewidth=2.5, color=color, 
+    ax1.plot(sol.t, C_completo[idx, :], linewidth=2.5, color=color,
              label=f'C para L={pos:.2f}')
 
 ax1.set_xlabel('t\' (tempo adimensional)', fontsize=13)
 ax1.set_ylabel('C (concentração adimensional)', fontsize=13)
-ax1.set_title(f'Evolução Temporal da Concentração em Diferentes Posições\nPe = {Pe}, Da = {Da}, Np = {Np}', 
+ax1.set_title(f'Evolução Temporal da Concentração em Diferentes Posições\nPe = {Pe}, Da = {Da}, Np = {Np}',
               fontsize=14, fontweight='bold')
 ax1.legend(fontsize=11, loc='right')
 ax1.grid(True, alpha=0.3)
@@ -116,12 +118,12 @@ colors = ['black', 'red', 'blue', 'green', 'cyan']
 
 for tempo, color in zip(tempos, colors):
     idx_time = np.argmin(np.abs(sol.t - tempo))
-    ax2.plot(z, C_completo[:, idx_time], linewidth=2.5, color=color, 
+    ax2.plot(z, C_completo[:, idx_time], linewidth=2.5, color=color,
              label=f't\' = {tempo:.2f}')
 
 ax2.set_xlabel('L (posição)', fontsize=13)
 ax2.set_ylabel('C (concentração adimensional)', fontsize=13)
-ax2.set_title(f'Perfil Espacial de Concentração em Diferentes Tempos\nPe = {Pe}, Da = {Da}, Np = {Np}', 
+ax2.set_title(f'Perfil Espacial de Concentração em Diferentes Tempos\nPe = {Pe}, Da = {Da}, Np = {Np}',
               fontsize=14, fontweight='bold')
 ax2.legend(fontsize=11, loc='upper right')
 ax2.grid(True, alpha=0.3)
@@ -129,6 +131,27 @@ ax2.set_xlim([0, L])
 ax2.set_ylim([0, 1.0])
 fig2.tight_layout()
 fig2.savefig(FIGURE_PATHS["perfil_espacial"], dpi=300, bbox_inches='tight')
+
+fig3 = plt.figure(figsize=(14, 10))
+ax3 = fig3.add_subplot(111, projection='3d')
+
+T, Z = np.meshgrid(sol.t, z)
+C_plot = C_completo
+
+surf = ax3.plot_surface(Z, T, C_plot, cmap='viridis', edgecolor='none', alpha=0.9)
+
+ax3.set_xlabel('L (posição)', fontsize=12, labelpad=10)
+ax3.set_ylabel("t' (tempo adimensional)", fontsize=12, labelpad=10)
+ax3.set_zlabel('C (concentração adimensional)', fontsize=12, labelpad=10)
+ax3.set_title(f'Superfície 3D: Concentração em Função do Tempo e Posição\nPe = {Pe}, Da = {Da}, Np = {Np}',
+              fontsize=14, fontweight='bold', pad=20)
+
+fig3.colorbar(surf, ax=ax3, shrink=0.5, aspect=5, label='Concentração')
+
+ax3.view_init(elev=25, azim=45)
+
+fig3.tight_layout()
+fig3.savefig(FIGURE_PATHS["grafico_3d"], dpi=300, bbox_inches='tight')
 
 plt.show()
 
