@@ -1,0 +1,532 @@
+\documentclass[10pt,a4paper]{article}
+
+% Idioma e codificação
+\usepackage[english,brazil]{babel} % português como principal
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Margens e layout (ajuste leve para ampliar a largura das colunas)
+\usepackage{indentfirst} % Ensures the first paragraph of each section is indented
+\usepackage[a4paper,left=1.2cm,right=1.2cm,top=2.0cm,bottom=2.0cm]{geometry}
+% Separação entre colunas (ligeiramente reduzida para ganhar espaço útil)
+\setlength{\columnsep}{15pt}
+
+% Matemática e unidades
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{siunitx}
+\sisetup{detect-all=true, per-mode=symbol, group-separator = {\,}}
+% Define custom unit for sampling time t_s to use in unit expressions
+\DeclareSIUnit{\ts}{t_s}
+
+% Espaçamento extra em equações
+\setlength{\jot}{6pt}
+\setlength{\abovedisplayskip}{10pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{10pt plus 2pt minus 2pt}
+\setlength{\abovedisplayshortskip}{8pt plus 1pt minus 1pt}
+\setlength{\belowdisplayshortskip}{8pt plus 1pt minus 1pt}
+
+% Figuras, tabelas e aparência
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{placeins}
+\usepackage{caption}
+\captionsetup{font=small}
+
+% Títulos de seção mais próximos do corpo (12pt para documento 10pt)
+\usepackage{sectsty}
+\sectionfont{\large\bfseries} % define títulos de \section em 12pt (mantendo negrito)
+\subsectionfont{\normalsize\bfseries}
+\subsubsectionfont{\normalsize\bfseries}
+
+% Algoritmos
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{float}
+
+% Hiperlinks e referências cruzadas
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+\usepackage[capitalise]{cleveref}
+
+% Informações do artigo
+\title{Síntese e Avaliação de um Controle Preditivo Não Linear (NMPC) em um Reator CSTR de Van de Vusse}
+
+\author{%
+  F. D. B. Rodrigues$^{1}$\\
+  \small $^{1}$Universidade Federal do Rio de Janeiro (UFRJ), Rio de Janeiro - RJ, Brasil\\  
+  \small E-mails: davibelo@eq.ufrj.br
+}
+
+\date{\today}
+
+\begin{document}
+\selectlanguage{brazil}
+\maketitle
+
+% Highlights
+\noindent\textbf{Highlights}
+\begin{itemize}[leftmargin=*]
+  \item Síntese e avaliação de um NMPC para o CSTR de Van de Vusse com estimação de estados via EKF e operação offset-free por integrador de viés em $C_{A0}$.
+  \item Comparação quantitativa com PID e MPC linear em dois pontos de operação sob perturbações e ruído, usando ISE e esforço de controle como métricas.
+  \item Diretrizes práticas sobre quando controladores lineares são suficientes e quando o NMPC agrega valor, considerando inversão de ganho, pesos de esforço e sensibilidade do estimador.
+\end{itemize}
+
+\vspace{0.5em}
+
+% Graphical abstract (placeholder)
+% \begin{figure}[H]
+%   \centering
+%   % Para inserir sua figura, descomente a linha abaixo e informe o caminho/arquivo
+%   % \includegraphics[width=0.9\linewidth]{graphical_abstract.png}
+%   \caption{Graphical abstract — insira aqui a ilustração resumindo o trabalho (substitua esta caixa pela figura).}
+%   \label{fig:graphical_abstract}
+% \end{figure}
+
+% Abstract em inglês
+\begin{otherlanguage}{english}
+\begin{abstract}
+This paper presents the synthesis and evaluation of a nonlinear model predictive controller (NMPC) applied to the Van de Vusse CSTR, aimed at controlling the production of the desired intermediate component B. The reactor is modeled by mass and energy balances with Arrhenius kinetics and includes heating-jacket dynamics. The manipulated variable is the jacket fluid inlet temperature ($T_k$), and the measured outputs are reactor temperature and product concentration. An extended Kalman filter (EKF) is employed to estimate the unmeasured concentration of reactant A. NMPC performance is compared to a PID controller and a linear MPC in both set-point (servo) and regulatory tests. Performance metrics include the integrated squared error (ISE) and control effort.
+\end{abstract}
+\end{otherlanguage}
+
+% Resumo em português
+\begin{abstract}
+Este artigo apresenta a síntese e a avaliação de um Controle Preditivo Não Linear (NMPC) aplicado ao reator CSTR de Van de Vusse, com o objetivo controlar a produção do componente intermediário desejado (B). O reator é modelado por balanços de massa e energia com cinética de Arrhenius e dinâmica na camisa de aquecimento. A variável manipulada é a temperatura de entrada do fluido na camisa, $T_k$, e as variáveis medidas são a temperatura do reator e a concentração do produto. Um Filtro de Kalman Estendido (EKF) é empregado para estimar a concentração não medida do reagente A. O desempenho do NMPC é comparado ao de um controlador PID e ao MPC linear em testes para casos servos e regulatórios. As métricas incluem ISE e esforço de controle.
+\end{abstract}
+
+\vspace{1em}
+
+% Palavras-chave
+\noindent\textbf{Palavras-chave}— NMPC; CSTR; Reação de Van de Vusse; EKF; Otimização sob restrições; Controle de processos.\\
+\noindent\textbf{Keywords}— NMPC; CSTR; Van de Vusse reaction; EKF; Constrained optimization; Process control.
+
+\vspace{2em}
+
+\section{Introdução}\label{sec:introducao}
+O Controle Preditivo Baseado em Modelo (MPC) tem sido amplamente adotado em processos químicos devido à sua habilidade de lidar com multivariáveis, restrições e previsões explícitas do comportamento dinâmico. Em sistemas fortemente não lineares, como reatores químicos com cinética de Arrhenius, o MPC não linear (NMPC) tende a superar abordagens lineares quando há variação significativa de ganhos e dinâmicas com a operação.
+
+Este trabalho considera o reator CSTR de Van de Vusse, com a rota de reações $A \to B \to C$ e $2A \to D$, um benchmark clássico para controle e otimização. Nosso objetivo é sintetizar um NMPC para: (i) rastrear referência em $C_B$ assegurando seletividade/rendimento de $B$, respeitando restrições na variável manipulada (temperatura de entrada na camisa, $T_k$) e em $\Delta u$.
+
+As contribuições principais são: (a) formulação de um NMPC com penalidades em erro de seguimento, incremento e ação de controle, considerando explicitamente a dinâmica térmica da camisa; (b) uso de EKF para estimar $C_A$; (c) extensão \emph{offset-free} por meio de um estado integrador $d$ modelado como viés em $C_{A0}$ no modelo interno de controle/estimação, permitindo rejeição de desalinhamentos e mudanças de ponto de operação; (d) comparação quantitativa com PID e MPC linear sob distúrbios e ruído; (e) análise de métricas de desempenho
+
+\section{Revisão Bibliográfica}\label{sec:bibliografia}
+O NMPC tem sido amplamente estudado e aplicado na indústria de processos, com contribuições que cobrem discretizações explícitas/implícitas, linearizações sucessivas e algoritmos numéricos como SQP e métodos de ponto interior, além de tópicos recentes em robustez e NMPC econômico \cite{nmpc_survey,amrit_rawlings_angeli_2011,angeli_amrit_rawlings_2012}. Avanços em ferramentas computacionais também viabilizaram implementações em tempo real, seja por esquemas do tipo Real-Time Iteration (RTI) baseados em SQP \cite{diehl_rti_2005}, seja por frameworks de otimização como CasADi/IPOPT \cite{casadi}. No contexto do CSTR de Van de Vusse, estudos clássicos destacam multiplicidade de equilíbrios, inversões de ganho e forte sensibilidade térmica, o que torna esse sistema um benchmark desafiador para controle preditivo \cite{vandevusse,chen_kremling_allgower_1995}.
+
+A eficácia do NMPC depende não apenas da qualidade do modelo, mas também da disponibilidade de estimativas confiáveis do estado, já que o controlador utiliza o estado corrente (medido ou estimado) como condição inicial da predição a cada iteração. Em processos químicos, usualmente apenas um subconjunto das variáveis é diretamente medido (por exemplo, temperatura e poucas concentrações), o que torna indispensável empregar observadores para reconstruir estados não medidos. O Filtro de Kalman Estendido (EKF) é uma escolha recorrente por conciliar custo computacional moderado e boa acurácia para não linearidades moderadas: o método lineariza o modelo em torno da trajetória estimada e propaga as covariâncias de ruído de processo e de medição, fornecendo estimativas em tempo real adequadas ao uso em NMPC \cite{ekf,nmpc_survey}. Alternativas incluem filtros não lineares sem linearização (UKF/EnKF) \cite{julier_uhlmann_1997} e a Estimação por Horizonte Móvel (MHE), que trata naturalmente restrições e outliers à custa de maior esforço computacional \cite{rao_rawlings_mayne_2003}.
+
+Para eliminar erro de regime (offset) em MPC, é prática consolidada estender o vetor de estados com integradores de distúrbio e estimá-los conjuntamente no observador, desde que sejam satisfeitas condições de observabilidade/detectabilidade; essa abordagem é discutida em \cite{pannocchia_rawlings_2003,maeder_morari_2012,pannocchia_gabiccini_artoni_2015}. Em linha com essa literatura, neste trabalho empregamos um EKF para estimar a concentração não medida de $A$, bem como um estado integrador lento $d$ que modela um viés em $C_{A0}$, habilitando uma implementação NMPC \emph{offset-free} mais robusta a desalinhamentos planta–modelo.
+
+\section{Metodologia}\label{sec:metodologia}
+\subsection{Modelagem do Processo}\label{sec:modelo}
+
+Considera-se um CSTR com volume constante $V$ e tempo de residência $\tau = V/F$. As reações são:
+\begin{align*}
+  &\text{R1:}\; A \xrightarrow{k_1} B, \quad
+  \text{R2:}\; B \xrightarrow{k_2} C, \quad
+  \text{R3:}\; 2A \xrightarrow{k_3} D.
+\end{align*}
+As constantes cinéticas seguem Arrhenius: $$k_i(T)=k_{0,i}\exp\big(-E_i/(RT)\big).$$
+
+Os estados da planta com camisa explícita são
+\[
+  x=\begin{bmatrix} C_A & C_B & T & T_j \end{bmatrix}^\top,
+\]
+onde $T_j$ é a temperatura média do fluido na camisa. A variável manipulada é $u=T_k$ (temperatura de entrada do fluido na camisa) e as variáveis medidas são $y=\begin{bmatrix} C_B & T \end{bmatrix}^\top$. Nesta subseção, considera-se apenas o modelo fenomenológico da planta, sem estados de integrador de viés.
+
+
+Balanços (modelo contínuo da planta):
+\begin{align}
+  \dot C_A &= (C_{A0} - C_A)\, r - k_1 C_A - k_3 C_A^2, \\
+  \dot C_B &= -C_B\, r + k_1 C_A - k_2 C_B, \\
+  \dot T   &= (T_0 - T)\, r + q_{\mathrm{rxn}} + \frac{U A}{\rho C_p V} (T_j - T), \\
+  \dot T_j &= \frac{F_j}{V_j} (T_k - T_j) + \frac{U A}{\rho_j C_{p,j} V_j} (T - T_j).
+\end{align}
+Onde o termo de reação (calor de reação normalizado por $\rho C_p$) é definido por
+\begin{equation}
+  q_{\mathrm{rxn}} = \frac{(-\Delta H_{AB})\, k_1 C_A + (-\Delta H_{BC})\, k_2 C_B + (-\Delta H_{AD})\, k_3 C_A^2}{\rho C_p}.
+\end{equation}
+
+Aqui $r = F/V = 1/\tau$. Além disso, $C_{A0}$ e $T_0$ são condições de alimentação; $U A$ representa a capacidade de troca térmica global, com $U A = K_w\,A_R$; $\rho$ e $C_p$ são densidade e calor específico do meio reacional. Para a camisa, $V_j$, $\rho_j$, $C_{p,j}$ e $F_j$ são, respectivamente, volume efetivo, densidade, calor específico e vazão do fluido de utilidade. As temperaturas nas ODEs são expressas em $^\circ$C, sendo $T$ (em K) usado nas relações de Arrhenius.
+
+\vspace{0.5em}
+Os parâmetros físicos e cinéticos utilizados neste trabalho são sumarizados na Tabela~\ref{tab:param}. Esses valores são os empregados na implementação das simulações e são típicos do benchmark de Van de Vusse com camisa explícita.
+
+\vspace{0.5em}
+Os parâmetros físicos e cinéticos utilizados neste trabalho são sumarizados na Tabela~\ref{tab:param}. Esses valores são os empregados na implementação das simulações e são típicos do benchmark de Van de Vusse com camisa explícita.
+
+\begin{table}[H]
+  \centering
+  \caption{Parâmetros e valores nominais utilizados no modelo.}
+  \label{tab:param}
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Parâmetro} & \textbf{Valor} & \textbf{Unid.} \\
+    \midrule
+    $V$ & 10 & \si{L} \\
+    $V_j$ & 5.0 & \si{L} \\
+    $U A$ & 866.88 & \si{kJ/(h\,K)} \\
+    $K_w$ & 4032 & \si{kJ/(h\,K\,m^2)} \\
+    $A_R$ & 0.215 & \si{m^2} \\
+    $\rho$ & 0.9342 & \si{kg/L} \\
+    $C_p$ & 3.01 & \si{kJ/(kg\,K)} \\
+    $\rho_j$ & 0.86 & \si{kg/L} \\
+    $C_{p,j}$ & 2.5 & \si{kJ/(kg\,K)} \\
+    $F_j$ & 700 & \si{L/h} \\
+    $k_{0,1},k_{0,2},k_{0,3}$ & $1.287\times10^{12},\,1.287\times10^{12},\,9.043\times10^{9}$ & \si{h^{-1}},\si{L/(mol\,h)} \\
+    $E_1,E_2,E_3$ & 9758.3, 9758.3, 8560.0 & \si{K} \\
+    $\Delta H_{AB},\Delta H_{BC},\Delta H_{AD}$ & -4.2, 11.0, 41.85 & \si{kJ/mol} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Um diagrama esquemático do reator CSTR é apresentado na Figura~\ref{fig:reator}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\linewidth]{reator.png}
+  \caption{Esquema do reator CSTR com camisa de resfriamento/aquecimento.}
+  \label{fig:reator}
+\end{figure}
+
+Para viabilizar as simulações e a integração com o controlador no ambiente MATLAB/Simulink, a modelagem do processo foi implementada por meio de uma S-Function \emph{Level-2} do MATLAB, utilizada como bloco de planta no diagrama do Simulink (arquivo \texttt{reator\_s\_fun\_level2.m}). Essa S-Function codifica as EDOs de balanço de massa e energia apresentadas nesta seção e possui: (i) quatro estados contínuos, $x=\begin{bmatrix} C_A & C_B & T & T_j \end{bmatrix}^\top$; (ii) duas portas de entrada totalizando quatro sinais, $U1=\begin{bmatrix} r & C_{A0} & T_0 \end{bmatrix}$ e $U2=T_k$; e (iii) duas portas de saída que reportam $C_A$, $C_B$, $T$ e $T_j$ (isto é, $y1=\begin{bmatrix} C_A & C_B & T \end{bmatrix}$ e $y2=T_j$). Os métodos \emph{Level-2} empregados são \texttt{InitializeConditions} (definição das condições iniciais), \texttt{Outputs} (mapeamento dos estados para as saídas) e \texttt{Derivatives} (avaliação das dinâmicas com leis de Arrhenius e troca térmica reator–camisa). O passo de integração e o solucionador numérico (por exemplo, \texttt{ode15s}/\texttt{ode45}) são herdados da configuração global do Simulink. Essa implementação facilita a co-simulação com o NL MPC e o EKF, mantendo consistência entre a planta simulada e o modelo de controle.
+
+\subsection{Cenários de Teste}\label{sec:setup}
+
+Para viabilizar as simulações, configurou-se no Simulink o ambiente da Figura~\ref{fig:simulink}, composto pela planta (S-function), pelo observador EKF e pelos controladores NMPC, MPC e PID.
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=0.8\linewidth]{diagrama_simulink.png}
+  \caption{Diagrama do Simulink: planta (S-function), observador EKF e controladores (NMPC/MPC/PID), configuração dos degraus}
+  \label{fig:simulink}
+\end{figure}
+
+Foram considerados dois estados estacionários (pontos de operação) distintos:
+
+\textbf{EE0.} Condições de alimentação: $r=\SI{40}{h^{-1}}$, $C_{A0}=\SI{5}{mol\,L^{-1}}$, $T_0=\SI{70}{\celsius}$. Estado estacionário no reator: $\big(C_A, C_B, T, T_j\big)=\big(2.80311,\;1.000,\;120.584,\;198.423\big)$, com $T_k=\SI{243.258}{\celsius}$.
+
+\textbf{EE1.} Condições de alimentação: $r=\SI{80}{h^{-1}}$, $C_{A0}=\SI{5}{mol\,L^{-1}}$, $T_0=\SI{100}{\celsius}$. Estado estacionário no reator: $\big(C_A, C_B, T, T_j\big)=\big(2.86566,\;1.000,\;131.34,\;235.65\big)$, com $T_k=\SI{295.125}{\celsius}$.
+
+Para avaliar o desempenho e a robustez dos controladores, aplicaram-se perturbações e mudanças de referência em dois cenários:
+
+\emph{Partindo de EE0:}
+\begin{enumerate}
+  \item Em $t=\SI{5}{h}$, perturbação em $r$ de +\SI{20}{\percent} (de \SI{40}{h^{-1}} para \SI{48}{h^{-1}});
+  \item Em $t=\SI{20}{h}$, perturbação em $T_0$ de +\SI{20}{\percent} (de \SI{70}{\celsius} para \SI{84}{\celsius});
+  \item Em $t=\SI{40}{h}$, perturbação em $C_{A0}$ de +\SI{20}{\percent} (de \SI{5}{mol\,L^{-1}} para \SI{6}{mol\,L^{-1}});
+  \item Em $t=\SI{55}{h}$, mudança no setpoint de $C_B$ de -\SI{10}{\percent} (de \SI{1}{mol\,L^{-1}} para \SI{0.9}{mol\,L^{-1}}).
+\end{enumerate}
+
+\emph{Partindo de EE1 (para avaliar desempenho fora do ponto de identificação/síntese):}
+\begin{enumerate}
+  \item Em $t=\SI{5}{h}$, perturbação em $r$ de +\SI{20}{\percent} (de \SI{80}{h^{-1}} para \SI{96}{h^{-1}});
+  \item Em $t=\SI{20}{h}$, perturbação em $T_0$ de +\SI{20}{\percent} (de \SI{100}{\celsius} para \SI{120}{\celsius});
+  \item Em $t=\SI{40}{h}$, perturbação em $C_{A0}$ de +\SI{20}{\percent} (de \SI{5}{mol\,L^{-1}} para \SI{6}{mol\,L^{-1}});
+  \item Em $t=\SI{55}{h}$, mudança no setpoint de $C_B$ de -\SI{10}{\percent} (de \SI{1}{mol\,L^{-1}} para \SI{0.9}{mol\,L^{-1}}).
+\end{enumerate}
+
+\subsection{Formulação do NMPC}\label{sec:formulacao_nmpc}
+Define-se o vetor de referência $r_k$ (por exemplo, em $C_B$ e $T$). O NMPC resolve a cada instante $k$ o problema de otimização em horizonte deslizante $N_p$ (com horizonte de controle $N_c\le N_p$):
+\begin{align}
+  \min_{\{u_{k+i}\}_{i=0}^{N_c-1}}\; &\sum_{i=1}^{N_p} \| y_{k+i|k} - r_{k+i} \|_{Q}^2
+  + \sum_{i=0}^{N_c-1} \| \Delta u_{k+i|k} \|_{R}^2 \\
+  &+ \sum_{i=0}^{N_c-1} \| u_{k+i|k} - u^{\mathrm{ref}} \|_{S}^2 + \| x_{k+N_p|k} - x^{\mathrm{t}} \|_{P}^2, \label{eq:cost}
+\end{align}
+\text{sujeito a}
+\begin{align}
+  &x_{k+i+1|k} = f\big(x_{k+i|k}, u_{k+i|k}\big), \quad x_{k|k}=\hat x_k, \\
+  &y_{k+i|k} = h\big(x_{k+i|k}\big), \\
+  &u_{\min} \le u_{k+i|k} \le u_{\max}, \\
+  &\Delta u_{\min} \le \Delta u_{k+i|k} \le \Delta u_{\max}, \\
+  &g\big(x_{k+i|k}, u_{k+i|k}\big) \le 0 \;\; (\text{restrições de processo, se houver}). \label{eq:constraints}
+\end{align}
+Onde $Q\succeq 0$, $R\succ 0$, $S\succeq 0$, $P\succeq 0$ são pesos sintonizáveis; $u^{\mathrm{ref}}$ e $x^{\mathrm{t}}$ representam referências de operação/terminais (se usados). A ação aplicada é $u_k = u_{k|k}^*$.
+
+Nesse trabalho, o controlador NMPC é implementado com o objeto \texttt{nlmpc} do MATLAB/Simulink, com integração numérica interna do modelo contínuo e com a seguinte parametrização.
+
+\paragraph{Modelo interno com integrador de viés (offset-free).}
+Para viabilizar operação \emph{offset-free}, o modelo interno do controlador é estendido com um estado integrador lento $d$ (com $\dot d=0$) que atua como viés aditivo em $C_{A0}$. Assim, a única modificação nas EDOs da planta (Seção~\ref{sec:modelo}) é na equação de $C_A$:
+\begin{align}
+  \dot C_A &= (C_{A0} + d - C_A)\, r - k_1 C_A - k_3 C_A^2, \\
+  \dot C_B &= -C_B\, r + k_1 C_A - k_2 C_B, \\
+  \dot T   &= (T_0 - T)\, r + q_{\mathrm{rxn}} + \frac{U A}{\rho C_p V} (T_j - T), \\
+  \dot T_j &= \frac{F_j}{V_j} (T_k - T_j) + \frac{U A}{\rho_j C_{p,j} V_j} (T - T_j), \\
+  \dot d &= 0,
+\end{align}
+com $q_{\mathrm{rxn}}$ conforme definido na Seção~\ref{sec:modelo}. As saídas consideradas pelo NMPC são $y=\begin{bmatrix} C_B & T \end{bmatrix}^\top$.
+
+\paragraph{Parâmetros de configuração: }
+\begin{itemize}[leftmargin=*]
+  \item Estrutura do modelo: $x=\begin{bmatrix} C_A & C_B & T & T_j & d \end{bmatrix}^\top$ (camisa explícita + integrador $d$ para \emph{offset-free} em $C_{A0}$, com $\dot d=0$); saídas $y=\begin{bmatrix} C_B & T \end{bmatrix}^\top$.
+  \item Entradas no controlador: MV $T_k$ e distúrbios medidos $r,\,T_0$; isto é, $u=[T_k;\, r;\, T_0]$, com MV no índice 1 e MD nos índices 2 e 3.
+  \item Amostragem e horizontes: $t_s=\SI{0.05}{h}$; predição $p=30$; controle $m=[2\;5\;10]$; \texttt{Model.IsContinuousTime=true}.
+  \item Funções de modelo: \texttt{StateFcn} $=\,$\texttt{reatorStateFcn\_nlmpc2}; \texttt{OutputFcn} $=\,$\texttt{reatorOutputFcn\_nlmpc2}.
+  \item Sem parâmetros online: utiliza apenas as entradas MV e MD (\texttt{NumberOfParameters}=0).
+  \item Escalas: MV $=100$; OV $=[1,\,100]$ para $[C_B,\,T]$; MD $=[50,\,100]$ para $[r,\,T_0]$.
+  \item Pesos: $Q_y=\mathrm{diag}([5,\,0])$ (rastrear $C_B$; $T$ tratado como restrição suave); peso em MV $=10^{-4}$; peso em $\Delta$MV $=10^{-4}$.
+  \item Restrições: $T_k\in[\SI{100}{\celsius},\,\SI{1000}{\celsius}]$; $\Delta T_k\in[\SI{-1000}{\celsius/\ts},\,\SI{+1000}{\celsius/\ts}]$; $T\in[\SI{0}{\celsius},\,\SI{1000}{\celsius}]$ com relaxamento (soft) via ECR em $T$ (\texttt{MinECR}$=\texttt{MaxECR}=10^{-2}$).
+\end{itemize}
+
+\subsubsection{Estimação de Estados via EKF}\label{sec:ekf}
+Nem todos os estados são medidos; especificamente, assume-se $C_A$ não medido. Considera-se o modelo discreto com ruídos de processo $w_k$ e medição $v_k$:
+\begin{align}
+  x_{k+1} &= f(x_k,u_k) + w_k, & w_k \sim \mathcal{N}(0,Q_k),\\
+  y_k     &= h(x_k) + v_k,     & v_k \sim \mathcal{N}(0,R_k).
+\end{align}
+O EKF realiza predição e atualização linearizando $f$ e $h$ nos pontos atuais (Jacobianos):
+
+\begin{align}
+A_k=\partial f/\partial x,\\
+C_k=\partial h/\partial x. 
+\end{align}
+
+Em contraste com o Filtro de Kalman clássico (KF), que supõe um sistema linear e usa diretamente as matrizes $(A,B,C,D)$ fixas, o EKF aproxima localmente um sistema não linear por um modelo linear variante no tempo, recomputando $A_k$ e $C_k$ a cada passo. Assim, o EKF herda a estrutura do KF, porém com Jacobianos recalculados on-line. 
+
+No caso não linear, essa linearização é feita em torno da estimativa atual, para o modelo discreto: $x_{k+1}=f(x_k,u_k)+w_k$ e $y_k=h(x_k)+v_k$, tem-se:
+
+\begin{align}
+A_k = \left.\tfrac{\partial f}{\partial x}\right|_{\hat x_{k|k},u_k},\\
+C_k = \left.\tfrac{\partial h}{\partial x}\right|_{\hat x_{k+1|k}}. 
+\end{align}
+
+Quando parte-se de um modelo contínuo $f_c$ e usa-se discretização de Euler com passo $T_s$, vale:
+
+\begin{align}
+A_k \approx I + F_k T_s\\
+F_k=\left.\tfrac{\partial f_c}{\partial x}\right|_{\hat x_{k|k},u_k}. 
+\end{align}
+
+Essas matrizes são usadas para:
+
+\begin{itemize}
+  \item Propagar a covariância, isto é,
+    \[
+      P_{k+1|k} = A_k \, P_{k|k} \, A_k^\top + Q_k.
+    \]
+  \item Calcular o ganho de Kalman
+    \[
+      K_{k+1} = P_{k+1|k} \, C_{k+1}^\top \, S_{k+1}^{-1}.
+    \]
+\end{itemize}
+
+\begin{algorithm}[H]
+\caption{Filtro de Kalman Estendido (EKF) para o CSTR}
+\label{alg:ekf}
+\begin{algorithmic}[1]
+  \State Dado $\hat x_{k|k}$, $P_{k|k}$
+  \State Predição (discretização de Euler do modelo contínuo $f_c$): $\hat x_{k+1|k}=\hat x_{k|k} + f_c(\hat x_{k|k},u_k)\,T_s$
+  \State Linearização do modelo: $F_k=\left.\partial f_c/\partial x\right|_{\hat x_{k|k},u_k}$ e $A_k \approx I + F_k\,T_s$
+  \State Predição da covariância: $P_{k+1|k}=A_k\, P_{k|k}\, A_k^\top + Q_k$
+  \State Medição $y_{k+1}$ e linearização da saída: $C_{k+1}=\left.\partial h/\partial x\right|_{\hat x_{k+1|k}}$
+  \State Inovação: $\tilde y_{k+1}=y_{k+1}-h(\hat x_{k+1|k})$
+  \State Covariância da inovação: $S_{k+1}=C_{k+1}P_{k+1|k}C_{k+1}^\top + R_k$
+  \State Ganho: $K_{k+1}=P_{k+1|k} C_{k+1}^\top S_{k+1}^{-1}$
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Parametrização do EKF}\label{subsec:ekf_param}
+\paragraph{Parâmetros de configuração:}
+\begin{itemize}[leftmargin=*,itemsep=2pt,topsep=2pt]
+  \item Estrutura do modelo: estados $\tilde x=\begin{bmatrix} C_A & C_B & T & T_j & d \end{bmatrix}^\top$; saídas $\tilde y=\begin{bmatrix} C_B & T & T_j \end{bmatrix}^\top$; entradas $\tilde u=\begin{bmatrix} T_k & r & T_0 \end{bmatrix}^\top$; $d$ atua como integrador de viés em $C_{A0}$ com $\dot d=0$.
+  \item Discretização e linearização: integração de Euler do modelo contínuo $f_c$ com passo $T_s=\SI{0.01}{h}$; Jacobianos via diferenças finitas; $A_k \approx I + F_k\,T_s$; $C_k$ obtido de $h$ por derivada numérica.
+  \item Ruídos: $R=\mathrm{diag}(\{10^{-4},10^{-4},10^{-4}\})$ para $[C_B,\,T,\,T_j]$; $Q=\mathrm{diag}(\{10^{-6},10^{-6},10^{-6},10^{-6},10^{-4}\})$, com maior incerteza atribuída a $d$.
+  \item Inicialização: $\hat x_0=[2.803,\,C_B^{\mathrm{meas}},\,T^{\mathrm{meas}},\,T_j^{\mathrm{meas}},\,0]^\top$; $P_0=I$.
+  \item Tratamentos numéricos: \emph{clamping} físico dos estados; atualização da covariância na forma de Joseph.
+  \item Sinais de medição: utiliza $[C_B,\,T,\,T_j]$; $C_A$ não medido.
+  \item Em MATLAB/Simulink, reutiliza-se a mesma função de estados \texttt{reatorStateFcn\_nlmpc2} compartilhada com o NMPC.
+\end{itemize}
+
+
+
+\subsection{MPC: levantamento do modelo por linearização local}\label{subsec:mpc_model}
+% Formulação explícita do modelo linear em espaço de estados (variáveis de desvio)
+Em variáveis de desvio em torno de $(x_0,u_0,y_0)$, o modelo linearizado contínuo utilizado pelo MPC é dado por:
+\begin{align}
+  \dot{\tilde x}(t) &= A\,\tilde x(t) + B\,\tilde u(t),\\
+  \tilde y(t) &= C\,\tilde x(t) + D\,\tilde u(t),
+\end{align}
+com $\tilde x = x - x_0$, $\tilde u = u - u_0$ e $\tilde y = y - y_0$. No caso adotado, \mbox{$x=\begin{bmatrix}C_A & C_B & T\end{bmatrix}^\top$}, \mbox{$u=\begin{bmatrix}T_k & r & T_0\end{bmatrix}^\top$}, \mbox{$y=\begin{bmatrix}C_B & T\end{bmatrix}^\top$} e, por construção, $D=0_{2\times 3}$. A versão discretizada por retenção de ordem zero (ZOH), com período de amostragem $T_s$, é
+\begin{align}
+  \tilde x_{k+1} &= A_d\,\tilde x_k + B_d\,\tilde u_k,\\
+  \tilde y_k     &= C_d\,\tilde x_k + D_d\,\tilde u_k,
+\end{align}
+em que $(A_d,B_d,C_d,D_d)$ são obtidas da discretização de $(A,B,C,D)$ em torno de $(x_0,u_0)$. Por convenção, a ação aplicada à planta é $u = u_0 + \tilde u$.
+
+Nesta subseção detalha-se como o modelo dinâmico usado pelo MPC linear foi obtido a partir do mesmo modelo fenomenológico contínuo do reator. O procedimento é implementado no script \texttt{setup\_mpc\_reator.m} e envolve:
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Escolha do ponto nominal} $(x_0,u_0)$: fixa-se $u_0=\begin{bmatrix}T_{k0} & r_0 & T_{0,0}\end{bmatrix}^\top$ (MV e distúrbios medidos) e parâmetros como $C_{A0}$. Palpites para $x=[C_A, C_B, T]^\top$ são definidos. Neste trabalho, adotou-se como ponto nominal o estado estacionário EE0 (vide Seção~\ref{sec:setup}).
+  \item \textbf{Cálculo do estado estacionário} $x_0$: resolve-se o sistema
+  \begin{equation}
+    0 = f(x_0,u_0)\,,
+  \end{equation}
+  onde $f$ é o campo vetorial das ODEs do CSTR (van de Vusse). Utiliza-se \texttt{fsolve} e, em caso de falha, um \emph{fallback} com \texttt{fminsearch} seguido de uma iteração de Newton (refino).
+  \item \textbf{Linearização contínua em torno de $(x_0,u_0)$}: obtém-se as matrizes
+  \begin{equation}
+    A = \left.\frac{\partial f}{\partial x}\right|_{x_0,u_0},\quad
+    B = \left.\frac{\partial f}{\partial u}\right|_{x_0,u_0},
+  \end{equation}
+  via diferenças finitas centrais (passos relativos automáticos), isto é,
+  \begin{align}
+    A_{\cdot i} &\approx \frac{f(x_0 + h_i e_i, u_0) - f(x_0 - h_i e_i, u_0)}{2h_i}, \\
+    B_{\cdot j} &\approx \frac{f(x_0, u_0 + k_j e_j) - f(x_0, u_0 - k_j e_j)}{2k_j},
+    \intertext{Os dados de identificação utilizados para obter os ganhos do PID estão mostrados na Figura~\ref{fig:ajuste_foptd_ee0}.}
+  \end{align}
+  onde $e_i$ e $e_j$ são vetores canônicos e $h_i, k_j$ são passos numéricos.
+  \item \textbf{Escolha de saídas e composição do modelo}: define-se $y = \begin{bmatrix} C_B & T \end{bmatrix}^\top$, o que resulta em
+  \begin{equation}
+    C = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix},\quad D=0_{2\times 3}.
+  \end{equation}
+  As entradas são ordenadas como $[\underbrace{T_k}_{\text{MV}}\,\underbrace{r,\,T_0}_{\text{MD}}]$. Em MATLAB: \texttt{G = ss(A,B,C,D)} seguido de \texttt{setmpcsignals(G,'MV',1,'MD',[2 3])}.
+  \item \textbf{Modelo discreto para o MPC}: o objeto \texttt{mpc(G,T\_s,P,M)} discretiza internamente o modelo contínuo \emph{por retenção de ordem zero} (ZOH) com período de amostragem $T_s=\SI{0.05}{h}$. Assim, o MPC usa
+  \begin{align}
+    x_{k+1} &= A_d x_k + B_d u_k, \quad y_k = C_d x_k + D_d u_k,
+  \end{align}
+  com $(A_d,B_d,C_d,D_d)$ provenientes da discretização de $(A,B,C,D)$ em variáveis de desvio (isto é, em torno de $(x_0,u_0)$).
+\end{enumerate}
+
+\noindent Para coerência numérica e escalonamento, o MPC é inicializado com valores nominais $x_0$, $u_0$ e $y_0=[C_{B0},\,T_0]^\top$. As restrições e pesos adotados são os descritos na \emph{Configuração efetiva} acima.
+
+\subsubsection{Parametrização do MPC}\label{subsec:mpc_param}
+\paragraph{Parâmetros de configuração:}
+\begin{itemize}[leftmargin=*]
+  \item Estrutura e sinais do modelo: linear em variáveis de desvio em torno de $(x_0,u_0)$; estados $x=\begin{bmatrix} C_A & C_B & T \end{bmatrix}^\top$; saídas $y=\begin{bmatrix} C_B & T \end{bmatrix}^\top$; entradas ordenadas como $u=\begin{bmatrix} T_k & r & T_0 \end{bmatrix}^\top$, com $T_k$ rotulada como MV e $r,\,T_0$ como MD ($D=0_{2\times 3}$).
+  \item Amostragem e horizontes: $t_s=\SI{0.05}{h}$; predição $P=30$; controle $M=[2\;5\;10]$.
+  \item Discretização: \emph{zero-order hold} (ZOH) interna do objeto \texttt{mpc(G,$t_s$,P,M)}.
+  \item Pesos: $Q_y=\mathrm{diag}([5,\,0])$ (rastrear $C_B$; $T$ tratado apenas como restrição); peso em MV $=10^{-4}$; peso em $\Delta$MV $=10^{-4}$.
+  \item Nominais e escalas: $X_{\mathrm{nom}}=x_0$, $Y_{\mathrm{nom}}=[C_{B0},\,T_0]^\top$, $U_{\mathrm{nom}}=[T_{k0},\,r_0,\,T_{0,0}]^\top$; fatores de escala: MV $=100$; OV $=[1,\,100]$ para $[C_B,\,T]$.
+  \item Restrições: $T_k\in[\SI{100}{\celsius},\,\SI{1000}{\celsius}]$; $\Delta T_k\in[\SI{-1000}{\celsius/\ts},\,\SI{+1000}{\celsius/\ts}]$; $T\in[\SI{0}{\celsius},\,\SI{1000}{\celsius}]$ como restrição suave (ECR padrão do MPC Toolbox, sem ajuste explícito).
+  \item Sinais utilizados: OVs medidas $[C_B,\,T]$; MDs $[r,\,T_0]$; referência $r=[C_B^{\mathrm{sp}};\,T_{\mathrm{ref}}]$ com $T_{\mathrm{ref}}$ mantido em $T_0$ nominal (sem peso de rastreio).
+\end{itemize}
+
+\paragraph{Sobre o horizonte de controle $M=[2,\,5,\,10]$}
+O vetor $M$ define um esquema de \emph{bloqueio de movimentos} (move blocking) para a MV ao longo do horizonte de controle: os incrementos de $T_k$ são mantidos constantes em blocos sucessivos de 2, 5 e 10 passos de amostragem, respectivamente. Isso reduz o número de graus de liberdade da otimização (menos variáveis de decisão), suaviza a ação de controle e melhora a robustez numérica, ao custo de menor agilidade para mudanças rápidas. No caso presente, tal escolha equilibra esforço computacional e suavidade da MV, mantendo desempenho satisfatório em rastreamento de $C_B$ e respeito às restrições de $T$.
+
+\subsection{Controlador PID}\label{subsec:pid}
+
+O controlador PID foi implementado em MATLAB/Simulink por meio de blocos elementares (ganhos, somadores, integrador, saturações e função de transferência) na forma paralela, segundo a formulação no domínio de Laplace:
+\begin{equation}
+  U(s) = \left(K_p + \frac{K_i}{s} + K_d\,\frac{s}{10\,s + 1}\right)E(s),
+\end{equation}
+em que $U(s)$ é a ação de controle e $E(s)$ o erro. O termo derivativo é filtrado por uma dinâmica de primeira ordem (constante de tempo $\tau_f=\SI{10}{h}$), de modo a atenuar ruídos de medição e reduzir conteúdo de alta frequência na MV.
+
+Os ganhos $K_p$, $K_i$ e $K_d$ foram obtidos a partir de um modelo de primeira ordem com tempo morto (FOPTD) identificado via teste degrau no ponto de operação EE0 (vide Figura~\ref{fig:ajuste_foptd_ee0} para os dados e ajuste) e sintonizados pelo método IMC, adotando-se um parâmetro de filtro $\lambda=0{,}8\,\tau$ (sendo $\tau$ a constante de tempo identificada); os parâmetros resultantes encontram-se na Tabela~\ref{tab:pid_imc}.
+
+O modelo identificado em EE0 foi:
+\begin{equation}
+  G(s) = \frac{0.004366\,e^{-0.0050\,s}}{0.0190\,s + 1},
+  \label{eq:foptd_ee0}
+\end{equation}
+com base em um degrau de $\Delta T_k=\SI{10}{\celsius}$ (de \SI{243.258}{\celsius} para \SI{253.258}{\celsius}), resultando em $\Delta C_B=0.043661$ (de $1.000$ para $1.043661$). A qualidade do ajuste foi $\mathrm{MSE}=3.11\times10^{-6}$. O tempo morto foi estimado por detecção do tempo com 2\% da resposta final e a constante de tempo pelo critério de 63,2\% da resposta final; o teste foi configurado com tempo de aplicação do degrau de \SI{0.1}{h}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{modelo_ajuste.png}
+  \caption{Teste degrau em EE0 (MV $T_k$) e ajuste do modelo FOPTD (Eq.~\ref{eq:foptd_ee0}).}
+  \label{fig:ajuste_foptd_ee0}
+\end{figure}
+
+\paragraph{Nota técnica:} Optou-se por essa implementação explícita em detrimento do bloco PID nativo do MATLAB/Simulink devido a dificuldades de inicialização coerente com o ponto de operação, isto é, garantir \emph{bumpless transfer} casando $u(0)$ com a $T_k$ do estado estacionário da planta.
+
+\begin{table}[H]
+  \centering
+  \caption{Parâmetros do controlador PID sintonado por IMC a partir do modelo identificado em EE0.}
+  \label{tab:pid_imc}
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Forma paralela} & $K_p$ & $K_i$ (h$^{-1}$) & $K_d$ (h) \\
+    \midrule
+    PID & 278.208111 & 12939.912127 & 0.614646 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Resultados e Discussão}\label{sec:resultados}
+
+Partindo de EE0 (Figura~\ref{fig:testes_ee0}), o PID apresentou o menor ISE, seguido de perto pelo NMPC, enquanto o MPC linear exibiu erro integrado superior. Todos os métodos, contudo, demandaram esforços de manipulação muito semelhantes (da ordem de $4.02\times 10^{6}$), indicando que, nessa vizinhança operacional, o desempenho dos controladores foi bem semelhante. Isso era esperado visto que a sintonia do PID e a linearização do MPC foram feitas em torno dessas condições.
+
+\begin{table}[H]
+  \centering
+  \caption{Métricas de desempenho no cenário EE0:}
+  \label{tab:metricas_ee0}
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Controlador} & \textbf{ISE} & \textbf{Esforço de manipulação} \\
+    \midrule
+    NMPC & $1.144950\times 10^{-3}$ & $4.021089\times 10^{6}$ \\
+    MPC  & $8.960125\times 10^{-3}$ & $4.029595\times 10^{6}$ \\
+    PID  & $4.946284\times 10^{-4}$ & $4.020429\times 10^{6}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+onde: ISE $=\int (\mathrm{SP}-C_B(t))^2\,dt$ e esforço de manipulação $=\int u^2(t)\,dt$, onde $u\equiv T_k$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{dados_simulacao_EE0.csv_graficos.png}
+  \caption{Resultados de testes partindo do estado estacionário EE0}
+  \label{fig:testes_ee0}
+\end{figure}
+
+No cenário EE1 (Figura~\ref{fig:testes_ee1}), observa-se um contraste importante: PID e MPC convergiram para os mesmos valores finais de $C_B$ (e variáveis correlatas), ao passo que o NMPC levou a planta a um estado estacionário distinto, com $T_k$ significativamente mais elevado. Esse comportamento explica o esforço de manipulação substancialmente maior do NMPC (\mbox{$\approx 1.23\times 10^{7}$}, cerca de 2,6 vezes o dos controladores lineares), a despeito de um ISE ainda relativamente baixo. O bom desempenho do PID e do MPC é evidência de que, em EE1, não houve inversão de ganho entre $T_k$ e $C_B$.
+
+\begin{table}[H]
+  \centering
+  \caption{Métricas de desempenho no cenário EE1:}
+  \label{tab:metricas_ee1}
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Controlador} & \textbf{ISE} & \textbf{Esforço de manipulação} \\
+    \midrule
+    NMPC & $3.994547\times 10^{-3}$ & $1.229926\times 10^{7}$ \\
+    MPC  & $3.488386\times 10^{-2}$ & $4.762825\times 10^{6}$ \\
+    PID  & $1.002494\times 10^{-3}$ & $4.624427\times 10^{6}$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{dados_simulacao_EE1.csv_graficos.png}
+  \caption{Resultados de testes partindo do estado estacionário EE1}
+  \label{fig:testes_ee1}
+\end{figure}
+
+Do ponto de vista de projeto, os resultados sugerem que, em regiões sem inversão de ganho e com restrições frouxas, controladores lineares (PID/MPC) tendem a fornecer rastreamento adequado com esforço moderado. O NMPC, por sua vez, pode explorar trajetórias com maior energia quando os pesos em $u$ e/ou $\Delta u$ são relativamente brandos ou quando pequenas inconsistências de modelagem/estimação (EKF) deslocam o ótimo para estados estacionários com $T_k$ mais alto. Isso ressalta a importância de: (i) sintonizar cuidadosamente os pesos de esforço/variação no custo do NMPC, (ii) verificar a presença de ganhos efetivos (sinal e magnitude) ao longo da trajetória e (iii) avaliar a sensibilidade do estimador de estados a ruídos e vieses.
+
+\FloatBarrier
+
+\section{Conclusões e sugestões para trabalhos futuros}\label{sec:conclusoes}
+À luz dos resultados experimentais apresentados nas Figuras~\ref{fig:testes_ee0} e \ref{fig:testes_ee1} e nas Tabelas~\ref{tab:metricas_ee0} e \ref{tab:metricas_ee1}, conclui-se que, em aplicações práticas SISO onde a planta (ainda que não linear) opere em faixas sem inversão de ganho, um controlador PID bem sintonado pode ser plenamente adequado e competitivo em desempenho, oferecendo simplicidade e baixo custo de implementação. Para problemas multivariáveis (MIMO), o MPC linear revela-se particularmente atraente pela capacidade de tratar explicitamente acoplamentos e restrições, mantendo complexidade geralmente inferior à do NMPC, principalmente devido aos desafios relacionados às estimações de estados. Por outro lado, o NMPC torna-se recomendável em cenários MIMO com variações significativas de sinal e de amplitude de ganho ao longo da trajetória, ou quando se exige um desempenho transitório muito agressivo que um MPC linear — mal linearizado ou com modelo pouco representativo.
+
+Como direções para trabalhos futuros, propõe-se investigar a imposição de restrições explícitas em $T_k$ e nas taxas de variação ($\Delta T_k$) tanto em MPC quanto em NMPC, de modo a verificar se o NMPC ainda tende a elevar $T_k$ a níveis elevados; caso essa tendência persista, deve-se explorar alternativas de formulação do custo (pesos, penalizações por energia) e, quando pertinente, custos econômicos que desencorajem estacionários energeticamente onerosos. Além disso, recomenda-se explorar formulações multivariáveis que incluam $r$ ou $T_0$ como variáveis manipuladas adicionais, avaliando potenciais ganhos de desempenho e a coordenação entre malhas. Por fim, é importante aprofundar a análise de sensibilidade dos estimadores de estado (por exemplo, EKF) a ruídos e vieses de modelo, bem como comparar alternativas como UKF e MHE, dado o impacto direto desses estimadores sobre a performance e a robustez do NMPC.
+
+\appendix
+
+\section{Reprodutibilidade}
+O código-fonte e dados para reproduzir as figuras e tabelas estarão disponíveis em: \url{https://github.com/davibelo/Sintese-e-Avaliacao-NMPC-CSTR-Van-de-Vusse}
+
+\begin{thebibliography}{99}
+\bibitem{nmpc_survey} Rawlings, J. B., Mayne, D. Q., Diehl, M. Model Predictive Control: Theory and Design. Nob Hill, 2017.
+\bibitem{vandevusse} Van de Vusse, J. G. (1964). Plug-flow type reactor versus tank reactor. \emph{Chemical Engineering Science}, 19(12), 994--996. doi:10.1016/0009-2509(64)85109-5.
+\bibitem{ekf} Simon, D. (2006). \emph{Optimal State Estimation}. Wiley.
+\bibitem{casadi} Andersson, J. A. E., et al. (2019). CasADi — A software framework for nonlinear optimization and optimal control. \emph{Mathematical Programming Computation}, 11, 1–36.
+\bibitem{pannocchia_rawlings_2003} Pannocchia, G.; Rawlings, J. B. (2003). Disturbance models for offset-free model-predictive control. \emph{AIChE Journal}, 49(2), 426–437. doi:10.1002/aic.690490213.
+\bibitem{maeder_morari_2012} Maeder, U.; Morari, M. (2012). Nonlinear offset-free model predictive control. \emph{Automatica}, 48(9), 2059–2067. doi:10.1016/j.automatica.2012.06.038.
+\bibitem{pannocchia_gabiccini_artoni_2015} Pannocchia, G.; Gabiccini, M.; Artoni, A. (2015). Offset-free MPC explained: novelties, subtleties, and applications. \emph{IFAC-PapersOnLine}, 48(23), 342--351. doi:10.1016/j.ifacol.2015.11.304.
+% --- novas referências adicionadas ---
+\bibitem{diehl_rti_2005} Diehl, M.; Bock, H. G.; Schlöder, J. P. (2005). A Real-Time Iteration Scheme for Nonlinear Optimization in Optimal Feedback Control. \emph{SIAM Journal on Control and Optimization}, 43(5), 1714–1736. doi:10.1137/S0363012902400713.
+\bibitem{amrit_rawlings_angeli_2011} Amrit, R.; Rawlings, J. B.; Angeli, D. (2011). Economic optimization using model predictive control with a terminal cost. \emph{Annual Reviews in Control}, 35(2), 178–186. doi:10.1016/j.arcontrol.2011.03.005.
+\bibitem{angeli_amrit_rawlings_2012} Angeli, D.; Amrit, R.; Rawlings, J. B. (2012). On average performance and stability of economic model predictive control. \emph{IEEE Transactions on Automatic Control}, 57(7), 1615–1626. doi:10.1109/TAC.2011.2179349.
+\bibitem{chen_kremling_allgower_1995} Chen, H.; Kremling, A.; Allgöwer, F. (1995). Nonlinear Predictive Control of a Benchmark CSTR. In: \emph{Proceedings of the European Control Conference (ECC'95)}, 3247–3252.
+\bibitem{julier_uhlmann_1997} Julier, S. J.; Uhlmann, J. K. (1997). A new extension of the Kalman filter to nonlinear systems. In: \emph{Proceedings of AeroSense: The 11th International Symposium on Aerospace/Defense Sensing, Simulation and Controls}, 182–193.
+\bibitem{rao_rawlings_mayne_2003} Rao, C. V.; Rawlings, J. B.; Mayne, D. Q. (2003). Constrained state estimation for nonlinear discrete-time systems: Stability and moving horizon approximations. \emph{IEEE Transactions on Automatic Control}, 48(2), 246–258. doi:10.1109/TAC.2002.808477.
+% ------------------------------------
+% TODO: adicionar referências específicas usadas na modelagem e comparação
+\end{thebibliography}
+
+\end{document}
