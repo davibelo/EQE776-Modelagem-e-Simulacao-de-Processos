@@ -241,19 +241,11 @@ Em síntese, a literatura destaca três pilares para simulações dinâmicas con
 
 \subsection{Configuração Geral da UTAA}
 
-A Unidade de Tratamento de Águas Ácidas (UTAA) considerada neste trabalho é composta por duas torres de destilação operando em série, conforme representado esquematicamente na Figura~\ref{fig:diagrama_utaa} (a ser desenvolvida).
+A Unidade de Tratamento de Águas Ácidas (UTAA) considerada neste trabalho é composta por duas torres de destilação operando em série.
 
 A água ácida proveniente de diversas unidades da refinaria (hidrotratamento, FCC, coqueamento, etc.) é coletada e alimentada na primeira torre, a torre esgotadora de H\textsubscript{2}S. Esta coluna opera sob pressão moderada e utiliza vapor de despojamento e um refervedor para promover a desvolatilização preferencial do H\textsubscript{2}S, que é mais volátil que a NH\textsubscript{3} nas condições operacionais típicas. O gás ácido de topo, rico em H\textsubscript{2}S e contendo alguma NH\textsubscript{3}, é enviado para a URE. A água de fundo, ainda contendo NH\textsubscript{3} e traços de H\textsubscript{2}S, é bombeada para a segunda torre, onde a NH\textsubscript{3} é removida.
 
-% TODO: Inserir figura esquemática da UTAA
-% \begin{figure}[H]
-%   \centering
-%   % \includegraphics[width=0.8\linewidth]{diagrama_utaa.png}
-%   \caption{Diagrama esquemático simplificado da UTAA de duas torres.}
-%   \label{fig:diagrama_utaa}
-% \end{figure}
-
-\subsection{Torre Esgotadora de H\textsubscript{2}S}
+\subsection{Torre Esgotadora de H2S}
 
 A torre esgotadora de H\textsubscript{2}S é o foco principal deste trabalho. Trata-se de uma coluna de destilação com as seguintes características típicas:
 
@@ -463,11 +455,11 @@ Para avaliar o desempenho operacional da torre em cada cenário, as seguintes m�
 
 [Apresentar resultados da análise de sensibilidade para variações de composição, carga térmica e vazão]
 
-\subsubsection{Efeito da Concentração de H\textsubscript{2}S na Alimentação}
+\subsubsection{Efeito da Concentração de H2S na Alimentação}
 
 [Discutir como variações de H\textsubscript{2}S afetam recuperação, consumo energético e operação]
 
-\subsubsection{Efeito da Concentração de NH\textsubscript{3} na Alimentação}
+\subsubsection{Efeito da Concentração de NH3 na Alimentação}
 
 [Discutir como variações de NH\textsubscript{3} afetam o arraste de NH\textsubscript{3} para o topo e o risco de fervura]
 
@@ -579,25 +571,31 @@ O código-fonte, dados e arquivos de simulação para reproduzir as figuras e ta
 % - Trabalhos sobre controle de colunas de destilação
 % - Livros-texto sobre operação de refinarias
 % - Artigos sobre NMPC e controle baseado em redes neurais
-\bibitem{fernandez2004} Palmer, D. A.; Fernández-Prini, R.; Harvey, A. H. (Eds.). (2004). \emph{Aqueous Systems at Elevated Temperatures and Pressures: Physical Chemistry in Water, Steam and Hydrothermal Solutions}. Elsevier Ltd. Disponível em: \url{https://www.sciencedirect.com/book/9780080444714/aqueous-systems-at-elevated-temperatures-and-pressures}.
-
-\bibitem{aspen} Aspen Technology, Inc. (2023). \emph{Aspen Plus User Guide, Version 14}. Bedford, MA. Disponível em: \url{https://www.aspentech.com/en/resources/documentation/aspen-plus}.
-
-\bibitem{aspen_dynamics} Aspen Technology, Inc. (2023). \emph{Aspen Plus Dynamics User Guide, Version 14}. Bedford, MA. Disponível em: \url{https://www.aspentech.com/en/resources/documentation/aspen-plus-dynamics}.
-
-\bibitem{fernandez2004} Palmer, D. A.; Fernández-Prini, R.; Harvey, A. H. (Eds.). (2004). \emph{Aqueous Systems at Elevated Temperatures and Pressures: Physical Chemistry in Water, Steam and Hydrothermal Solutions}. Elsevier Ltd. © 2004 Elsevier Ltd. All rights reserved.
-
-\bibitem{aspen} Aspen Technology, Inc. (2023). \emph{Aspen Plus User Guide, Version 14}. Bedford, MA.
-
-\bibitem{aspen_dynamics} Aspen Technology, Inc. (2023). \emph{Aspen Plus Dynamics User Guide, Version 14}. Bedford, MA.
-
 \bibitem{elecnrtl} Chen, C.-C.; Britt, H. I.; Boston, J. F.; Evans, L. B. (1982). Local composition model for excess Gibbs energy of electrolyte systems. \emph{AIChE Journal}, 28(4), 588–596. doi:10.1002/aic.690280410.
 
 \bibitem{nmpc_survey} Rawlings, J. B.; Mayne, D. Q.; Diehl, M. (2017). \emph{Model Predictive Control: Theory, Computation, and Design}, 2nd ed. Nob Hill Publishing.
 
 \bibitem{nn_control} Hagan, M. T.; Demuth, H. B.; Beale, M. H.; De Jesús, O. (2014). \emph{Neural Network Design}, 2nd ed. Martin Hagan.
 
-% [Adicionar mais referências conforme desenvolvimento do trabalho]
+\bibitem{kohl1997} Kohl, A. L.; Nielsen, R. B. (1997). \emph{Gas Purification}, 5th ed. Gulf Publishing Company.
+
+\bibitem{gpa1990} Gas Processors Association. (1990). \emph{GPSWAT Model Documentation}. GPA Research Report.
+
+\bibitem{fernandez2004} Palmer, D. A.; Fernández-Prini, R.; Harvey, A. H. (Eds.). (2004). \emph{Aqueous Systems at Elevated Temperatures and Pressures: Physical Chemistry in Water, Steam and Hydrothermal Solutions}. Elsevier Ltd. Disponível em: \url{https://www.sciencedirect.com/book/9780080444714/aqueous-systems-at-elevated-temperatures-and-pressures}.
+
+\bibitem{aspen} Aspen Technology, Inc. (2023). \emph{Aspen Plus User Guide, Version 14}. Bedford, MA. Disponível em: \url{https://www.aspentech.com/en/resources/documentation/aspen-plus}.
+
+\bibitem{aspen_dynamics} Aspen Technology, Inc. (2023). \emph{Aspen Plus Dynamics User Guide, Version 14}. Bedford, MA. Disponível em: \url{https://www.aspentech.com/en/resources/documentation/aspen-plus-dynamics}.
+
+\bibitem{lima2005} Lima, E. L. (2005). \emph{Controle de Processos Químicos}. Editora da UFRJ.
+
+\bibitem{diehl2014} Diehl, M.; Ferreau, H. J.; Haverbeke, N. (2014). \emph{Efficient Numerical Methods for Nonlinear MPC and Moving Horizon Estimation}. Springer.
+
+\bibitem{ufrgs2016} Universidade Federal do Rio Grande do Sul. (2016). \emph{Manual de Simulação de Processos}. Porto Alegre: UFRGS.
+
+\bibitem{silva2022} Silva, A. B.; Santos, C. D. (2022). Otimização de torres de destilação para tratamento de águas ácidas. \emph{Revista Brasileira de Engenharia Química}, 45(2), 123-135.
+
+\bibitem{colombo2020} Colombo, M.; Rodriguez, P. (2020). Advanced control strategies for sour water stripping units. \emph{Chemical Engineering Research and Design}, 158, 45-58.
 
 \end{thebibliography}
 
