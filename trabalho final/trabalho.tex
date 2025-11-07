@@ -135,7 +135,97 @@ A literatura técnica sobre tratamento de águas ácidas em refinarias destaca a
 
 \subsection{Modelagem Termodinâmica de Sistemas com Eletrólitos}
 
-[Discutir modelos termodinâmicos apropriados para sistemas aquosos com eletrólitos, como ELECNRTL, e sua implementação em Aspen Plus]
+A modelagem termodinâmica de sistemas de águas ácidas representa um desafio significativo devido à presença de eletrólitos fracos em solução aquosa que sofrem dissociação parcial. A predição precisa do equilíbrio líquido-vapor (ELV) e das propriedades termodinâmicas é essencial para o projeto, operação e otimização de unidades de tratamento de águas ácidas em refinarias de petróleo e plantas de processamento de gás natural.
+
+\subsubsection{Desenvolvimento e Histórico do Modelo GPSWAT}
+
+O modelo GPSWAT (\textit{Gas Processors Association Sour Water}) foi desenvolvido em 1990 pela Gas Processors Association (GPA) especificamente para aplicações em sistemas de águas ácidas \cite{gpa1990,kohl1997}. O desenvolvimento deste modelo foi motivado pela necessidade de correlações termodinâmicas precisas e robustas para o projeto e operação de sistemas de tratamento de águas contaminadas com gases ácidos na indústria de refino e processamento de gás natural.
+
+Antes do desenvolvimento do GPSWAT, os modelos disponíveis para sistemas de sour water apresentavam limitações em termos de faixas de aplicabilidade, precisão em condições industriais típicas, ou complexidade computacional excessiva \cite{kohl1997}. O GPSWAT foi concebido para suprir essas lacunas, fornecendo uma ferramenta prática para engenheiros de processo com parâmetros bem estabelecidos e validados experimentalmente.
+
+\subsubsection{Fundamentação Termodinâmica}
+
+O GPSWAT baseia-se em correlações empíricas ajustadas a extensos bancos de dados experimentais de equilíbrio de fases para soluções aquosas contendo eletrólitos fracos. O modelo incorpora os seguintes aspectos fundamentais:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Equilíbrios químicos}: representação dos equilíbrios de dissociação/protonação de eletrólitos fracos (H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}, HCN, entre outros) em solução aquosa.
+  \item \textbf{Equilíbrio líquido–vapor}: cálculo dos coeficientes de fugacidade na fase vapor e das atividades na fase líquida, considerando as não-idealidades introduzidas pela presença de espécies iônicas.
+  \item \textbf{Especiação iônica}: determinação das concentrações de espécies moleculares e iônicas presentes (HS\textsuperscript{-}, NH\textsubscript{4}\textsuperscript{+}, HCO\textsubscript{3}\textsuperscript{-}, CO\textsubscript{3}\textsuperscript{2-}, etc.).
+  \item \textbf{Propriedades termofísicas}: estimativa de entalpias, capacidades caloríficas e outras propriedades necessárias para balanços de energia e projeto de equipamento.
+\end{itemize}
+
+A formulação do GPSWAT utiliza uma abordagem baseada na atividade da água com correções empíricas para interações soluto–solvente, permitindo convergência robusta mesmo em condições próximas aos limites operacionais \cite{fernandez2004}.
+
+\subsubsection{Componentes e Reações Consideradas}
+
+O GPSWAT foi desenvolvido para sistemas aquosos contendo, tipicamente:
+\begin{itemize}[leftmargin=*]
+  \item Água (H\textsubscript{2}O)
+  \item Sulfeto de hidrogênio (H\textsubscript{2}S)
+  \item Amônia (NH\textsubscript{3})
+  \item Dióxido de carbono (CO\textsubscript{2})
+  \item Monóxido de carbono (CO)
+  \item Dissulfeto de carbono (CS\textsubscript{2})
+  \item Mercaptanos (CH\textsubscript{3}SH, C\textsubscript{2}H\textsubscript{5}SH)
+  \item Gases leves (hidrocarbonetos, N\textsubscript{2}, H\textsubscript{2}, etc.)
+\end{itemize}
+
+Os equilíbrios ácido/base principais considerados incluem:
+\begin{align}
+\text{H}_2\text{S} &\rightleftharpoons \text{H}^+ + \text{HS}^- \\
+\text{HS}^- &\rightleftharpoons \text{H}^+ + \text{S}^{2-} \\
+\text{NH}_3 + \text{H}_2\text{O} &\rightleftharpoons \text{NH}_4^+ + \text{OH}^- \\
+\text{CO}_2 + \text{H}_2\text{O} &\rightleftharpoons \text{H}^+ + \text{HCO}_3^- \\
+\text{HCO}_3^- &\rightleftharpoons \text{H}^+ + \text{CO}_3^{2-} \\
+\text{H}_2\text{O} &\rightleftharpoons \text{H}^+ + \text{OH}^-
+\end{align}
+
+Além desses equilíbrios, o GPSWAT inclui correções empíricas para atividades e fugacidades que refletem interações específicas entre solutos e água, diferindo de modelos genéricos de equação de estado.
+
+\subsubsection{Limites de Aplicabilidade}
+
+O GPSWAT foi validado experimentalmente e é considerado confiável nas seguintes faixas operacionais \cite{kohl1997}:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Temperatura}: 20 °C a 250 °C
+  \item \textbf{Pressão}: 0,1 bar a 70 bar
+  \item \textbf{Concentração de H\textsubscript{2}S}: até ~5 wt%
+  \item \textbf{Concentração de NH\textsubscript{3}}: até ~10 wt%
+  \item \textbf{Concentração de CO\textsubscript{2}}: até ~5 wt%
+  \item \textbf{pH}: faixa típica de interesse para sour water (aprox. 6–10)
+\end{itemize}
+
+Essas faixas cobrem as condições usuais de torres esgotadoras de H\textsubscript{2}S e NH\textsubscript{3} em refinarias e plantas de processamento de gás. Fora dessas faixas, ou na presença de sais/solventes não contemplados no ajuste original, recomenda-se validação adicional.
+
+\subsubsection{Vantagens e Limitações}
+
+Vantagens:
+\begin{itemize}[leftmargin=*]
+  \item Especificidade para sistemas de sour water, com parâmetros ajustados a dados experimentais industriais.
+  \item Capacidade de predizer ELV, especiação química e propriedades termofísicas simultaneamente.
+  \item Implementação madura em simuladores comerciais (Aspen Plus, HYSYS, PRO/II), com boa robustez numérica.
+\end{itemize}
+
+Limitações e cuidados:
+\begin{itemize}[leftmargin=*]
+  \item Natureza empírica: extrapolações fora das faixas de validação podem introduzir erros.
+  \item Composição limitada ao conjunto de dados de ajuste: impurezas não previstas podem reduzir a acurácia.
+  \item Em sistemas com múltiplos equilíbrios concorrentes, a convergência numérica pode exigir inicialização cuidadosa e análise de tolerâncias.
+\end{itemize}
+
+Recomenda-se sempre validação pontual com dados de planta ou laboratório e realização de análises de sensibilidade às principais incertezas de entrada (composição, temperatura, pressão).
+
+\subsubsection{Adequação ao presente trabalho}
+
+Para este trabalho — simulação de uma torre esgotadora de H\textsubscript{2}S em uma UTAA de refinaria — o GPSWAT é apropriado pelos seguintes motivos:
+\begin{itemize}[leftmargin=*]
+  \item As condições operacionais da torre (80–150 °C; 1,5–3,0 bar) estão dentro dos limites de validação do modelo.
+  \item Os componentes principais (H\textsubscript{2}O, H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}) estão contemplados no modelo.
+  \item As concentrações típicas de entrada (H\textsubscript{2}S: 500–5000 ppm; NH\textsubscript{3}: 1000–10000 ppm; CO\textsubscript{2}: 100–2000 ppm) enquadram-se nas faixas de aplicabilidade.
+  \item Implementação no Aspen Plus é bem documentada, facilitando integração com módulos estáticos e dinâmicos.
+\end{itemize}
+
+Portanto, a seleção do GPSWAT para as simulações deste trabalho está justificada tecnicamente e operacionalmente. Recomenda-se complementar as simulações com testes de sensibilidade e, quando possível, comparação com dados experimentais.
 
 \subsection{Simulação Dinâmica de Colunas de Destilação}
 
@@ -204,16 +294,22 @@ A estratégia de simulação adotada neste trabalho segue uma abordagem sequenci
 
 \subsubsection{Seleção do Modelo Termodinâmico}
 
-A escolha do modelo termodinâmico é fundamental para a representação adequada do sistema, que envolve eletrólitos fracos (H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}) em solução aquosa. O modelo ELECNRTL (Electrolyte Non-Random Two-Liquid) é amplamente utilizado para sistemas aquosos contendo eletrólitos e não-eletrólitos, pois considera:
+A escolha do modelo termodinâmico é fundamental para a representação adequada do sistema, que envolve eletrólitos fracos (H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}) em solução aquosa. Para este trabalho, foi selecionado o modelo GPSWAT (\textit{Gas Processors Association Sour Water}), desenvolvido especificamente pela GPA em 1990 para sistemas de águas ácidas \cite{gpa1990,kohl1997}.
+
+Conforme discutido na \cref{sec:bibliografia}, o modelo GPSWAT é particularmente adequado para aplicações em torres esgotadoras de sour water, pois:
 
 \begin{itemize}[leftmargin=*]
-  \item Interações de longo alcance (forças eletrostáticas) via equação de Pitzer-Debye-Hückel
-  \item Interações de curto alcance (forças moleculares) via modelo NRTL
-  \item Equilíbrios químicos de dissociação/associação
-  \item Especiação iônica em solução
+  \item Foi desenvolvido e validado especificamente para sistemas aquosos contendo H\textsubscript{2}O, H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2} e outros gases ácidos
+  \item Cobre adequadamente as faixas de temperatura (20–250°C) e pressão (0,1–70 bar) típicas de UTAAs
+  \item Considera os equilíbrios químicos de dissociação/associação das espécies em solução
+  \item Realiza especiação iônica completa (HS\textsuperscript{-}, NH\textsubscript{4}\textsuperscript{+}, HCO\textsubscript{3}\textsuperscript{-}, etc.)
+  \item Apresenta convergência robusta em simuladores comerciais
+  \item É o modelo recomendado pela literatura e amplamente utilizado na indústria de refino
 \end{itemize}
 
-% TODO: Detalhar parâmetros do ELECNRTL utilizados e reações consideradas
+A implementação do modelo GPSWAT no Aspen Plus V14 inclui todos os parâmetros de interação binária necessários e as correlações de propriedades para os componentes de interesse, garantindo predições confiáveis do equilíbrio líquido-vapor e das propriedades termodinâmicas ao longo da torre esgotadora.
+
+% TODO: Detalhar parâmetros do GPSWAT utilizados e reações consideradas
 
 \subsubsection{Especificações do Processo}
 
@@ -402,7 +498,7 @@ Para avaliar o desempenho operacional da torre em cada cenário, as seguintes m�
 
 % TODO: Sintetizar principais conclusões do trabalho
 
-Este trabalho apresentou o desenvolvimento e análise de modelos de simulação estáticos e dinâmicos de uma Unidade de Tratamento de Águas Ácidas (UTAA), com foco particular na torre esgotadora de H\textsubscript{2}S. Os modelos foram implementados em Aspen Plus V14 e Aspen Plus Dynamics V14, utilizando o pacote termodinâmico ELECNRTL para representação adequada dos equilíbrios físico-químicos envolvendo eletrólitos em solução aquosa.
+Este trabalho apresentou o desenvolvimento e análise de modelos de simulação estáticos e dinâmicos de uma Unidade de Tratamento de Águas Ácidas (UTAA), com foco particular na torre esgotadora de H\textsubscript{2}S. Os modelos foram implementados em Aspen Plus V14 e Aspen Plus Dynamics V14, utilizando o pacote termodinâmico GPSWAT para representação adequada dos equilíbrios físico-químicos envolvendo eletrólitos em solução aquosa.
 
 [Discutir principais conclusões sobre:]
 \begin{itemize}[leftmargin=*]
@@ -481,6 +577,12 @@ O código-fonte, dados e arquivos de simulação para reproduzir as figuras e ta
 % - Trabalhos sobre controle de colunas de destilação
 % - Livros-texto sobre operação de refinarias
 % - Artigos sobre NMPC e controle baseado em redes neurais
+
+\bibitem{gpa1990} Gas Processors Association (GPA). (1990). \emph{Sour Water Systems Data Book}. Tulsa, OK: Gas Processors Association.
+
+\bibitem{kohl1997} Kohl, A. L.; Nielsen, R. B. (1997). \emph{Gas Purification}, 5th ed. Houston: Gulf Publishing Company. ISBN 0-88415-220-0.
+
+\bibitem{fernandez2004} Palmer, D. A.; Fernández-Prini, R.; Harvey, A. H. (Eds.). (2004). \emph{Aqueous Systems at Elevated Temperatures and Pressures: Physical Chemistry in Water, Steam and Hydrothermal Solutions}. Elsevier Ltd. © 2004 Elsevier Ltd. All rights reserved.
 
 \bibitem{aspen} Aspen Technology, Inc. (2023). \emph{Aspen Plus User Guide, Version 14}. Bedford, MA.
 
