@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  7 NOV 2025 14:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  7 NOV 2025 14:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -716,26 +716,26 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 [3{C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
 
-LaTeX Warning: Reference `fig:diagrama_utaa' on page 4 undefined on input line 242.
+LaTeX Warning: Reference `fig:diagrama_utaa' on page 4 undefined on input line 240.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 254.
+(hyperref)                removing `\mathsurround' on input line 252.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 254.
+(hyperref)                removing `\z@' on input line 252.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 254.
+(hyperref)                removing `subscript' on input line 252.
 
 
 
 [4]
 
 [5]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 366.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 364.
  (C:\Users\davib\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -748,27 +748,27 @@ Package microtype Info: Loading generic protrusion settings for font family
 [6]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 464.
+(hyperref)                removing `\mathsurround' on input line 462.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 464.
+(hyperref)                removing `\z@' on input line 462.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 464.
+(hyperref)                removing `subscript' on input line 462.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\mathsurround' on input line 468.
+(hyperref)                removing `\mathsurround' on input line 466.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\z@' on input line 468.
+(hyperref)                removing `\z@' on input line 466.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 468.
+(hyperref)                removing `subscript' on input line 466.
 
 
 
@@ -791,15 +791,15 @@ Package rerunfilecheck Info: File `trabalho.out' has not changed.
 (rerunfilecheck)             Checksum: 6E5C934EDB1F4B9B0F30AF1956E6D7CA;10334.
  ) 
 Here is how much of TeX's memory you used:
- 23211 strings out of 468221
- 461296 string characters out of 5432891
+ 23209 strings out of 468221
+ 461276 string characters out of 5432891
  872645 words of memory out of 5000000
  51169 multiletter control sequences out of 15000+600000
- 711420 words of font info for 185 fonts, out of 8000000 for 9000
+ 711337 words of font info for 184 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,80p,1408b,1202s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,80p,1408b,1204s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on trabalho.pdf (10 pages, 428161 bytes).
+Output written on trabalho.pdf (10 pages, 428002 bytes).
 PDF statistics:
  402 PDF objects out of 1000 (max. 8388607)
  103 named destinations out of 1000 (max. 500000)
