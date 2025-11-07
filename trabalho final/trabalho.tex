@@ -227,7 +227,15 @@ Para este trabalho — simulação de uma torre esgotadora de H\textsubscript{2}
 
 \subsection{Simulação Dinâmica de Colunas de Destilação}
 
-[Revisar trabalhos sobre simulação dinâmica de colunas, aspectos de convergência, inicialização de modelos dinâmicos a partir de modelos estáticos]
+A simulação dinâmica de colunas de destilação tem sido amplamente estudada na literatura, com ênfase em aspectos como convergência numérica e inicialização de modelos. Trabalhos como o de Lima (2005) \cite{lima2005} apresentam modelagens matemáticas rigorosas para processos de destilação, destacando a necessidade de métodos numéricos eficientes para resolver as equações diferenciais e algébricas que descrevem o comportamento dinâmico das colunas.
+
+A convergência dos modelos dinâmicos é frequentemente desafiadora devido à não linearidade inerente aos balanços de massa, energia e às relações termodinâmicas. Diehl et al. (2014) \cite{diehl2014} ressaltam que o uso de simuladores comerciais, como Aspen Plus Dynamics, facilita a análise dinâmica ao permitir a identificação de regimes instáveis e oferecer rotinas otimizadas para integração temporal e tratamento de DAEs. Essas ferramentas geralmente incorporam algoritmos de passos variáveis e métodos implícitos que aumentam a robustez frente à rigidez e aos acoplamentos fortes presentes em colunas com múltiplos estágios.
+
+A inicialização de modelos dinâmicos a partir de soluções estacionárias é uma prática consolidada para aumentar a robustez e acelerar a convergência. Conforme discutido em modelos simplificados para colunas binárias \cite{ufrgs2016}, perfis estacionários de composição, temperatura e pressão obtidos por simuladores estáticos podem ser transferidos para o modelo dinâmico, reduzindo discrepâncias iniciais e mitigando o risco de divergência do integrador. Essa estratégia é especialmente recomendada para modelos de equilíbrio de estágio, em que a solução estacionária fornece um ponto de partida fisicamente consistente para a simulação transitória.
+
+Adicionalmente, estudos mais recentes, como a tese de Silva (2022) \cite{silva2022}, exploram modelagens de não-equilíbrio a nível de estágio e de placa, que podem representar fenômenos cinéticos e de transferência de massa de forma mais realista, embora com maior custo computacional e desafios numéricos. Paralelamente, pesquisas sobre identificação de modelos e aprendizagem de máquina, exemplificadas por Colombo (2020) \cite{colombo2020}, mostram potencial para complementar modelos físicos com abordagens empíricas que capturam dinâmicas não modeladas, auxiliando no projeto de controladores e na estimação de estados em tempo real.
+
+Em síntese, a literatura destaca três pilares para simulações dinâmicas confiáveis de colunas de destilação: (i) formulação adequada do modelo físico (equilíbrio versus não-equilíbrio), (ii) uso de algoritmos numéricos robustos capazes de tratar rigidez e DAEs, e (iii) estratégias de inicialização, frequentemente baseadas em soluções estacionárias, para melhorar convergência e estabilidade. Esses elementos são fundamentais para aplicações de projeto, análise de controle e otimização em sistemas de destilação.
 
 \section{Descrição do Processo}\label{sec:processo}
 
@@ -571,10 +579,11 @@ O código-fonte, dados e arquivos de simulação para reproduzir as figuras e ta
 % - Trabalhos sobre controle de colunas de destilação
 % - Livros-texto sobre operação de refinarias
 % - Artigos sobre NMPC e controle baseado em redes neurais
+\bibitem{fernandez2004} Palmer, D. A.; Fernández-Prini, R.; Harvey, A. H. (Eds.). (2004). \emph{Aqueous Systems at Elevated Temperatures and Pressures: Physical Chemistry in Water, Steam and Hydrothermal Solutions}. Elsevier Ltd. Disponível em: \url{https://www.sciencedirect.com/book/9780080444714/aqueous-systems-at-elevated-temperatures-and-pressures}.
 
-\bibitem{gpa1990} Gas Processors Association (GPA). (1990). \emph{Sour Water Systems Data Book}. Tulsa, OK: Gas Processors Association.
+\bibitem{aspen} Aspen Technology, Inc. (2023). \emph{Aspen Plus User Guide, Version 14}. Bedford, MA. Disponível em: \url{https://www.aspentech.com/en/resources/documentation/aspen-plus}.
 
-\bibitem{kohl1997} Kohl, A. L.; Nielsen, R. B. (1997). \emph{Gas Purification}, 5th ed. Houston: Gulf Publishing Company. ISBN 0-88415-220-0.
+\bibitem{aspen_dynamics} Aspen Technology, Inc. (2023). \emph{Aspen Plus Dynamics User Guide, Version 14}. Bedford, MA. Disponível em: \url{https://www.aspentech.com/en/resources/documentation/aspen-plus-dynamics}.
 
 \bibitem{fernandez2004} Palmer, D. A.; Fernández-Prini, R.; Harvey, A. H. (Eds.). (2004). \emph{Aqueous Systems at Elevated Temperatures and Pressures: Physical Chemistry in Water, Steam and Hydrothermal Solutions}. Elsevier Ltd. © 2004 Elsevier Ltd. All rights reserved.
 
