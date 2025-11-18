@@ -192,13 +192,11 @@ Limitações e cuidados:
   \item Em sistemas com múltiplos equilíbrios concorrentes, a convergência numérica pode exigir inicialização cuidadosa e análise de tolerâncias.
 \end{itemize}
 
-Recomenda-se sempre validação pontual com dados de planta ou laboratório e realização de análises de sensibilidade às principais incertezas de entrada (composição, temperatura, pressão).
-
 \subsubsection{Adequação ao presente trabalho}
 
-Para este trabalho — simulação de uma torre esgotadora de H\textsubscript{2}S em uma UTAA de refinaria — o GPSWAT é apropriado pelos seguintes motivos:
+Para este trabalho, simulação de uma torre esgotadora de H\textsubscript{2}S em uma UTAA de refinaria, o GPSWAT é apropriado pelos seguintes motivos:
 \begin{itemize}[leftmargin=*]
-  \item As condições operacionais da torre (60–180 °C; 6 bar) estão dentro dos limites de validação do modelo.
+  \item As condições operacionais da torre (60–180 °C; 5-7 bar) estão dentro dos limites de validação do modelo.
   \item Os componentes principais (H\textsubscript{2}O, H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}) estão contemplados no modelo.
   \item As concentrações típicas de entrada (H\textsubscript{2}S: 500–5000 ppm; NH\textsubscript{3}: 1000–10000 ppm; CO\textsubscript{2}: 100–2000 ppm) enquadram-se nas faixas de aplicabilidade.
   \item Implementação no Aspen Plus é bem documentada, facilitando integração com módulos estáticos e dinâmicos.
@@ -209,39 +207,6 @@ Para este trabalho — simulação de uma torre esgotadora de H\textsubscript{2}
 A simulação dinâmica de colunas de destilação tem sido amplamente estudada na literatura, com ênfase em aspectos como convergência numérica e inicialização de modelos. Trabalhos como o de Secchi et al.\ (1993) \cite{secchi1993} apresentam modelagens matemáticas rigorosas para processos de destilação, destacando a necessidade de métodos numéricos eficientes para resolver as equações diferenciais e algébricas que descrevem o comportamento dinâmico das colunas.
 
 A inicialização de modelos dinâmicos a partir de soluções estacionárias é uma prática consolidada para aumentar a robustez e acelerar a convergência. Conforme discutido em modelos simplificados para colunas binárias \cite{vieira2001}, perfis estacionários de composição, temperatura e pressão obtidos por simuladores estáticos podem ser transferidos para o modelo dinâmico, reduzindo discrepâncias iniciais e mitigando o risco de divergência do integrador. Essa estratégia é especialmente recomendada para modelos de equilíbrio de estágio, em que a solução estacionária fornece um ponto de partida fisicamente consistente para a simulação transitória.
-
-\section{Descrição do Processo}\label{sec:processo}
-
-\subsection{Configuração Geral da UTAA}
-
-A Unidade de Tratamento de Águas Ácidas (UTAA) considerada neste trabalho é composta por duas torres de destilação operando em série.
-
-A água ácida proveniente de diversas unidades da refinaria (hidrotratamento, FCC, coqueamento, etc.) é coletada e alimentada na primeira torre, a torre esgotadora de H\textsubscript{2}S. Esta coluna opera sob pressão moderada e utiliza vapor de despojamento e um refervedor para promover a evaporação preferencial do H\textsubscript{2}S, que é mais volátil que a NH\textsubscript{3} nas condições operacionais típicas. O gás ácido de topo, rico em H\textsubscript{2}S e contendo alguma NH\textsubscript{3}, é enviado para a URE. A água de fundo, ainda contendo NH\textsubscript{3} e traços de H\textsubscript{2}S, é bombeada para a segunda torre, onde a NH\textsubscript{3} é removida.
-
-\subsection{Torre Esgotadora de H2S}
-
-A torre esgotadora de H\textsubscript{2}S é o foco principal deste trabalho. Trata-se de uma coluna de destilação com as seguintes características típicas:
-
-\begin{itemize}[leftmargin=*]
-  \item Número de estágios: [a ser especificado]
-  \item Alimentação: água ácida a [temperatura] e [pressão]
-  \item Pressão de operação: [valor] bar
-  \item Vapor de despojamento: injetado no fundo da coluna
-  \item Refervedor: tipo [kettle/termossifão], carga térmica [valor] kW
-  \item Produto de topo: gás ácido para URE
-  \item Produto de fundo: água parcialmente tratada para segunda torre
-\end{itemize}
-
-\subsection{Desafios Operacionais}
-
-A operação da torre esgotadora apresenta os seguintes desafios:
-
-\begin{enumerate}
-  \item \textbf{Maximização da recuperação de H\textsubscript{2}S}: É desejável maximizar a concentração de H\textsubscript{2}S no gás ácido para otimizar a operação da URE.
-  \item \textbf{Minimização de NH\textsubscript{3} no gás ácido}: A presença de NH\textsubscript{3} no gás ácido leva à formação de sais de amônio (principalmente NH\textsubscript{4}HS), que causam corrosão, entupimentos e redução de eficiência na URE.
-  \item \textbf{Prevenção de fervura da coluna}: Em condições extremas de carga térmica ou composição, pode ocorrer o fenômeno de "fervura", caracterizado por um aumento abrupto da taxa de vaporização que leva a arraste excessivo de líquido e NH\textsubscript{3} para o topo.
-  \item \textbf{Eficiência energética}: A carga térmica do refervedor representa um custo operacional significativo, sendo desejável minimizá-la mantendo os objetivos de separação.
-\end{enumerate}
 
 \section{Metodologia}\label{sec:metodologia}
 
@@ -263,271 +228,35 @@ A estratégia de simulação adotada neste trabalho segue uma abordagem sequenci
 
 A escolha do modelo termodinâmico é fundamental para a representação adequada do sistema, que envolve eletrólitos fracos (H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}) em solução aquosa. Para este trabalho, foi selecionado o modelo GPSWAT (\textit{Gas Processors Association águas ácidas}), desenvolvido especificamente pela GPA em 1990 para sistemas de águas ácidas \cite{gpa1990,kohl1997}.
 
-Conforme discutido na \cref{sec:bibliografia}, o modelo GPSWAT é particularmente adequado para aplicações em torres esgotadoras de águas ácidas, pois:
-
-\begin{itemize}[leftmargin=*]
-  \item Foi desenvolvido e validado especificamente para sistemas aquosos contendo H\textsubscript{2}O, H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2} e outros gases ácidos
-  \item Cobre adequadamente as faixas de temperatura (20–250°C) e pressão (0,1–70 bar) típicas de UTAAs
-  \item Considera os equilíbrios químicos de dissociação/associação das espécies em solução
-  \item Realiza especiação iônica completa (HS\textsuperscript{-}, NH\textsubscript{4}\textsuperscript{+}, HCO\textsubscript{3}\textsuperscript{-}, etc.)
-  \item Apresenta convergência robusta em simuladores comerciais
-  \item É o modelo recomendado pela literatura e amplamente utilizado na indústria de refino
-\end{itemize}
+Conforme discutido na \cref{sec:bibliografia}, o modelo GPSWAT é particularmente adequado para aplicações em torres esgotadoras de águas ácidas.
 
 A implementação do modelo GPSWAT no Aspen Plus V14 inclui todos os parâmetros de interação binária necessários e as correlações de propriedades para os componentes de interesse, garantindo predições confiáveis do equilíbrio líquido-vapor e das propriedades termodinâmicas ao longo da torre esgotadora.
 
-% TODO: Detalhar parâmetros do GPSWAT utilizados e reações consideradas
-
-\subsubsection{Especificações do Processo}
-
-As principais especificações do modelo estático incluem:
-
-\begin{table}[H]
-  \centering
-  \caption{Especificações do modelo estático da torre esgotadora de H\textsubscript{2}S.}
-  \label{tab:spec_estatico}
-  \begin{tabular}{lcc}
-    \toprule
-    \textbf{Parâmetro} & \textbf{Valor} & \textbf{Unidade} \\
-    \midrule
-    Número de estágios & [valor] & - \\
-    Estágio de alimentação & [valor] & - \\
-    Pressão de topo & [valor] & bar \\
-    Pressão de fundo & [valor] & bar \\
-    Vazão de alimentação & [valor] & kg/h \\
-    Temperatura de alimentação & [valor] & \si{\celsius} \\
-    Vazão de vapor de despojamento & [valor] & kg/h \\
-    Razão de refluxo & [valor] & - \\
-    Carga térmica do refervedor & [valor] & kW \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-% TODO: Preencher valores após definição do caso base
-
-\subsubsection{Composição da Alimentação}
-
-A composição típica da água ácida de alimentação é apresentada na Tabela~\ref{tab:composicao_feed}.
-
-\begin{table}[H]
-  \centering
-  \caption{Composição típica da alimentação de água ácida.}
-  \label{tab:composicao_feed}
-  \begin{tabular}{lcc}
-    \toprule
-    \textbf{Componente} & \textbf{Concentração} & \textbf{Unidade} \\
-    \midrule
-    H\textsubscript{2}O & [valor] & wt\% \\
-    H\textsubscript{2}S & [valor] & ppm (w) \\
-    NH\textsubscript{3} & [valor] & ppm (w) \\
-    CO\textsubscript{2} & [valor] & ppm (w) \\
-    Outros & [valor] & ppm (w) \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-% TODO: Definir composição de referência e variações para estudo paramétrico
-
 \subsubsection{Configuração do Modelo no Aspen Plus}
+
+Como o objetivo do estudo é identificar e trabalho no limiar dos pontos de limite de estabilidade térmica da torre esgotadora para diferentes composições de alimentação, o modelo construído focou exclusivamente inserção e simulação da tore esgotadora de H\textsubscript{2}.
 
 O modelo da torre esgotadora foi construído utilizando o bloco \texttt{RadFrac} do Aspen Plus, configurado da seguinte forma:
 
+TODO: continuar aqui
 \begin{itemize}[leftmargin=*]
   \item Tipo: coluna de destilação com refervedor e condensador parcial
+  \item Número de estágios: 30 
+  \item Eficiência de Murphree (em toda a coluna): 70\%
+  \item Pressão de operação: [valor] bar
+  \item Alimentação: água ácida a [temperatura] e [pressão]
+  \item Vapor de despojamento: injetado no fundo da coluna
+  \item Refervedor: tipo [kettle/termossifão], carga térmica [valor] kW
+  \item Produto de topo: gás ácido para URE
+  \item Produto de fundo: água parcialmente tratada para segunda torre
+
+
   \item Método de convergência: [especificar algoritmo]
   \item Número máximo de iterações: [valor]
   \item Tolerância de convergência: [valor]
   \item Especificações de projeto: [listar variáveis especificadas e calculadas]
 \end{itemize}
 
-\subsection{Modelagem Dinâmica no Aspen Plus Dynamics V14}\label{sec:modelo_dinamico}
-
-\subsubsection{Preparação do Modelo Estático}
-
-Antes da exportação para o ambiente dinâmico, o modelo estático foi preparado conforme os seguintes passos:
-
-\begin{enumerate}
-  \item Verificação de convergência robusta do modelo estático
-  \item Dimensionamento de equipamentos (diâmetro de coluna, volumes de pratos, holdups)
-  \item Especificação de controladores básicos de inventário (nível, pressão)
-  \item Definição de válvulas de controle e suas características
-  \item Configuração de instrumentação (transmissores, sensores)
-\end{enumerate}
-
-\subsubsection{Exportação e Configuração em Aspen Dynamics}
-
-O modelo foi exportado do Aspen Plus para o Aspen Plus Dynamics utilizando a funcionalidade de exportação de modelos em regime permanente (\emph{Pressure-Driven} mode). As principais configurações incluem:
-
-\begin{itemize}[leftmargin=*]
-  \item Modo de simulação: modo orientado por pressão (\emph{pressure-driven})
-  \item Passo de integração: [valor] segundos
-  \item Método de integração: [especificar]
-  \item Configuração de controladores PID para inventários
-  \item Especificação de dinâmicas de válvulas
-\end{itemize}
-
-\subsubsection{Condições Iniciais e Convergência Dinâmica}
-
-A inicialização do modelo dinâmico utilizou o estado estacionário convergido do modelo estático. As seguintes verificações foram realizadas:
-
-\begin{enumerate}
-  \item Balanços de massa e energia em cada estágio
-  \item Estabilidade de holdups e taxas de fluxo
-  \item Resposta de controladores de inventário
-  \item Tempo de estabelecimento após pequenas perturbações
-\end{enumerate}
-
-\subsection{Cenários de Simulação e Análise}\label{sec:cenarios}
-
-Para investigar o comportamento do sistema em torno do ponto crítico de operação (limite de fervura), foram definidos os seguintes cenários:
-
-\begin{enumerate}
-  \item \textbf{Caso Base}: Condições nominais de operação com composição de alimentação típica
-  \item \textbf{Variação de H\textsubscript{2}S}: Aumento/diminuição da concentração de H\textsubscript{2}S na alimentação em [valor]\%
-  \item \textbf{Variação de NH\textsubscript{3}}: Aumento/diminuição da concentração de NH\textsubscript{3} na alimentação em [valor]\%
-  \item \textbf{Variação de carga térmica}: Aumento/diminuição da carga do refervedor em [valor]\%
-  \item \textbf{Variação de vazão}: Aumento/diminuição da vazão de alimentação em [valor]\%
-  \item \textbf{Aproximação do limite de fervura}: Condições operacionais progressivamente mais severas até atingir o limite
-\end{enumerate}
-
-\subsection{Métricas de Desempenho}
-
-Para avaliar o desempenho operacional da torre em cada cenário, as seguintes métricas serão calculadas:
-
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Recuperação de H\textsubscript{2}S}: fração mássica de H\textsubscript{2}S da alimentação que sai no gás ácido de topo
-  \item \textbf{Concentração de NH\textsubscript{3} no gás ácido}: ppm (mol) de NH\textsubscript{3} no topo
-  \item \textbf{Consumo energético}: carga térmica do refervedor por unidade de massa de água ácida tratada
-  \item \textbf{Margem até fervura}: distância operacional até condições críticas
-  \item \textbf{Qualidade da água tratada}: concentração residual de H\textsubscript{2}S e NH\textsubscript{3} no fundo
-\end{itemize}
-
-\section{Resultados e Discussão}\label{sec:resultados}
-
-% TODO: Apresentar resultados das simulações estáticas e dinâmicas
-
-\subsection{Modelo Estático: Caso Base}
-
-[Apresentar resultados do caso base em regime permanente, perfis de composição, temperatura e pressão ao longo da coluna]
-
-% \begin{figure}[H]
-%   \centering
-%   % \includegraphics[width=0.8\linewidth]{perfil_temperatura.png}
-%   \caption{Perfil de temperatura ao longo da torre esgotadora de H\textsubscript{2}S — caso base.}
-%   \label{fig:perfil_temp}
-% \end{figure}
-
-% \begin{figure}[H]
-%   \centering
-%   % \includegraphics[width=0.8\linewidth]{perfil_composicao.png}
-%   \caption{Perfis de composição de H\textsubscript{2}S e NH\textsubscript{3} ao longo da coluna — caso base.}
-%   \label{fig:perfil_comp}
-% \end{figure}
-
-\subsection{Análise de Sensibilidade Paramétrica}
-
-[Apresentar resultados da análise de sensibilidade para variações de composição, carga térmica e vazão]
-
-\subsubsection{Efeito da Concentração de H2S na Alimentação}
-
-[Discutir como variações de H\textsubscript{2}S afetam recuperação, consumo energético e operação]
-
-\subsubsection{Efeito da Concentração de NH3 na Alimentação}
-
-[Discutir como variações de NH\textsubscript{3} afetam o arraste de NH\textsubscript{3} para o topo e o risco de fervura]
-
-\subsubsection{Efeito da Carga Térmica do Refervedor}
-
-[Analisar trade-offs entre carga térmica, recuperação de H\textsubscript{2}S e arraste de NH\textsubscript{3}]
-
-\subsection{Modelo Dinâmico: Resposta Transitória}
-
-[Apresentar resultados de simulações dinâmicas para perturbações típicas]
-
-% \begin{figure}[H]
-%   \centering
-%   % \includegraphics[width=0.8\linewidth]{resposta_dinamica.png}
-%   \caption{Resposta dinâmica a perturbação em degrau na composição de alimentação.}
-%   \label{fig:resposta_dinamica}
-% \end{figure}
-
-\subsection{Identificação do Limite de Fervura}
-
-[Apresentar caracterização do ponto crítico de operação, sinais precursores de fervura, margem operacional segura]
-
-\subsection{Discussão dos Resultados}
-
-[Sintetizar principais descobertas, comparar com dados de literatura, discutir implicações práticas para operação de refinaria]
-
-\FloatBarrier
-
-\section{Conclusões}\label{sec:conclusoes}
-
-% TODO: Sintetizar principais conclusões do trabalho
-
-Este trabalho apresentou o desenvolvimento e análise de modelos de simulação estáticos e dinâmicos de uma Unidade de Tratamento de Águas Ácidas (UTAA), com foco particular na torre esgotadora de H\textsubscript{2}S. Os modelos foram implementados em Aspen Plus V14 e Aspen Plus Dynamics V14, utilizando o pacote termodinâmico GPSWAT para representação adequada dos equilíbrios físico-químicos envolvendo eletrólitos em solução aquosa.
-
-[Discutir principais conclusões sobre:]
-\begin{itemize}[leftmargin=*]
-  \item Capacidade dos modelos de reproduzir o comportamento esperado do processo
-  \item Trade-offs identificados entre recuperação de H\textsubscript{2}S, minimização de NH\textsubscript{3} e eficiência energética
-  \item Caracterização do ponto operacional crítico (limite de fervura)
-  \item Sensibilidade do sistema a variações de composição e condições operacionais
-  \item Implicações para estratégias de operação e controle
-\end{itemize}
-
-Os modelos desenvolvidos fornecem uma base sólida para otimização operacional da UTAA e para o desenvolvimento de estratégias de controle avançado, conforme discutido na seção de trabalhos futuros.
-
-\section{Trabalhos Futuros}\label{sec:futuros}
-
-Este trabalho estabelece as fundações para desenvolvimentos subsequentes em controle avançado da UTAA. As seguintes direções são propostas:
-
-\subsection{Geração de Dados para Treinamento de Redes Neurais}
-
-O modelo dinâmico desenvolvido em Aspen Plus Dynamics será utilizado para gerar extensos conjuntos de dados de treinamento mediante simulação de trajetórias operacionais diversificadas. Especificamente:
-
-\begin{itemize}[leftmargin=*]
-  \item Simulação de múltiplos cenários com variações nas composições de alimentação, vazões e condições operacionais
-  \item Coleta de séries temporais de variáveis de processo (temperaturas, composições, pressões, fluxos)
-  \item Identificação de relações entrada-saída para mapeamento via redes neurais
-  \item Geração de dados próximos ao limite de fervura para capturar não-linearidades críticas
-\end{itemize}
-
-\subsection{Desenvolvimento de Modelos de Redes Neurais}
-
-Com base nos dados gerados, redes neurais artificiais (ANNs) serão treinadas para emular o comportamento dinâmico da torre esgotadora. Arquiteturas candidatas incluem:
-
-\begin{itemize}[leftmargin=*]
-  \item Redes neurais feedforward (FNNs) para mapeamento estático entrada-saída
-  \item Redes neurais recorrentes (RNNs, LSTMs, GRUs) para captura de dinâmicas temporais
-  \item Modelos híbridos combinando conhecimento fenomenológico com componentes baseados em dados
-\end{itemize}
-
-\subsection{Controle Preditivo Não Linear Baseado em Redes Neurais (NN NMPC)}
-
-O objetivo final é desenvolver um controlador preditivo não linear (NMPC) utilizando o modelo de rede neural como preditor interno. A estrutura proposta envolve:
-
-\begin{enumerate}
-  \item \textbf{Modelo de predição}: Rede neural treinada substituindo o modelo fenomenológico rigoroso no otimizador do NMPC, reduzindo drasticamente o custo computacional
-  \item \textbf{Função objetivo}: Minimização de um funcional custo considerando rastreamento de referências (recuperação de H\textsubscript{2}S), penalização de NH\textsubscript{3} no topo, esforço de controle e eficiência energética
-  \item \textbf{Restrições}: Limites operacionais em variáveis manipuladas (carga térmica, vazão de vapor) e variáveis de processo (temperatura, pressão, concentrações)
-  \item \textbf{Estimação de estados}: Filtros estendidos de Kalman (EKF) ou estimadores por horizonte móvel (MHE) para estados não medidos
-  \item \textbf{Operação offset-free}: Incorporação de estados integradores para rejeição de distúrbios e desalinhamentos modelo-planta
-\end{enumerate}
-
-\subsection{Validação e Implementação}
-
-O controlador NN NMPC será validado inicialmente em simulações fechadas (closed-loop) utilizando o modelo rigoroso do Aspen Plus Dynamics como "planta virtual". Serão avaliados:
-
-\begin{itemize}[leftmargin=*]
-  \item Desempenho de rastreamento de setpoints
-  \item Rejeição de distúrbios em composição e vazão de alimentação
-  \item Capacidade de operação próxima ao limite de fervura sem violação de restrições
-  \item Robustez a incertezas de modelo e ruídos de medição
-  \item Comparação com estratégias de controle convencionais (PID, MPC linear)
-\end{itemize}
-
-Caso os resultados sejam promissores, estudos de viabilidade para implementação em planta piloto ou industrial poderão ser conduzidos.
 
 \appendix
 
