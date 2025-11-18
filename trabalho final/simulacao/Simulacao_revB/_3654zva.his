@@ -1,0 +1,42 @@
+
+  *   WARNING IN PHYSICAL PROPERTY SYSTEM WHILE INITIALIZING PROPERTY MODELS    
+                                                               (GM05I.1)        
+      NRTL BINARY PARAMETERS FOR ALL COMPONENT PAIRS ARE ZERO,                  
+      YOUR RESULTS MAY NOT BE ACCURATE. PLEASE REVIEW AND PROVIDE BINARY        
+      PARAMETERS AS APPROPRIATE.                                                
+
+ *** CALCULATION TRACE ***
+
+ SOUR WATER TREATMENT                                            
+
+      KODE = 5  NTRIAL =   6  T = 310.9280  P = 2.707648E+06  V =  0.00000      Q =  0.00000    
+      KODE = 5  NTRIAL =   6  T = 310.9280  P = 1.574273E+06  V =  0.00000      Q =  0.00000    
+      KODE = 5  NTRIAL =   6  T = 310.9280  P = 1.921028E+06  V =  0.00000      Q =  0.00000    
+<set objective = None>
+
+ Report Writer entered                                                            Time =    230.06
+      KODE = 5  NTRIAL =   6  T = 310.9280  P = 2.707648E+06  V =  0.00000      Q =  0.00000    
+      KODE = 5  NTRIAL =   6  T = 310.9280  P = 1.574273E+06  V =  0.00000      Q =  0.00000    
+      KODE = 5  NTRIAL =   6  T = 310.9280  P = 1.921028E+06  V =  0.00000      Q =  0.00000    
+
+ Results generated                                                                Time =    230.17
+
+ Report Writer entered                                                            Time =    230.67
+      KODE = 5  NTRIAL =   6  T = 310.9280  P = 2.707648E+06  V =  0.00000      Q =  0.00000    
+      KODE = 5  NTRIAL =   6  T = 310.9280  P = 1.574273E+06  V =  0.00000      Q =  0.00000    
+      KODE = 5  NTRIAL =   6  T = 310.9280  P = 1.921028E+06  V =  0.00000      Q =  0.00000    
+
+ Results generated                                                                Time =    230.68
+
+RUN SAVED
+
+
+
+ *** SUMMARY OF ERRORS ***
+
+                  PHYSICAL
+                  PROPERTY  SYSTEM  SIMULATION
+ TERMINAL ERRORS      0        0         0
+   SEVERE ERRORS      0        0         0
+          ERRORS      0        0         0
+        WARNINGS      1        0         0

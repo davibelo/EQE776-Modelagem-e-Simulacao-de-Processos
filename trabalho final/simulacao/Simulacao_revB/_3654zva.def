@@ -1,0 +1,11 @@
+SLAVE:
+INPUT: _3654zva.inm
+MODNAME: apmain
+RUNID: _3654zva
+NEW_RUNID: _3654zva
+OLD_RUNID: _3654zva
+PDF: _3654zva.appdf
+USERNAME: davib
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:
+DBCONN: _3654zva

@@ -120,7 +120,7 @@ A modelagem termodinâmica de sistemas de águas ácidas representa um desafio s
 
 O modelo GPSWAT (\textit{Gas Processors Association Sour Water}) foi desenvolvido em 1990 pela Gas Processors Association (GPA) especificamente para aplicações em sistemas de águas ácidas \cite{gpa1990,kohl1997}. O desenvolvimento deste modelo foi motivado pela necessidade de correlações termodinâmicas precisas e robustas para o projeto e operação de sistemas de tratamento de águas contaminadas com gases ácidos na indústria de refino e processamento de gás natural.
 
-Antes do desenvolvimento do GPSWAT, os modelos disponíveis para sistemas de sour water apresentavam limitações em termos de faixas de aplicabilidade, precisão em condições industriais típicas, ou complexidade computacional excessiva \cite{kohl1997}. O GPSWAT foi concebido para suprir essas lacunas, fornecendo uma ferramenta prática para engenheiros de processo com parâmetros bem estabelecidos e validados experimentalmente.
+Antes do desenvolvimento do GPSWAT, os modelos disponíveis para sistemas de águas ácidas apresentavam limitações em termos de faixas de aplicabilidade, precisão em condições industriais típicas, ou complexidade computacional excessiva \cite{kohl1997}. O GPSWAT foi concebido para suprir essas lacunas, fornecendo uma ferramenta prática para engenheiros de processo com parâmetros bem estabelecidos e validados experimentalmente.
 
 \subsubsection{Fundamentação Termodinâmica}
 
@@ -165,15 +165,13 @@ Além desses equilíbrios, o GPSWAT inclui correções empíricas para atividade
 
 O GPSWAT foi validado experimentalmente e é considerado confiável nas seguintes faixas operacionais \cite{kohl1997}:
 
-TODO: A partir daqui
-
 \begin{itemize}[leftmargin=*]
   \item \textbf{Temperatura}: 20 °C a 250 °C
   \item \textbf{Pressão}: 0,1 bar a 70 bar
   \item \textbf{Concentração de H\textsubscript{2}S}: até ~5 wt%
   \item \textbf{Concentração de NH\textsubscript{3}}: até ~10 wt%
   \item \textbf{Concentração de CO\textsubscript{2}}: até ~5 wt%
-  \item \textbf{pH}: faixa típica de interesse para sour water (aprox. 6–10)
+  \item \textbf{pH}: faixa típica de interesse para águas ácidas (aprox. 6–10)
 \end{itemize}
 
 Essas faixas cobrem as condições usuais de torres esgotadoras de H\textsubscript{2}S e NH\textsubscript{3} em refinarias e plantas de processamento de gás. Fora dessas faixas, ou na presença de sais/solventes não contemplados no ajuste original, recomenda-se validação adicional.
@@ -182,7 +180,7 @@ Essas faixas cobrem as condições usuais de torres esgotadoras de H\textsubscri
 
 Vantagens:
 \begin{itemize}[leftmargin=*]
-  \item Especificidade para sistemas de sour water, com parâmetros ajustados a dados experimentais industriais.
+  \item Especificidade para sistemas de águas ácidas, com parâmetros ajustados a dados experimentais industriais.
   \item Capacidade de predizer ELV, especiação química e propriedades termofísicas simultaneamente.
   \item Implementação madura em simuladores comerciais (Aspen Plus, HYSYS, PRO/II), com boa robustez numérica.
 \end{itemize}
@@ -200,7 +198,7 @@ Recomenda-se sempre validação pontual com dados de planta ou laboratório e re
 
 Para este trabalho — simulação de uma torre esgotadora de H\textsubscript{2}S em uma UTAA de refinaria — o GPSWAT é apropriado pelos seguintes motivos:
 \begin{itemize}[leftmargin=*]
-  \item As condições operacionais da torre (80–150 °C; 1,5–3,0 bar) estão dentro dos limites de validação do modelo.
+  \item As condições operacionais da torre (60–180 °C; 6 bar) estão dentro dos limites de validação do modelo.
   \item Os componentes principais (H\textsubscript{2}O, H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}) estão contemplados no modelo.
   \item As concentrações típicas de entrada (H\textsubscript{2}S: 500–5000 ppm; NH\textsubscript{3}: 1000–10000 ppm; CO\textsubscript{2}: 100–2000 ppm) enquadram-se nas faixas de aplicabilidade.
   \item Implementação no Aspen Plus é bem documentada, facilitando integração com módulos estáticos e dinâmicos.
@@ -208,15 +206,9 @@ Para este trabalho — simulação de uma torre esgotadora de H\textsubscript{2}
 
 \subsection{Simulação Dinâmica de Colunas de Destilação}
 
-A simulação dinâmica de colunas de destilação tem sido amplamente estudada na literatura, com ênfase em aspectos como convergência numérica e inicialização de modelos. Trabalhos como o de Lima (2005) \cite{lima2005} apresentam modelagens matemáticas rigorosas para processos de destilação, destacando a necessidade de métodos numéricos eficientes para resolver as equações diferenciais e algébricas que descrevem o comportamento dinâmico das colunas.
+A simulação dinâmica de colunas de destilação tem sido amplamente estudada na literatura, com ênfase em aspectos como convergência numérica e inicialização de modelos. Trabalhos como o de Secchi et al.\ (1993) \cite{secchi1993} apresentam modelagens matemáticas rigorosas para processos de destilação, destacando a necessidade de métodos numéricos eficientes para resolver as equações diferenciais e algébricas que descrevem o comportamento dinâmico das colunas.
 
-A convergência dos modelos dinâmicos é frequentemente desafiadora devido à não linearidade inerente aos balanços de massa, energia e às relações termodinâmicas. Diehl et al. (2014) \cite{diehl2014} ressaltam que o uso de simuladores comerciais, como Aspen Plus Dynamics, facilita a análise dinâmica ao permitir a identificação de regimes instáveis e oferecer rotinas otimizadas para integração temporal e tratamento de DAEs. Essas ferramentas geralmente incorporam algoritmos de passos variáveis e métodos implícitos que aumentam a robustez frente à rigidez e aos acoplamentos fortes presentes em colunas com múltiplos estágios.
-
-A inicialização de modelos dinâmicos a partir de soluções estacionárias é uma prática consolidada para aumentar a robustez e acelerar a convergência. Conforme discutido em modelos simplificados para colunas binárias \cite{ufrgs2016}, perfis estacionários de composição, temperatura e pressão obtidos por simuladores estáticos podem ser transferidos para o modelo dinâmico, reduzindo discrepâncias iniciais e mitigando o risco de divergência do integrador. Essa estratégia é especialmente recomendada para modelos de equilíbrio de estágio, em que a solução estacionária fornece um ponto de partida fisicamente consistente para a simulação transitória.
-
-Adicionalmente, estudos mais recentes, como a tese de Silva (2022) \cite{silva2022}, exploram modelagens de não-equilíbrio a nível de estágio e de placa, que podem representar fenômenos cinéticos e de transferência de massa de forma mais realista, embora com maior custo computacional e desafios numéricos. Paralelamente, pesquisas sobre identificação de modelos e aprendizagem de máquina, exemplificadas por Colombo (2020) \cite{colombo2020}, mostram potencial para complementar modelos físicos com abordagens empíricas que capturam dinâmicas não modeladas, auxiliando no projeto de controladores e na estimação de estados em tempo real.
-
-Em síntese, a literatura destaca três pilares para simulações dinâmicas confiáveis de colunas de destilação: (i) formulação adequada do modelo físico (equilíbrio versus não-equilíbrio), (ii) uso de algoritmos numéricos robustos capazes de tratar rigidez e DAEs, e (iii) estratégias de inicialização, frequentemente baseadas em soluções estacionárias, para melhorar convergência e estabilidade. Esses elementos são fundamentais para aplicações de projeto, análise de controle e otimização em sistemas de destilação.
+A inicialização de modelos dinâmicos a partir de soluções estacionárias é uma prática consolidada para aumentar a robustez e acelerar a convergência. Conforme discutido em modelos simplificados para colunas binárias \cite{vieira2001}, perfis estacionários de composição, temperatura e pressão obtidos por simuladores estáticos podem ser transferidos para o modelo dinâmico, reduzindo discrepâncias iniciais e mitigando o risco de divergência do integrador. Essa estratégia é especialmente recomendada para modelos de equilíbrio de estágio, em que a solução estacionária fornece um ponto de partida fisicamente consistente para a simulação transitória.
 
 \section{Descrição do Processo}\label{sec:processo}
 
@@ -269,9 +261,9 @@ A estratégia de simulação adotada neste trabalho segue uma abordagem sequenci
 
 \subsubsection{Seleção do Modelo Termodinâmico}
 
-A escolha do modelo termodinâmico é fundamental para a representação adequada do sistema, que envolve eletrólitos fracos (H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}) em solução aquosa. Para este trabalho, foi selecionado o modelo GPSWAT (\textit{Gas Processors Association Sour Water}), desenvolvido especificamente pela GPA em 1990 para sistemas de águas ácidas \cite{gpa1990,kohl1997}.
+A escolha do modelo termodinâmico é fundamental para a representação adequada do sistema, que envolve eletrólitos fracos (H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}) em solução aquosa. Para este trabalho, foi selecionado o modelo GPSWAT (\textit{Gas Processors Association águas ácidas}), desenvolvido especificamente pela GPA em 1990 para sistemas de águas ácidas \cite{gpa1990,kohl1997}.
 
-Conforme discutido na \cref{sec:bibliografia}, o modelo GPSWAT é particularmente adequado para aplicações em torres esgotadoras de sour water, pois:
+Conforme discutido na \cref{sec:bibliografia}, o modelo GPSWAT é particularmente adequado para aplicações em torres esgotadoras de águas ácidas, pois:
 
 \begin{itemize}[leftmargin=*]
   \item Foi desenvolvido e validado especificamente para sistemas aquosos contendo H\textsubscript{2}O, H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2} e outros gases ácidos
@@ -562,15 +554,10 @@ O código-fonte, dados e arquivos de simulação para reproduzir as figuras e ta
 
 \bibitem{aspen_dynamics} Aspen Technology, Inc. (2023). \emph{Aspen Plus Dynamics User Guide, Version 14}. Bedford, MA. Disponível em: \url{https://www.aspentech.com/en/resources/documentation/aspen-plus-dynamics}.
 
-\bibitem{lima2005} Lima, E. L. (2005). \emph{Controle de Processos Químicos}. Editora da UFRJ.
+\bibitem{secchi1993} SECCHI, A. R.; LAGANIER, F. S.; MORARI, M. Dynamic process simulation using a concurrent differential and algebraic solver. \textit{Computers \& Chemical Engineering}, v. 17, supl. 1, p. S467--S472, 1993. DOI: 10.1016/0098-1354(93)80267-Q.
 
-\bibitem{diehl2014} Diehl, M.; Ferreau, H. J.; Haverbeke, N. (2014). \emph{Efficient Numerical Methods for Nonlinear MPC and Moving Horizon Estimation}. Springer.
-
-\bibitem{ufrgs2016} Universidade Federal do Rio Grande do Sul. (2016). \emph{Manual de Simulação de Processos}. Porto Alegre: UFRGS.
-
-\bibitem{silva2022} Silva, A. B.; Santos, C. D. (2022). Otimização de torres de destilação para tratamento de águas ácidas. \emph{Revista Brasileira de Engenharia Química}, 45(2), 123-135.
-
-\bibitem{colombo2020} Colombo, M.; Rodriguez, P. (2020). Advanced control strategies for sour water stripping units. \emph{Chemical Engineering Research and Design}, 158, 45-58.
+\bibitem{vieira2001}
+VIEIRA, R. C.; BISCAIA JR., E. C. Direct methods for consistent initialization of DAE systems. \textit{Computers \& Chemical Engineering}, v.~25, p.~1299--1311, 2001. DOI: 10.1016/S0098-1354(01)00702-5.
 
 \end{thebibliography}
 
