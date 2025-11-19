@@ -67,7 +67,7 @@
 
 % Highlights
 \noindent\textbf{Highlights}
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item Desenvolvimento de modelos estáticos e dinâmicos de uma UTAA em Aspen Plus V14 e Aspen Plus Dynamics V14.
   \item Análise do comportamento da torre esgotadora de H\textsubscript{2}S para diversas concentrações de contaminantes na alimentação.
   \item Estudo do ponto de operação crítico próximo ao limite de fervura da torre e suas implicações operacionais.
@@ -126,7 +126,7 @@ Antes do desenvolvimento do GPSWAT, os modelos disponíveis para sistemas de ág
 
 O GPSWAT baseia-se em correlações empíricas ajustadas a extensos bancos de dados experimentais de equilíbrio de fases para soluções aquosas contendo eletrólitos fracos. O modelo incorpora os seguintes aspectos fundamentais:
 
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item \textbf{Equilíbrios químicos}: representação dos equilíbrios de dissociação/protonação de eletrólitos fracos (H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}, HCN, entre outros) em solução aquosa.
   \item \textbf{Equilíbrio líquido–vapor}: cálculo dos coeficientes de fugacidade na fase vapor e das atividades na fase líquida, considerando as não-idealidades introduzidas pela presença de espécies iônicas.
   \item \textbf{Especiação iônica}: determinação das concentrações de espécies moleculares e iônicas presentes (HS\textsuperscript{-}, NH\textsubscript{4}\textsuperscript{+}, HCO\textsubscript{3}\textsuperscript{-}, CO\textsubscript{3}\textsuperscript{2-}, etc.).
@@ -138,7 +138,7 @@ A formulação do GPSWAT utiliza uma abordagem baseada na atividade da água com
 \subsubsection{Componentes e Reações Consideradas}
 
 O GPSWAT foi desenvolvido para sistemas aquosos contendo, tipicamente:
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item Água (H\textsubscript{2}O)
   \item Sulfeto de hidrogênio (H\textsubscript{2}S)
   \item Amônia (NH\textsubscript{3})
@@ -165,7 +165,7 @@ Além desses equilíbrios, o GPSWAT inclui correções empíricas para atividade
 
 O GPSWAT foi validado experimentalmente e é considerado confiável nas seguintes faixas operacionais \cite{kohl1997}:
 
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item \textbf{Temperatura}: 20 °C a 250 °C
   \item \textbf{Pressão}: 0,1 bar a 70 bar
   \item \textbf{Concentração de H\textsubscript{2}S}: até ~5 wt%
@@ -179,14 +179,14 @@ Essas faixas cobrem as condições usuais de torres esgotadoras de H\textsubscri
 \subsubsection{Vantagens e Limitações}
 
 Vantagens:
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item Especificidade para sistemas de águas ácidas, com parâmetros ajustados a dados experimentais industriais.
   \item Capacidade de predizer ELV, especiação química e propriedades termofísicas simultaneamente.
   \item Implementação madura em simuladores comerciais (Aspen Plus, HYSYS, PRO/II), com boa robustez numérica.
 \end{itemize}
 
 Limitações e cuidados:
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item Natureza empírica: extrapolações fora das faixas de validação podem introduzir erros.
   \item Composição limitada ao conjunto de dados de ajuste: impurezas não previstas podem reduzir a acurácia.
   \item Em sistemas com múltiplos equilíbrios concorrentes, a convergência numérica pode exigir inicialização cuidadosa e análise de tolerâncias.
@@ -195,7 +195,7 @@ Limitações e cuidados:
 \subsubsection{Adequação ao presente trabalho}
 
 Para este trabalho, simulação de uma torre esgotadora de H\textsubscript{2}S em uma UTAA de refinaria, o GPSWAT é apropriado pelos seguintes motivos:
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item As condições operacionais da torre (60–180 °C; 5-7 bar) estão dentro dos limites de validação do modelo.
   \item Os componentes principais (H\textsubscript{2}O, H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}) estão contemplados no modelo.
   \item As concentrações típicas de entrada (H\textsubscript{2}S: 500–5000 ppm; NH\textsubscript{3}: 1000–10000 ppm; CO\textsubscript{2}: 100–2000 ppm) enquadram-se nas faixas de aplicabilidade.
@@ -238,7 +238,7 @@ Como o objetivo do trabalho é identificar os pontos de limite de estabilidade t
 
 O modelo da torre esgotadora foi construído utilizando o bloco \texttt{RadFrac} do Aspen Plus, configurado da seguinte forma:
 
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item Calculation Type: Equilibrium
   \item Number of stages: 30 
   \item Murphree efficiency (all stages): 70\%
@@ -261,7 +261,7 @@ Foram definidas 2 correntes de alimentação da torre: água ácida (estágio 14
 
 A especificação da corrente de água ácida foi definida como:
 
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item Flash Type: Temperature Pressure
   \item Temperature: 122°C
   \item Pressure: 8.3 kgf/cm² (m)
@@ -272,7 +272,7 @@ A especificação da corrente de água ácida foi definida como:
 
 A especificação da corrente de água tratada de alimentação na torre esgotadora foi definida como:
 
-\begin{itemize}[leftmargin=*]
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item Flash Type: Temperature Pressure
   \item Temperature: 100°C
   \item Pressure: 11.5 kgf/cm² (m)
@@ -283,10 +283,14 @@ A especificação da corrente de água tratada de alimentação na torre esgotad
 
 Essa alimentação de água tratada no estágio 7 serve como acréscimo de um refluxo líquido ao refluxo gerado pelo "pumparound" além de uma seção de lavagem interna para remoção adicional de NH\textsubscript{3}.
 
+
+
+\subsubsection{}
+
+
 \subsubsection{Resultados Preliminares}
 
-A simulação com as especificações acima resultou numa recuperação de H\textsubscript{2}S de 99.789\% no gás de topo e uma perda de NH\textsubscript{3} de 0.00143\% para o gás de topo.
-
+A simulação configurada com as especificações acima resultou numa recuperação de H\textsubscript{2}S de 99.789\% no gás de topo e uma perda de NH\textsubscript{3} de 0.00143\% para o gás de topo.
 
 \appendix
 
