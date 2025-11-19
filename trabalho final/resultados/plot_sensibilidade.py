@@ -14,7 +14,7 @@ def plot_metric(df, x_col, metric_name, column_template, y_label, title, filenam
     fig, ax = plt.subplots(figsize=(8, 5))
     x = df[x_col]
 
-    for case_idx in range(1, 7):
+    for case_idx in range(1, 9):
         col = column_template.format(case_idx)
         ax.plot(x, df[col], linewidth=1, label=f"Caso {case_idx}")
 
