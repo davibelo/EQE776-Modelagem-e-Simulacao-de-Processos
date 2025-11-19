@@ -234,35 +234,35 @@ A implementação do modelo GPSWAT no Aspen Plus V14 inclui todos os parâmetros
 
 \subsubsection{Configuração do Modelo no Aspen Plus}
 
-Como o objetivo do estudo é identificar e trabalho no limiar dos pontos de limite de estabilidade térmica da torre esgotadora para diferentes composições de alimentação, o modelo construído focou exclusivamente inserção e simulação da tore esgotadora de H\textsubscript{2}.
+Como o objetivo do trabalho é identificar os pontos de limite de estabilidade térmica da torre esgotadora para diferentes composições de alimentação, o modelo construído focou exclusivamente na  simulação da tore esgotadora de H\textsubscript{2}.
 
 O modelo da torre esgotadora foi construído utilizando o bloco \texttt{RadFrac} do Aspen Plus, configurado da seguinte forma:
 
-TODO: continuar aqui
 \begin{itemize}[leftmargin=*]
-  \item Tipo: coluna de destilação com refervedor e condensador parcial
-  \item Número de estágios: 30 
-  \item Eficiência de Murphree (em toda a coluna): 70\%
-  \item Pressão de operação: [valor] bar
-  \item Alimentação: água ácida a [temperatura] e [pressão]
-  \item Vapor de despojamento: injetado no fundo da coluna
-  \item Refervedor: tipo [kettle/termossifão], carga térmica [valor] kW
-  \item Produto de topo: gás ácido para URE
-  \item Produto de fundo: água parcialmente tratada para segunda torre
-
-
-  \item Método de convergência: [especificar algoritmo]
-  \item Número máximo de iterações: [valor]
-  \item Tolerância de convergência: [valor]
-  \item Especificações de projeto: [listar variáveis especificadas e calculadas]
+  \item Calculation Type: Equilibrium
+  \item Number of stages: 30 
+  \item Murphree efficiency (all stages): 70\%
+  \item Condenser: None
+  \item Reboiler: Kettle
+  \item Valid Phases: Vapor-Liquid
+  \item Convergence: Standard
+  \item Operation specifications: Reboiler Duty
+  \item Feed streams stages: 14 (sour water) and 7 (stripped water)
+  \item Product streams stages: 1 (vapor) and 30 (liquid)
+  \item Pressure Stage 1: 6 kgf/cm² (m)
+  \item Column pressure drop: 0.2 kgf/cm² (m)
+  \item Reboiler Utility: Medium Pressure Steam (175°C, 127psia)
+  \item Pumparound Draw stage: 2
+  \item Pumparound Return stage: 1 (Source Phase, 6kg/cm² (m))
+  \item Pumparound Drawoff type: Partial. 7000 kg/h, 60°C
 \end{itemize}
+
 
 
 \appendix
 
 \section{Reprodutibilidade}
-% TODO: Adicionar link para repositório quando disponível
-O código-fonte, dados e arquivos de simulação para reproduzir as figuras e tabelas estarão disponíveis em: \url{https://github.com/[usuario]/[repositorio]}
+O código-fonte, dados e arquivos de simulação para reproduzir as figuras e tabelas estarão disponíveis em: \url{https://github.com/davibelo/EQE776-Modelagem-e-Simulacao-de-Processos/tree/main/trabalho%20final}
 
 \begin{thebibliography}{99}
 \bibitem{knust2013} Knust, K. (2013). [Referência completa do trabalho citado sobre UTAA — adicionar detalhes bibliográficos completos]
