@@ -15,5 +15,6 @@
         "Prini",
         "SWTU",
         "UTAA"
-    ]
+    ],
+    "python.languageServer": "None"
 }
