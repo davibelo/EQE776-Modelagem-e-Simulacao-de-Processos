@@ -257,6 +257,31 @@ O modelo da torre esgotadora foi construído utilizando o bloco \texttt{RadFrac}
   \item Pumparound Drawoff type: Partial. 7000 kg/h, 60°C
 \end{itemize}
 
+Foram definidas 2 correntes de alimentação da torre: água ácida (estágio 14) e água tratada (estágio 7)
+
+A especificação da corrente de água ácida foi definida como:
+
+\begin{itemize}[leftmargin=*]
+  \item Flash Type: Temperature Pressure
+  \item Temperature: 122°C
+  \item Pressure: 8.3 kgf/cm² (m)
+  \item Total flow basis: Mass
+  \item Total flow rate: 50000 kg/h
+  \item Composition: Mass Fraction: H\textsubscript{2}S 0,0035\%, NH\textsubscript{3} 0,003\%, H\textsubscript{2}O 99,9935\%  
+\end{itemize}
+
+A especificação da corrente de água tratada de alimentação na torre esgotadora foi definida como:
+
+\begin{itemize}[leftmargin=*]
+  \item Flash Type: Temperature Pressure
+  \item Temperature: 100°C
+  \item Pressure: 11.5 kgf/cm² (m)
+  \item Total flow basis: Mass
+  \item Total flow rate: 3000 kg/h
+  \item Composition: Mass Fraction: NH\textsubscript{3} 5E-6\% (5ppm) H\textsubscript{2}O 100\%  
+\end{itemize}
+
+Essa alimentação de água tratada no estágio 7 serve como acréscimo de um refluxo líquido somado com o refluxo gerado pelo "pumparound" além de uma seção de lavagem interna para remoção adicional de NH\textsubscript{3}.
 
 
 \appendix
