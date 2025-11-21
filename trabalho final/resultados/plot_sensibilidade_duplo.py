@@ -7,6 +7,8 @@ import unicodedata
 DATA_PATH = Path(__file__).resolve().parent / "AnaliseSensibilidade.xlsx"
 SHEET_NAME = "Dados"
 OUTPUT_DIR = Path(__file__).resolve().parent / "figuras"
+GENERATE_COLOR = True
+GENERATE_MONO = True
 COLOR_CYCLE = plt.rcParams["axes.prop_cycle"].by_key()["color"]
 MARKERS = ["o", "s", "^", "v", "D", "P", "X", "*"]
 
@@ -44,6 +46,12 @@ def plot_metric(df, x_col, column_template, y_label, title, filename, mono=False
     ax.grid(True, linestyle="--", alpha=0.4)
     ax.legend()
     fig.tight_layout()
+    filepath = Path(filename)
+    if not filepath.is_absolute():
+        filepath = OUTPUT_DIR / filepath
+    filepath.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(filepath, dpi=300)
+    plt.close(fig)
     fig.savefig(OUTPUT_DIR / filename, dpi=300)
     plt.close(fig)
 
@@ -86,28 +94,55 @@ def main():
 
     for metric in metrics:
         base = metric["base_filename"]
-        plot_metric(
-            df,
-            x_col,
-            metric["column_template"],
-            metric["y_label"],
-            metric["title"],
-            f"{base}.png",
-            mono=False,
-        )
-        plot_metric(
-            df,
-            x_col,
-            metric["column_template"],
-            metric["y_label"],
-            metric["title"],
-            f"{base}_mono.png",
-            mono=True,
-        )
+        if GENERATE_COLOR:
+            plot_metric(
+                df,
+                x_col,
+                metric["column_template"],
+                metric["y_label"],
+                metric["title"],
+                f"{base}.png",
+                mono=False,
+            )
+        if GENERATE_MONO:
+            plot_metric(
+                df,
+                x_col,
+                metric["column_template"],
+                metric["y_label"],
+                metric["title"],
+                f"{base}_mono.png",
+                mono=True,
+            )
         for group in case_groups:
             suffix = slugify(group["label"])
             title = f"{metric['title']} - {group['label']}"
-            filename_color = f"{base}_{suffix}.png"
+            group_dir = OUTPUT_DIR / suffix
+            group_dir.mkdir(parents=True, exist_ok=True)
+            if GENERATE_COLOR:
+                filename_color = group_dir / f"{base}_{suffix}.png"
+                plot_metric(
+                    df,
+                    x_col,
+                    metric["column_template"],
+                    metric["y_label"],
+                    title,
+                    filename_color.name,
+                    mono=False,
+                    cases=group["cases"],
+                )
+            if GENERATE_MONO:
+                filename_mono = group_dir / f"{base}_{suffix}_mono.png"
+                plot_metric(
+                    df,
+                    x_col,
+                    metric["column_template"],
+                    metric["y_label"],
+                    title,
+                    filename_mono.name,
+                    mono=True,
+                    cases=group["cases"],
+                )
             filename_mono = f"{base}_{suffix}_mono.png"
             plot_metric(
                 df,
