@@ -276,3 +276,156 @@ leftmargin=4em, itemsep=0pt
 \end{itemize}
 
 Caso os resultados sejam promissores, estudos de viabilidade para implementação em planta piloto ou industrial poderão ser conduzidos.
+
+
+
+
+
+
+\subsubsection{Comportamento Geral do Sistema}
+
+As Figuras~\ref{fig:q_ref_vs_recuperacao_h2s} a \ref{fig:q_ref_vs_t_topo} apresentam o comportamento geral da torre esgotadora de H\textsubscript{2}S em função da carga térmica do refervedor. Observa-se claramente a existência de um \textit{trade-off} operacional fundamental: o aumento da carga térmica promove maior vaporização de H\textsubscript{2}S (aumentando a recuperação), porém simultaneamente eleva a temperatura na torre, favorecendo também a vaporização de NH\textsubscript{3}.
+
+Na Figura~\ref{fig:q_ref_vs_recuperacao_h2s}, nota-se que a recuperação de H\textsubscript{2}S aumenta rapidamente com o incremento da carga térmica, atingindo patamares próximos a 100\% para valores de carga térmica acima de 3,0 Gcal/h. Este comportamento é esperado devido à maior volatilidade relativa do H\textsubscript{2}S em comparação à NH\textsubscript{3} nas condições operacionais da torre.
+
+A Figura~\ref{fig:q_ref_vs_perda_nh3} revela o fenômeno crítico de arraste de amônia: após a recuperação completa de H\textsubscript{2}S, qualquer aumento adicional na carga térmica resulta em elevação acentuada da perda de NH\textsubscript{3} para o gás ácido. Esse comportamento é indesejável pois a presença de NH\textsubscript{3} no gás ácido enviado à URE pode causar formação de sais de amônio (NH\textsubscript{4}HS), levando a problemas operacionais como incrustações, entupimentos e corrosão.
+
+As temperaturas de fundo e topo (Figuras~\ref{fig:q_ref_vs_t_fundo} e \ref{fig:q_ref_vs_t_topo}) apresentam comportamento esperado para colunas de destilação: aumento monotônico com a carga térmica. A temperatura de fundo varia aproximadamente entre 100 °C e 180 °C, enquanto a temperatura de topo mantém-se entre 60 °C e 110 °C, dependendo das condições operacionais. O ponto de operação crítico, onde ocorre o disparo acentuado no arraste de NH\textsubscript{3}, coincide com temperaturas de fundo superiores a aproximadamente 160 °C, sugerindo que o controle da temperatura de fundo é uma estratégia viável para evitar perda excessiva de amônia.
+
+\subsubsection{Influência dos contaminantes}
+
+A análise comparativa dos Casos 1 a 4 (Figuras~\ref{fig:q_ref_vs_recuperacao_h2s_influencia_contaminantes} a \ref{fig:q_ref_vs_t_topo_influencia_contaminantes}) permite avaliar a influência das concentrações de H\textsubscript{2}S e NH\textsubscript{3} na alimentação sobre o desempenho da torre esgotadora.
+
+Conforme Figura~\ref{fig:q_ref_vs_recuperacao_h2s_influencia_contaminantes}, a concentração de H\textsubscript{2}S na alimentação exerce influência significativa sobre a carga térmica necessária para atingir recuperação completa. O Caso 1 (H\textsubscript{2}S máximo: 3500 ppm) requer maior energia para alcançar patamares elevados de recuperação em comparação ao Caso 2 (H\textsubscript{2}S reduzido: 1750 ppm). Isso se deve à maior quantidade absoluta de H\textsubscript{2}S que deve ser vaporizada no Caso 1. Por outro lado, a concentração de NH\textsubscript{3} (comparando Caso 1 vs. Caso 3, e Caso 2 vs. Caso 4) não afeta significativamente a curva de recuperação de H\textsubscript{2}S, confirmando a maior volatilidade relativa do H\textsubscript{2}S.
+
+A Figura~\ref{fig:q_ref_vs_perda_nh3_influencia_contaminantes} evidencia o efeito mais pronunciado: a perda de NH\textsubscript{3} aumenta drasticamente para os casos com maior concentração inicial de amônia (Casos 1 e 2, com 3000 ppm NH\textsubscript{3}) em comparação aos casos com concentração reduzida (Casos 3 e 4, com 1500 ppm NH\textsubscript{3}). Esse comportamento demonstra que, operando-se em cargas térmicas elevadas (acima de 3,5 Gcal/h), a perda percentual de NH\textsubscript{3} torna-se crítica nos cenários de alta concentração de amônia na alimentação, podendo ultrapassar 60\% para o Caso 1. Já nos Casos 3 e 4, mesmo em cargas térmicas elevadas, a perda de NH\textsubscript{3} permanece abaixo de 40\%, indicando que a operação com alimentações menos concentradas em amônia oferece maior flexibilidade operacional.
+
+As curvas de temperatura de fundo (Figura~\ref{fig:q_ref_vs_t_fundo_influencia_contaminantes}) mostram comportamento relativamente similar entre os quatro casos, sugerindo que a presença de contaminantes em concentrações típicas não altera significativamente o perfil térmico da torre. Contudo, observa-se uma leve tendência de temperaturas de fundo ligeiramente superiores nos casos com maiores concentrações de contaminantes, devido ao efeito de elevação do ponto de ebulição causado pela presença de solutos não voláteis remanescentes no fundo da coluna.
+
+A temperatura de topo (Figura~\ref{fig:q_ref_vs_t_topo_influencia_contaminantes}) apresenta diferenças mais evidentes entre os casos, especialmente na faixa de carga térmica entre 2,5 e 3,5 Gcal/h, onde os casos com menor concentração de contaminantes exibem temperaturas de topo ligeiramente inferiores. Esse comportamento pode estar relacionado à composição do vapor no topo, que varia conforme a concentração relativa de H\textsubscript{2}S e NH\textsubscript{3}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_contaminantes/q_ref_vs_recuperacao_h2s_influencia_contaminantes.png}
+  \caption{Carga térmica x recuperação de H\textsubscript{2}S - Influência Contaminantes}
+  \label{fig:q_ref_vs_recuperacao_h2s_influencia_contaminantes}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_contaminantes/q_ref_vs_perda_nh3_influencia_contaminantes.png}
+  \caption{Carga térmica x perda de NH\textsubscript{3} - Influência Contaminantes}
+  \label{fig:q_ref_vs_perda_nh3_influencia_contaminantes}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_contaminantes/q_ref_vs_t_fundo_influencia_contaminantes.png}
+  \caption{Carga térmica x temperatura do fundo - Influência Contaminantes}
+  \label{fig:q_ref_vs_t_fundo_influencia_contaminantes}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_contaminantes/q_ref_vs_t_topo_influencia_contaminantes.png}
+  \caption{Carga térmica x temperatura do topo - Influência Contaminantes}
+  \label{fig:q_ref_vs_t_topo_influencia_contaminantes}
+\end{figure}
+
+\subsubsection{Influência da temperatura da carga}
+
+A análise dos Casos 1, 7 e 8 (Figuras~\ref{fig:q_ref_vs_recuperacao_h2s_influencia_temperatura_carga} a \ref{fig:q_ref_vs_t_topo_influencia_temperatura_carga}) investiga o efeito da temperatura da corrente de alimentação sobre o desempenho da torre esgotadora. A temperatura da alimentação tem impacto significativo no balanço energético global da coluna, uma vez que alimentações mais quentes reduzem a demanda de energia do refervedor para atingir determinada condição de operação.
+
+Conforme observado na Figura~\ref{fig:q_ref_vs_recuperacao_h2s_influencia_temperatura_carga}, para uma mesma recuperação de H\textsubscript{2}S alvo, alimentações mais quentes (Caso 8) requerem menor carga térmica no refervedor em comparação a alimentações mais frias (Caso 7). Esse comportamento é intuitivo: parte da energia necessária para vaporizar os componentes leves já é fornecida pela entalpia da corrente de alimentação, reduzindo o trabalho do refervedor. Quantitativamente, uma alimentação pré-aquecida pode reduzir em até 10-15\% a carga térmica necessária para atingir recuperação completa de H\textsubscript{2}S.
+
+A Figura~\ref{fig:q_ref_vs_perda_nh3_influencia_temperatura_carga} demonstra que a temperatura de alimentação também influencia o arraste de NH\textsubscript{3}. Para uma mesma carga térmica do refervedor, alimentações mais quentes tendem a apresentar maior perda de NH\textsubscript{3}. Esse fenômeno ocorre porque o perfil de temperatura ao longo da torre é mais elevado quando a alimentação entra mais quente, favorecendo a volatilização da amônia nos estágios superiores à alimentação. Portanto, embora o pré-aquecimento da alimentação reduza o consumo energético do refervedor, ele deve ser cuidadosamente controlado para evitar arraste excessivo de NH\textsubscript{3} ao gás ácido.
+
+Os perfis de temperatura de fundo (Figura~\ref{fig:q_ref_vs_t_fundo_influencia_temperatura_carga}) mostram que, para uma mesma carga térmica, alimentações mais quentes resultam em temperaturas de fundo ligeiramente superiores. Esse efeito é coerente com o balanço energético global da coluna. Já a temperatura de topo (Figura~\ref{fig:q_ref_vs_t_topo_influencia_temperatura_carga}) apresenta comportamento similar, sendo mais elevada nos casos com alimentação pré-aquecida, reforçando a correlação entre temperatura de alimentação e perfil térmico geral da torre.
+
+Esses resultados indicam que o pré-aquecimento da alimentação é uma estratégia interessante para redução do consumo energético, porém deve ser implementado em conjunto com controle rigoroso da carga térmica do refervedor e monitoramento da perda de NH\textsubscript{3}, a fim de manter a qualidade do gás ácido enviado à URE.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_temperatura_carga/q_ref_vs_recuperacao_h2s_influencia_temperatura_carga.png}
+  \caption{Carga térmica x recuperação de H\textsubscript{2}S - Influência Temperatura da Carga}
+  \label{fig:q_ref_vs_recuperacao_h2s_influencia_temperatura_carga}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_temperatura_carga/q_ref_vs_perda_nh3_influencia_temperatura_carga.png}
+  \caption{Carga térmica x perda de NH\textsubscript{3} - Influência Temperatura da Carga}
+  \label{fig:q_ref_vs_perda_nh3_influencia_temperatura_carga}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_temperatura_carga/q_ref_vs_t_fundo_influencia_temperatura_carga.png}
+  \caption{Carga térmica x temperatura do fundo - Influência Temperatura da Carga}
+  \label{fig:q_ref_vs_t_fundo_influencia_temperatura_carga}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_temperatura_carga/q_ref_vs_t_topo_influencia_temperatura_carga.png}
+  \caption{Carga térmica x temperatura do topo - Influência Temperatura da Carga}
+  \label{fig:q_ref_vs_t_topo_influencia_temperatura_carga}
+\end{figure}
+
+\subsubsection{Influência da vazão de carga}
+
+A análise dos Casos 1, 5 e 6 (Figuras~\ref{fig:q_ref_vs_recuperacao_h2s_influencia_vazao_carga} a \ref{fig:q_ref_vs_t_topo_influencia_vazao_carga}) investiga o efeito de variações na vazão mássica de alimentação, mantendo-se constante a composição e temperatura. Esse tipo de análise é fundamental para compreender a resposta do sistema a perturbações na vazão de produção das unidades upstream, situação frequente em refinarias.
+
+A Figura~\ref{fig:q_ref_vs_recuperacao_h2s_influencia_vazao_carga} evidencia que o aumento da vazão de alimentação (Caso 6, +10\%) desloca a curva de recuperação para a direita, indicando que é necessária maior carga térmica no refervedor para atingir determinado nível de recuperação de H\textsubscript{2}S. Esse comportamento é esperado, pois uma maior vazão mássica implica maior quantidade absoluta de H\textsubscript{2}S a ser vaporizada, demandando mais energia. Por outro lado, a redução da vazão (Caso 5, -5\%) desloca a curva para a esquerda, permitindo atingir recuperação completa com menor carga térmica. Quantitativamente, uma variação de +10\% na vazão de alimentação pode requerer um acréscimo de aproximadamente 10-12\% na carga térmica do refervedor para manter a mesma recuperação de H\textsubscript{2}S.
+
+A Figura~\ref{fig:q_ref_vs_perda_nh3_influencia_vazao_carga} mostra um comportamento interessante: para uma mesma carga térmica do refervedor, vazões mais baixas de alimentação (Caso 5) resultam em maior perda percentual de NH\textsubscript{3}, enquanto vazões mais altas (Caso 6) apresentam menor perda percentual. Esse fenômeno pode ser explicado pela razão entre energia fornecida e massa alimentada: em vazões mais baixas, a energia específica por unidade de massa é maior, elevando o perfil térmico da coluna e favorecendo a vaporização de NH\textsubscript{3}. Esse comportamento contraintuitivo ressalta a importância de considerar a razão carga térmica/vazão como variável de controle, em vez de apenas a carga térmica absoluta.
+
+Os perfis de temperatura de fundo (Figura~\ref{fig:q_ref_vs_t_fundo_influencia_vazao_carga}) demonstram que, para uma mesma carga térmica, vazões menores resultam em temperaturas de fundo mais elevadas, coerente com o conceito de energia específica mencionado anteriormente. A temperatura de topo (Figura~\ref{fig:q_ref_vs_t_topo_influencia_vazao_carga}) segue tendência similar, porém com menor amplitude de variação.
+
+Esses resultados têm implicações importantes para estratégias de controle: em situações de redução de vazão upstream, é essencial reduzir proporcionalmente a carga térmica do refervedor para evitar operação em condições de alta temperatura que favoreçam o arraste de NH\textsubscript{3}. Por outro lado, aumentos de vazão demandam ajustes rápidos na carga térmica para manter a recuperação de H\textsubscript{2}S em níveis adequados.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_vazao_carga/q_ref_vs_recuperacao_h2s_influencia_vazao_carga.png}
+  \caption{Carga térmica x recuperação de H\textsubscript{2}S - Influência Vazão da Carga}
+  \label{fig:q_ref_vs_recuperacao_h2s_influencia_vazao_carga}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_vazao_carga/q_ref_vs_perda_nh3_influencia_vazao_carga.png}
+  \caption{Carga térmica x perda de NH\textsubscript{3} - Influência Vazão da Carga}
+  \label{fig:q_ref_vs_perda_nh3_influencia_vazao_carga}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_vazao_carga/q_ref_vs_t_fundo_influencia_vazao_carga.png}
+  \caption{Carga térmica x temperatura do fundo - Influência Vazão da Carga}
+  \label{fig:q_ref_vs_t_fundo_influencia_vazao_carga}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_vazao_carga/q_ref_vs_t_topo_influencia_vazao_carga.png}
+  \caption{Carga térmica x temperatura do topo - Influência Vazão da Carga}
+  \label{fig:q_ref_vs_t_topo_influencia_vazao_carga}
+\end{figure}
+
+\subsubsection{Síntese e Implicações Operacionais}
+
+A análise de sensibilidade realizada fornece subsídios valiosos para a compreensão do comportamento da torre esgotadora de H\textsubscript{2}S e para o desenvolvimento de estratégias de operação e controle. Os principais achados são sintetizados a seguir:
+
+\begin{itemize}[leftmargin=4em, itemsep=0pt]
+  \item \textbf{Trade-off fundamental}: Existe uma região operacional ótima onde se atinge recuperação completa de H\textsubscript{2}S com mínima perda de NH\textsubscript{3}. Operar abaixo dessa região resulta em perda de H\textsubscript{2}S (redução de eficiência da URE), enquanto operar acima resulta em arraste excessivo de NH\textsubscript{3} (risco de formação de sais de amônio na URE).
+
+  \item \textbf{Concentração de contaminantes}: Alimentações com alta concentração de NH\textsubscript{3} apresentam maior propensão ao arraste de amônia em cargas térmicas elevadas. A operação com alimentações diluídas oferece maior flexibilidade operacional e menor risco de perda de NH\textsubscript{3}.
+
+  \item \textbf{Temperatura de alimentação}: O pré-aquecimento da alimentação reduz significativamente o consumo energético do refervedor (até 10-15\%), porém aumenta o risco de arraste de NH\textsubscript{3} se não for acompanhado de ajuste adequado na carga térmica. A integração energética deve ser avaliada em conjunto com os requisitos de qualidade do gás ácido.
+
+  \item \textbf{Vazão de alimentação}: Variações na vazão de alimentação demandam ajustes proporcionais na carga térmica do refervedor. A relação carga térmica/vazão (energia específica) é uma variável chave para evitar arraste excessivo de NH\textsubscript{3} em condições de baixa vazão ou perda de H\textsubscript{2}S em condições de alta vazão.
+
+  \item \textbf{Temperatura de fundo como indicador}: A temperatura de fundo da torre mostrou-se um indicador confiável da proximidade ao ponto de arraste crítico de NH\textsubscript{3}. Temperaturas de fundo superiores a 160 °C devem ser evitadas para minimizar perda de amônia, sugerindo que o controle da temperatura de fundo é uma estratégia viável.
+\end{itemize}
+
+Esses resultados estabelecem a base para o desenvolvimento de estratégias de controle preditivo não linear (NMPC) utilizando redes neurais, conforme objetivos futuros do projeto. Os modelos dinâmicos desenvolvidos em Aspen Plus Dynamics V14 permitirão gerar datasets para treinamento de redes neurais que capturem a dinâmica não linear do sistema, viabilizando controle avançado em tempo real considerando múltiplas variáveis manipuladas (carga térmica do refervedor, temperatura de alimentação) e múltiplos objetivos (maximização de recuperação de H\textsubscript{2}S, minimização de perda de NH\textsubscript{3}, minimização de consumo energético).
