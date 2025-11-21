@@ -7,7 +7,7 @@ import unicodedata
 DATA_PATH = Path(__file__).resolve().parent / "AnaliseSensibilidade.xlsx"
 SHEET_NAME = "Dados"
 OUTPUT_DIR = Path(__file__).resolve().parent / "figuras"
-GENERATE_COLOR = False
+GENERATE_COLOR = True
 GENERATE_MONO = True
 CREATE_SUBFOLDERS = True
 COLOR_CYCLE = plt.rcParams["axes.prop_cycle"].by_key()["color"]
