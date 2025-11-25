@@ -284,7 +284,6 @@ A especificação da corrente de água tratada de alimentação na torre esgotad
 Essa alimentação de água tratada no estágio 7 serve como acréscimo de um refluxo líquido ao refluxo gerado pelo "pumparound" além de uma seção de lavagem interna para remoção adicional de NH\textsubscript{3}.
 
 
-
 \subsubsection{Análise de Sensibilidade}
 
 Para analisar a influência da carga térmica aplicada à coluna, considerando diferentes concentrações de contaminantes na alimentação e variações na vazão mássica de alimentação, foram definidos seis casos de estudo:
@@ -298,39 +297,33 @@ Para analisar a influência da carga térmica aplicada à coluna, considerando d
   \item Caso 6: Vazão Mássica de alimentação aumentada em 10\%
 \end{itemize}
 
+\subsubsection{Métricas utilizadas}
+
+As métricas utilizadas nas análises que virão a seguir foram definidas da seguinte forma: a recuperação de H\textsubscript{2}S corresponde à razão entre a quantidade de H\textsubscript{2}S direcionada ao gás ácido e o total presente na alimentação; já a perda de NH\textsubscript{3} corresponde à razão entre a quantidade de NH\textsubscript{3} arrastada para o gás ácido e o total introduzido na alimentação.
+
 \subsection{Resultados}
 
+A Figura~\ref{fig:q_ref_vs_h2s_nh3_dual_influencia_contaminantes} e \ref{fig:q_ref_vs_t_topo_influencia_contaminantes} apresentam o comportamento geral da torre esgotadora de H\textsubscript{2}S em função da carga térmica do refervedor. Observa-se claramente a existência de um \textit{trade-off} operacional fundamental: o aumento da carga térmica promove maior vaporização de H\textsubscript{2}S (aumentando a recuperação), porém simultaneamente eleva a temperatura na torre, favorecendo também a vaporização de NH\textsubscript{3}.
 
+Na Figura~\ref{fig:q_ref_vs_h2s_nh3_dual_influencia_contaminantes}, nota-se que a recuperação de H\textsubscript{2}S aumenta rapidamente com o incremento da carga térmica, atingindo patamares próximos a 100\% para valores de carga térmica acima de 2,4 Gcal/h para uma perda de NH\textsubscript{3} entre 2 a 4\% nos casos 1 a 4. 
 
-As métricas utilizadas nessas análises foram definidas da seguinte forma: a recuperação de H\textsubscript{2}S corresponde à razão entre a quantidade de H\textsubscript{2}S direcionada ao gás ácido e o total presente na alimentação; já a perda de NH\textsubscript{3} corresponde à razão entre a quantidade de NH\textsubscript{3} arrastada para o gás ácido e o total introduzido na alimentação.
+Na Figura~\ref{fig:q_ref_vs_h2s_nh3_dual_influencia_contaminantes} também percebe-se o fenômeno crítico de arraste de amônia: após a recuperação completa de H\textsubscript{2}S, qualquer aumento adicional na carga térmica resulta em elevação acentuada da perda de NH\textsubscript{3} para o gás ácido. Esse comportamento é indesejável pois a presença de NH\textsubscript{3} no gás ácido enviado à URE pode causar formação de sais de amônio (NH\textsubscript{4}HS), levando a problemas operacionais como incrustações, entupimentos e corrosão.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/q_ref_vs_recuperacao_h2s.png}
-  \caption{Carga térmica x recuperação de H\textsubscript{2}S}
-  \label{fig:q_ref_vs_recuperacao_h2s}
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/influencia_contaminantes/q_ref_vs_h2s_nh3_dual_influencia_contaminantes.png}
+  \caption{Carga térmica x recuperação de H\textsubscript{2}S e perda de NH\textsubscript{3}}
+  \label{fig:q_ref_vs_h2s_nh3_dual_influencia_contaminantes}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/q_ref_vs_perda_nh3.png}
-  \caption{Carga térmica x perda de NH\textsubscript{3}}
-  \label{fig:q_ref_vs_perda_nh3}
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/influencia_contaminantes/q_ref_vs_t_topo_influencia_contaminantes.png}
+  \caption{Carga térmica x Temperatura do topo da coluna}
+  \label{fig:q_ref_vs_t_topo_influencia_contaminantes}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/q_ref_vs_t_fundo.png}
-  \caption{Carga térmica x temperatura do fundo}
-  \label{fig:q_ref_vs_t_fundo}
-\end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/q_ref_vs_t_topo.png}
-  \caption{Carga térmica x temperatura do topo}
-  \label{fig:q_ref_vs_t_topo}
-\end{figure}
 
 \appendix
 

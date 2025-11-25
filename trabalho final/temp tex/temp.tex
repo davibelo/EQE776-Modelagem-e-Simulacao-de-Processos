@@ -287,11 +287,7 @@ Caso os resultados sejam promissores, estudos de viabilidade para implementaçã
 A partir das Figuras \ref{fig:q_ref_vs_recuperacao_h2s} e \ref{fig:q_ref_vs_perda_nh3}, observa-se que existe um ponto operacional no qual a recuperação de H\textsubscript{2}S se torna completa. Acima desse ponto, contudo, passa a ocorrer perda de NH\textsubscript{3} para a corrente de gás ácido.
 
 
-As Figuras~\ref{fig:q_ref_vs_recuperacao_h2s} a \ref{fig:q_ref_vs_t_topo} apresentam o comportamento geral da torre esgotadora de H\textsubscript{2}S em função da carga térmica do refervedor. Observa-se claramente a existência de um \textit{trade-off} operacional fundamental: o aumento da carga térmica promove maior vaporização de H\textsubscript{2}S (aumentando a recuperação), porém simultaneamente eleva a temperatura na torre, favorecendo também a vaporização de NH\textsubscript{3}.
 
-Na Figura~\ref{fig:q_ref_vs_recuperacao_h2s}, nota-se que a recuperação de H\textsubscript{2}S aumenta rapidamente com o incremento da carga térmica, atingindo patamares próximos a 100\% para valores de carga térmica acima de 3,0 Gcal/h. Este comportamento é esperado devido à maior volatilidade relativa do H\textsubscript{2}S em comparação à NH\textsubscript{3} nas condições operacionais da torre.
-
-A Figura~\ref{fig:q_ref_vs_perda_nh3} revela o fenômeno crítico de arraste de amônia: após a recuperação completa de H\textsubscript{2}S, qualquer aumento adicional na carga térmica resulta em elevação acentuada da perda de NH\textsubscript{3} para o gás ácido. Esse comportamento é indesejável pois a presença de NH\textsubscript{3} no gás ácido enviado à URE pode causar formação de sais de amônio (NH\textsubscript{4}HS), levando a problemas operacionais como incrustações, entupimentos e corrosão.
 
 As temperaturas de fundo e topo (Figuras~\ref{fig:q_ref_vs_t_fundo} e \ref{fig:q_ref_vs_t_topo}) apresentam comportamento esperado para colunas de destilação: aumento monotônico com a carga térmica. A temperatura de fundo varia aproximadamente entre 100 °C e 180 °C, enquanto a temperatura de topo mantém-se entre 60 °C e 110 °C, dependendo das condições operacionais. O ponto de operação crítico, onde ocorre o disparo acentuado no arraste de NH\textsubscript{3}, coincide com temperaturas de fundo superiores a aproximadamente 160 °C, sugerindo que o controle da temperatura de fundo é uma estratégia viável para evitar perda excessiva de amônia.
 
@@ -306,6 +302,29 @@ A Figura~\ref{fig:q_ref_vs_perda_nh3_influencia_contaminantes} evidencia o efeit
 As curvas de temperatura de fundo (Figura~\ref{fig:q_ref_vs_t_fundo_influencia_contaminantes}) mostram comportamento relativamente similar entre os quatro casos, sugerindo que a presença de contaminantes em concentrações típicas não altera significativamente o perfil térmico da torre. Contudo, observa-se uma leve tendência de temperaturas de fundo ligeiramente superiores nos casos com maiores concentrações de contaminantes, devido ao efeito de elevação do ponto de ebulição causado pela presença de solutos não voláteis remanescentes no fundo da coluna.
 
 A temperatura de topo (Figura~\ref{fig:q_ref_vs_t_topo_influencia_contaminantes}) apresenta diferenças mais evidentes entre os casos, especialmente na faixa de carga térmica entre 2,5 e 3,5 Gcal/h, onde os casos com menor concentração de contaminantes exibem temperaturas de topo ligeiramente inferiores. Esse comportamento pode estar relacionado à composição do vapor no topo, que varia conforme a concentração relativa de H\textsubscript{2}S e NH\textsubscript{3}.
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/q_ref_vs_perda_nh3.png}
+  \caption{Carga térmica x perda de NH\textsubscript{3}}
+  \label{fig:q_ref_vs_perda_nh3}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/q_ref_vs_t_fundo.png}
+  \caption{Carga térmica x temperatura do fundo}
+  \label{fig:q_ref_vs_t_fundo}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/q_ref_vs_t_topo.png}
+  \caption{Carga térmica x temperatura do topo}
+  \label{fig:q_ref_vs_t_topo}
+\end{figure}
+
 
 \begin{figure}[H]
   \centering
