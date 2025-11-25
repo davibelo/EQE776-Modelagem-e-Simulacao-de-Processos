@@ -53,14 +53,6 @@ def plot_metric(df, x_col, column_template, y_label, title, filename, mono=False
     filepath.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(filepath, dpi=300)
     plt.close(fig)
-    filepath = Path(filename)
-    if not filepath.is_absolute():
-        filepath = OUTPUT_DIR / filepath
-    filepath.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(filepath, dpi=300)
-    plt.close(fig)
-    fig.savefig(OUTPUT_DIR / filename, dpi=300)
-    plt.close(fig)
 
 
 def main():
@@ -108,7 +100,7 @@ def main():
                 metric["column_template"],
                 metric["y_label"],
                 metric["title"],
-                f"{base}.png",
+                f"color/{base}.png",
                 mono=False,
             )
         if GENERATE_MONO:
@@ -118,16 +110,21 @@ def main():
                 metric["column_template"],
                 metric["y_label"],
                 metric["title"],
-                f"{base}_mono.png",
+                f"mono/{base}_mono.png",
                 mono=True,
             )
         for group in case_groups:
             suffix = slugify(group["label"])
             title = f"{metric['title']} - {group['label']}"
-            target_dir = OUTPUT_DIR / suffix if CREATE_SUBFOLDERS else OUTPUT_DIR
-            target_dir.mkdir(parents=True, exist_ok=True)
+            if CREATE_SUBFOLDERS:
+                color_subdir = f"color/{suffix}"
+                mono_subdir = f"mono/{suffix}"
+            else:
+                color_subdir = "color"
+                mono_subdir = "mono"
+
             if GENERATE_COLOR:
-                filename_color = target_dir / f"{base}_{suffix}.png"
+                filename_color = f"{color_subdir}/{base}_{suffix}.png"
                 plot_metric(
                     df,
                     x_col,
@@ -139,7 +136,7 @@ def main():
                     cases=group["cases"],
                 )
             if GENERATE_MONO:
-                filename_mono = target_dir / f"{base}_{suffix}_mono.png"
+                filename_mono = f"{mono_subdir}/{base}_{suffix}_mono.png"
                 plot_metric(
                     df,
                     x_col,
