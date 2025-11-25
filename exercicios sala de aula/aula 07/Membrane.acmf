@@ -1,0 +1,815 @@
+Version "40.0-0";
+Libraries "Modeler.acml", "SystemLibrary.acml";
+Model Membrane
+
+// Parameters
+L as Length (Description: "Espessura da membrana [m]");
+A as Area (Description: "Area da membrana [m^2]");
+P_ratio as Fraction (Description: "Razao de pressao P Permeado / P de Alimentacao [-]");
+K(ComponentList) as NoType (Description: "Permeabilidade [kmol/(s.m.Pa)]");
+
+// Variaveis
+J(ComponentList) as Flux_Mol (Description: "Fluxo molar atraves da membrana [kmol/(s.m^2)]");
+
+// Conexoes
+Inlet as Input MoleFractionPort;
+Permeate as Output MoleFractionPort;
+Retentate as Output MoleFractionPort;
+
+// Equacoes
+PermeateTemperature: Permeate.T = Inlet.T;
+RetentateTemperature: Retentate.T = Inlet.T;
+PermeatePressure: Permeate.P = P_ratio*Inlet.P;
+RetentatePressure: Retentate.P = Inlet.P;
+MolarFractionSumPermeate: sigma( foreach (comp in ComponentList) Permeate.z(comp) ) = 1;
+MolarFractionSumRetentate: sigma( foreach (comp in ComponentList) Retentate.z(comp) ) = 1;
+
+For comp in ComponentList do
+ComponentMassBalance: Inlet.F*Inlet.z(comp) = Retentate.F*Retentate.z(comp) + Permeate.F*Permeate.z(comp);
+Flux: J(comp) = K(comp)*(Inlet.P-Permeate.P)/L;
+PermeateMolarFlow: Permeate.F*Permeate.z(comp) = J(comp)*A;
+EndFor
+
+//SYSTEM SECTION - WARNING: DO NOT EDIT
+  Current_Icon : "System";
+TYPE Membrane_T0 ROLE "ICON" text
+Name = Membrane
+lines = 35
+
+sub main
+call Path.Begin
+'' <<Path:0
+call Path.Box(-0.5,-0.5,3.5,-1.4,0,25600,1)
+call Path.Line(-0.4,-0.9,3.3,-0.9,0,2)
+'' >>
+call Path.End
+end sub
+
+sub LabPos
+call Label.at(1.5,-0.9)
+end sub
+
+sub ports
+call Port.name("UniversalIN")
+call Port.at(-0.502794,-0.506091)
+call Port.direction(0)
+call Port.name("UniversalOUT")
+call Port.at(3.50104,-0.548836)
+call Port.IOtype(1)
+call Port.direction(0)
+call Port.name("Inlet")
+call Port.at(-0.503226,-0.784751)
+call Port.direction(0)
+call Port.name("Retentate")
+call Port.at(3.50147,-0.763636)
+call Port.IOtype(1)
+call Port.direction(0)
+call Port.name("Permeate")
+call Port.at(1.52375,-1.41114)
+call Port.IOtype(1)
+call Port.direction(270)
+end sub
+
+
+
+endtext
+
+Membrane_T0_I0 as Membrane_T0;
+SystemData : Text
+<FORMLIST DEFAULTFORM="AllVariables">
+</FORMLIST>
+<EXPORTDATA>AS::0::1
+DISPLAY::membrane
+DESCRIPTION::
+COMPILED::1
+CATEGORY::ACM Models
+GUID400::{22B95665-ACD6-419E-B945-90AEF603D100}
+PORT::Retentate::1::Mole Fraction::Retentate::0
+PORT::Permeate::1::Mole Fraction::Permeate::0
+PORT::Inlet::1::Mole Fraction::Inlet::0
+QUERY::AllVariables::1::0::3
+</EXPORTDATA>
+EndText;
+TYPE PreSolve ROLE "SCRIPT" TEXT ' Presolve script for model membrane
+' Created from block B1 at 2:15:22 PM Monday, November 24, 2025
+'
+' Initialize values if:
+'   Aspen Plus EO mode & previously failed to converge,
+'   or Aspen Plus SM mode or HYSYS, and not previously solved,
+'   or running manually in ACM
+
+If (SolutionMode = "Sequential Modular" and SMStatus <> "Converged") _
+    or (SolutionMode = "Equation Oriented" and EOStatus = "Not converged") _
+    or (SolutionMode = "") Then
+
+  Application.Msg "    PreSolve: Performing Initialization "
+  DisableIncrementalUpdate
+
+    If A.spec <> "Fixed" Then A.value = 1.000000e+01
+    If Inlet.F.spec <> "Fixed" Then Inlet.F.value = 1.000000e+02
+    If Inlet.P.spec <> "Fixed" Then Inlet.P.value = 5.000000e+05
+    If Inlet.T.spec <> "Fixed" Then Inlet.T.value = 3.230000e+02
+    If Inlet.z("CARBO-01").spec <> "Fixed" Then Inlet.z("CARBO-01").value = 2.000000e-01
+    If Inlet.z("ETHAN-01").spec <> "Fixed" Then Inlet.z("ETHAN-01").value = 6.000000e-01
+    If Inlet.z("METHA-01").spec <> "Fixed" Then Inlet.z("METHA-01").value = 1.500000e-01
+    If Inlet.z("PROPA-01").spec <> "Fixed" Then Inlet.z("PROPA-01").value = 5.000000e-02
+    If J("CARBO-01").spec <> "Fixed" Then J("CARBO-01").value = 1.533330e+00
+    If J("ETHAN-01").spec <> "Fixed" Then J("ETHAN-01").value = 6.000000e-01
+    If J("METHA-01").spec <> "Fixed" Then J("METHA-01").value = 2.033330e-01
+    If J("PROPA-01").spec <> "Fixed" Then J("PROPA-01").value = 2.733330e-02
+    If K("CARBO-01").spec <> "Fixed" Then K("CARBO-01").value = 4.600000e-08
+    If K("ETHAN-01").spec <> "Fixed" Then K("ETHAN-01").value = 1.800000e-08
+    If K("METHA-01").spec <> "Fixed" Then K("METHA-01").value = 6.100000e-09
+    If K("PROPA-01").spec <> "Fixed" Then K("PROPA-01").value = 8.200000e-10
+    If L.spec <> "Fixed" Then L.value = 3.000000e-03
+    If P_ratio.spec <> "Fixed" Then P_ratio.value = 8.000000e-01
+    If Permeate.F.spec <> "Fixed" Then Permeate.F.value = 2.364000e+01
+    If Permeate.P.spec <> "Fixed" Then Permeate.P.value = 4.000000e+05
+    If Permeate.T.spec <> "Fixed" Then Permeate.T.value = 3.230000e+02
+    If Permeate.z("CARBO-01").spec <> "Fixed" Then Permeate.z("CARBO-01").value = 6.486180e-01
+    If Permeate.z("ETHAN-01").spec <> "Fixed" Then Permeate.z("ETHAN-01").value = 2.538070e-01
+    If Permeate.z("METHA-01").spec <> "Fixed" Then Permeate.z("METHA-01").value = 8.601240e-02
+    If Permeate.z("PROPA-01").spec <> "Fixed" Then Permeate.z("PROPA-01").value = 1.156230e-02
+    If Retentate.F.spec <> "Fixed" Then Retentate.F.value = 7.636000e+01
+    If Retentate.P.spec <> "Fixed" Then Retentate.P.value = 5.000000e+05
+    If Retentate.T.spec <> "Fixed" Then Retentate.T.value = 3.230000e+02
+    If Retentate.z("CARBO-01").spec <> "Fixed" Then Retentate.z("CARBO-01").value = 6.111400e-02
+    If Retentate.z("ETHAN-01").spec <> "Fixed" Then Retentate.z("ETHAN-01").value = 7.071770e-01
+    If Retentate.z("METHA-01").spec <> "Fixed" Then Retentate.z("METHA-01").value = 1.698100e-01
+    If Retentate.z("PROPA-01").spec <> "Fixed" Then Retentate.z("PROPA-01").value = 6.189980e-02
+  EnableIncrementalUpdate
+
+End If
+ENDTEXT
+
+//SYSTEM SECTION END
+End
+SystemData : Text
+globaldatasection
+EndText;
+SystemData : Text
+<FORMLIST DEFAULTFORM="AllGlobals">
+  <FORM NAME="AllGlobals" CLSID="{6BA76840-806B-11D0-BE51-0000C09984EF}">
+    { Version : 1
+SizeX : 4200
+SizeY : 3000
+ShowAllVariables : True
+ShowAllAttributes : False
+ExpandAll : True
+ShowRegistryAttributes : True
+VariablesPaths : [ ]
+AttributesPaths : [ ]
+ColumnWidths : [ ]
+}
+  </FORM>
+</FORMLIST>
+EndText;
+
+FLOWSHEET
+  B1 as membrane;
+  FEED as Connection;
+  RETENTATE as Connection;
+  PERMEATE as Connection;
+  Connect B1.Inlet with FEED;
+  Connect B1.Retentate with RETENTATE;
+  Connect B1.Permeate with PERMEATE;
+
+CONSTRAINTS
+  // Flowsheet variables and equations...
+END
+
+//SYSTEM SECTION - WARNING: DO NOT EDIT
+SystemData : Text
+<FORMLIST DEFAULTFORM="AllVariables">
+  <FORM NAME="AllVariables" MODEL="B1">
+    { Version : 1
+SizeX : 10596
+SizeY : 7500
+ShowAllVariables : True
+ShowAllAttributes : False
+ExpandAll : True
+ShowRegistryAttributes : True
+VariablesPaths : [ ]
+AttributesPaths : [ ]
+ColumnWidths : [ ]
+}
+  </FORM>
+  <FORM NAME="AllVariables" MODEL="FEED">
+    { Version : 1
+SizeX : 5256
+SizeY : 3756
+ShowAllVariables : True
+ShowAllAttributes : False
+ExpandAll : True
+ShowRegistryAttributes : True
+VariablesPaths : [ ]
+AttributesPaths : [ ]
+ColumnWidths : [ ]
+}
+  </FORM>
+  <FORM NAME="AllVariables" MODEL="RETENTATE">
+    { Version : 1
+SizeX : 5256
+SizeY : 3756
+ShowAllVariables : True
+ShowAllAttributes : False
+ExpandAll : True
+ShowRegistryAttributes : True
+VariablesPaths : [ ]
+AttributesPaths : [ ]
+ColumnWidths : [ ]
+}
+  </FORM>
+  <FORM NAME="AllVariables" MODEL="PERMEATE">
+    { Version : 1
+SizeX : 5256
+SizeY : 3756
+ShowAllVariables : True
+ShowAllAttributes : False
+ExpandAll : True
+ShowRegistryAttributes : True
+VariablesPaths : [ ]
+AttributesPaths : [ ]
+ColumnWidths : [ ]
+}
+  </FORM>
+</FORMLIST>
+EndText;
+
+//SYSTEM SECTION END
+  ActiveTasks : [];
+  B1.A.Spec : Fixed;
+  B1.A : 10.;
+  B1.Inlet.F.Spec : Fixed;
+  B1.Inlet.F : 100.;
+  B1.Inlet.P.Spec : Fixed;
+  B1.Inlet.P : 500000.;
+  B1.Inlet.T.Spec : Fixed;
+  B1.Inlet.T : 323.;
+  B1.Inlet.z("CARBO-01").Spec : Fixed;
+  B1.Inlet.z("CARBO-01") : 0.2;
+  B1.Inlet.z("ETHAN-01").Spec : Fixed;
+  B1.Inlet.z("ETHAN-01") : 0.6;
+  B1.Inlet.z("METHA-01").Spec : Fixed;
+  B1.Inlet.z("METHA-01") : 0.15;
+  B1.Inlet.z("PROPA-01").Spec : Fixed;
+  B1.Inlet.z("PROPA-01") : 5.e-002;
+  B1.J("CARBO-01") : 1.533333333333333;
+  B1.J("ETHAN-01") : 0.6;
+  B1.J("METHA-01") : 0.2033333333333334;
+  B1.J("PROPA-01") : 2.733333333333332e-002;
+  B1.K("CARBO-01").Spec : Fixed;
+  B1.K("CARBO-01") : 4.6e-008;
+  B1.K("ETHAN-01").Spec : Fixed;
+  B1.K("ETHAN-01") : 1.8e-008;
+  B1.K("METHA-01").Spec : Fixed;
+  B1.K("METHA-01") : 6.1e-009;
+  B1.K("PROPA-01").Spec : Fixed;
+  B1.K("PROPA-01") : 8.2e-010;
+  B1.L.Spec : Fixed;
+  B1.L : 3.e-003;
+  B1.P_ratio.Spec : Fixed;
+  B1.P_ratio : 0.8;
+  B1.Permeate.F : 23.64;
+  B1.Permeate.P : 400000.;
+  B1.Permeate.T : 323.;
+  B1.Permeate.z("CARBO-01") : 0.6486181613085165;
+  B1.Permeate.z("ETHAN-01") : 0.2538071065989848;
+  B1.Permeate.z("METHA-01") : 8.601240834743373e-002;
+  B1.Permeate.z("PROPA-01") : 1.156232374506485e-002;
+  B1.Retentate.F : 76.36;
+  B1.Retentate.P : 500000.;
+  B1.Retentate.T : 323.;
+  B1.Retentate.z("CARBO-01") : 6.111402130260175e-002;
+  B1.Retentate.z("ETHAN-01") : 0.7071765322158198;
+  B1.Retentate.z("METHA-01") : 0.1698096734765148;
+  B1.Retentate.z("PROPA-01") : 6.189977300506375e-002;
+  Graphics : TEXT CLSID {A0DFFFE6-908E-11CE-A964-0000C08C668E}
+# of PFS Objects = 5
+SIZE -3.12493 7.99178 -4.40292 0.113793
+BLOCK
+ID: B1
+Version: 1
+ICON: "Membrane"
+Flag 0
+Section 
+At 1.181698 -0.026260
+Label At 1.500000 -0.900000
+Scale 1.000000 Modifier 0
+STREAM
+ID: FEED
+Version: 2
+Flag 0
+TYPE 0 TERMINAL 1
+At -3.037400 0.026260
+Label At 1.071759 0.000000
+ROUTE 0 0
+$ $ 0.0 0.0
+ROUTE 1 0
+r r -3.037400 0.026260 0
+x x -1.175000 0.026260 0
+y y -1.175000 -0.811011 0
+x x 0.478472 -0.811011 0
+t l 0.678472 -0.811011 0
+$ C 1.000000 0.0
+$ $ 0.0 0.0
+At 0.000000 0.000000
+Label At 0.000000 0.000000
+ROUTE 0 1
+$ $ 0.0 0.0
+ROUTE 1 1
+$ $ 0.0 0.0
+At 0.000000 0.000000
+Label At 0.000000 0.000000
+ROUTE 0 2
+$ $ 0.0 0.0
+ROUTE 1 2
+$ $ 0.0 0.0
+STREAM
+ID: RETENTATE
+Version: 2
+Flag 0
+TYPE 0 TERMINAL 2
+At 7.904244 -0.148806
+Label At -1.419019 0.000000
+ROUTE 0 0
+r l 7.904244 -0.148806 0
+x y 6.275000 -0.148806 0
+y x 6.275000 -0.789896 0
+x 0 4.883168 -0.789896 0
+t r 4.683168 -0.789896 0
+$ C 1.000000 0.0
+$ $ 0.0 0.0
+ROUTE 1 0
+$ $ 0.0 0.0
+At 0.000000 0.000000
+Label At 0.000000 0.000000
+ROUTE 0 1
+$ $ 0.0 0.0
+ROUTE 1 1
+$ $ 0.0 0.0
+At 0.000000 0.000000
+Label At 0.000000 0.000000
+ROUTE 0 2
+$ $ 0.0 0.0
+ROUTE 1 2
+$ $ 0.0 0.0
+STREAM
+ID: PERMEATE
+Version: 2
+Flag 0
+TYPE 0 TERMINAL 2
+At 5.558355 -4.315384
+Label At -1.426454 0.000000
+ROUTE 0 0
+r l 5.558355 -4.315384 0
+x y 2.705448 -4.315384 0
+y 0 2.705448 -1.637400 0
+t d 2.705448 -1.437400 0
+$ C 1.000000 0.0
+$ $ 0.0 0.0
+ROUTE 1 0
+$ $ 0.0 0.0
+At 0.000000 0.000000
+Label At 0.000000 0.000000
+ROUTE 0 1
+$ $ 0.0 0.0
+ROUTE 1 1
+$ $ 0.0 0.0
+At 0.000000 0.000000
+Label At 0.000000 0.000000
+ROUTE 0 2
+$ $ 0.0 0.0
+ROUTE 1 2
+$ $ 0.0 0.0
+LEGEND
+Version: 2
+Dim: -4.15782 -3.2 -3.10743 -3.40504
+Size: 0.0175066
+Font: 1 0 =Times New Roman
+# of PFS Objects = 0
+VIEWPORT -6.468700 20.754110 3.300000 -5.820954
+LAYOUT
+TableFormat 1
+Pages 1 1 1 1
+PAGESETUP
+PAPERSIZE 
+PAPERSOURCE 
+ORIENTATION -1
+PRINTPAGENO 1 1
+LEFTMARGIN 0.5"
+RIGHTMARGIN 0.5"
+TOPMARGIN 0.5"
+BOTTOMMARGIN 0.5"
+VISIBILITY 0.030000
+PFDFLAG 255 255
+PFDMODE 0
+SCALE 0.017507
+
+ENDTEXT;
+END
+
+Properties
+Package : "PropertiesPlus";
+DefinitionText : TEXT MM "40.0" FLAVOR "NO" VERSION "40.0" DATETIME "Mon Nov 24 13:31:34 2025" 
+MACHINE "WIN-NT/VC" 
+? SETUP MAIN ? \ "RUN-CLASS" RUN-CLASS = PROP \ \ SIMULATE INTERACTIVE = NO 
+MOLEFLOW = MOLEFLOW \ ? SETUP GLOBAL ? \ "IN-UNITS" INSET = SI \ ? SETUP 
+"SIM-OPTIONS" ? ; "SI_MOLE" ; ? SETUP "UNITS-SET" METCBAR ? \ DESCRIPTION 
+DESCRIPTION = "User-defined units set" \ \ MMLOCAL \ \ UNITSET BASESET = MET 
+( 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 5 3 4 3 3 3 3 3 3 3 3 4 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 5 3 3 
+3 3 3 3 5 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 7 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+) \ ? DATABANKS ? \ DATABANKS \ ? COMPONENTS MAIN ? \ COMPONENTS CID = 
+"CARBO-01" ANAME = CO2 OUTNAME = "CARBO-01" DBNAME1 = "CARBON-DIOXIDE" ANAME1
+ = "CO2" /  CID = "METHA-01" ANAME = CH4 OUTNAME = "METHA-01" DBNAME1 = 
+"METHANE" ANAME1 = "CH4" /  CID = "ETHAN-01" ANAME = C2H6 OUTNAME = "ETHAN-01" 
+DBNAME1 = "ETHANE" ANAME1 = "C2H6" /  CID = "PROPA-01" ANAME = C3H8 OUTNAME
+ = "PROPA-01" DBNAME1 = "PROPANE" ANAME1 = "C3H8" \ ? COMPONENTS "ADA/PCS" 
+"LE-PROP-DATA" ? ; "SI_MOLE" ; ? COMPONENTS "COMP-LIST" GLOBAL ? ? COMPONENTS 
+"UNIFAC-GROUP" ? ? "BIO-COMPS" ? ? PROPERTIES MAIN ? \ GPROPERTIES GBASEOPSET
+ = "PENG-ROB" GOPSETNAME = "PENG-ROB" PARCON = -2 \ ? PROPERTIES "OPTION-SETS" 
+"PENG-ROB" ? \ PARAM BASE = "PENG-ROB" \ ? PROPERTIES "NC-PROPS" ? ? 
+PROPERTIES "MOLEC-STRUCT" "CARBO-01" ? ? PROPERTIES "MOLEC-STRUCT" "ETHAN-01" 
+? ? PROPERTIES "MOLEC-STRUCT" "METHA-01" ? ? PROPERTIES "MOLEC-STRUCT" 
+"PROPA-01" ? ? PROPERTIES PARAMETERS SUMMARY ? ? PROPERTIES PARAMETERS BINARY 
+SCALAR "MLQKIJ-1" ? ; "ENG_MOLE" ; \ PROP-LIST PARAMNAME = MLQKIJ SETNO = 1 
+UNITROW = 0 \ ? PROPERTIES PARAMETERS BINARY SCALAR "RKTKIJ-1" ? ; "ENG_MOLE" 
+; \ PROP-LIST PARAMNAME = RKTKIJ SETNO = 1 UNITROW = 0 \ ? PROPERTIES 
+PARAMETERS BINARY "T-DEPENDENT" "ANDKIJ-1" ? ; "ENG_MOLE" ; \ PROP-LIST 
+PARAMNAME = ANDKIJ SETNO = 1 UNITROW = 0 TUNITROW = 22 TUNITLABEL = F NEL = 2 
+\ \ PARAM DEFTUNIT = F \ ? PROPERTIES PARAMETERS BINARY "T-DEPENDENT" 
+"ANDMIJ-1" ? ; "ENG_MOLE" ; \ PROP-LIST PARAMNAME = ANDMIJ SETNO = 1 UNITROW
+ = 0 TUNITROW = 22 TUNITLABEL = F NEL = 2 \ ? PROPERTIES PARAMETERS BINARY 
+"T-DEPENDENT" "MUKIJ-1" ? ; "ENG_MOLE" ; \ PROP-LIST PARAMNAME = MUKIJ SETNO
+ = 1 UNITROW = 0 TUNITROW = 22 TUNITLABEL = F NEL = 6 \ ? PROPERTIES 
+PARAMETERS BINARY "T-DEPENDENT" "MULIJ-1" ? ; "ENG_MOLE" ; \ PROP-LIST 
+PARAMNAME = MULIJ SETNO = 1 UNITROW = 0 TUNITROW = 22 TUNITLABEL = F NEL = 11 
+\ ? PROPERTIES PARAMETERS BINARY "T-DEPENDENT" "PRKBV-1" ? ; "SI_MOLE" ; \ 
+PROP-LIST PARAMNAME = PRKBV SETNO = 1 UNITROW = 0 TUNITROW = 22 TUNITLABEL = 
+C BDBANK = ( "APV140 EOS-LIT" ) NEL = 5 \ \ BPVAL PARAMNAME2 = PRKBV CID1 = 
+"CARBO-01" CID2 = "METHA-01" UNITROW2 = 0 TUNITROW2 = 22 TUNITLABEL2 = C VAL1 
+= "APV140 EOS-LIT" VAL2 = "APV140 EOS-LIT" VAL3 = "APV140 EOS-LIT" VAL4 = 
+"APV140 EOS-LIT" VAL5 = "APV140 EOS-LIT" /  PARAMNAME2 = PRKBV CID1 = 
+"CARBO-01" CID2 = "ETHAN-01" UNITROW2 = 0 TUNITROW2 = 22 TUNITLABEL2 = C VAL1 
+= "APV140 EOS-LIT" VAL2 = "APV140 EOS-LIT" VAL3 = "APV140 EOS-LIT" VAL4 = 
+"APV140 EOS-LIT" VAL5 = "APV140 EOS-LIT" /  PARAMNAME2 = PRKBV CID1 = 
+"CARBO-01" CID2 = "PROPA-01" UNITROW2 = 0 TUNITROW2 = 22 TUNITLABEL2 = C VAL1 
+= "APV140 EOS-LIT" VAL2 = "APV140 EOS-LIT" VAL3 = "APV140 EOS-LIT" VAL4 = 
+"APV140 EOS-LIT" VAL5 = "APV140 EOS-LIT" /  PARAMNAME2 = PRKBV CID1 = 
+"METHA-01" CID2 = "ETHAN-01" UNITROW2 = 0 TUNITROW2 = 22 TUNITLABEL2 = C VAL1 
+= "APV140 EOS-LIT" VAL2 = "APV140 EOS-LIT" VAL3 = "APV140 EOS-LIT" VAL4 = 
+"APV140 EOS-LIT" VAL5 = "APV140 EOS-LIT" /  PARAMNAME2 = PRKBV CID1 = 
+"METHA-01" CID2 = "PROPA-01" UNITROW2 = 0 TUNITROW2 = 22 TUNITLABEL2 = C VAL1 
+= "APV140 EOS-LIT" VAL2 = "APV140 EOS-LIT" VAL3 = "APV140 EOS-LIT" VAL4 = 
+"APV140 EOS-LIT" VAL5 = "APV140 EOS-LIT" /  PARAMNAME2 = PRKBV CID1 = 
+"ETHAN-01" CID2 = "PROPA-01" UNITROW2 = 0 TUNITROW2 = 22 TUNITLABEL2 = C VAL1 
+= "APV140 EOS-LIT" VAL2 = "APV140 EOS-LIT" VAL3 = "APV140 EOS-LIT" VAL4 = 
+"APV140 EOS-LIT" VAL5 = "APV140 EOS-LIT" \ ? PROPERTIES PARAMETERS BINARY 
+"T-DEPENDENT" "PRLIJ-1" ? ; "SI_MOLE" ; \ PROP-LIST PARAMNAME = PRLIJ SETNO
+ = 1 UNITROW = 0 TUNITROW = 22 TUNITLABEL = C NEL = 8 \ ? PROPERTIES 
+"ATTR-COMPS" ? ? POLYMERS ? ? REPORT "STREAM-REPOR" ? \ OPTIONS MOLEFLOW = 
+MOLEFLOW \ 
+
+ GRAPHICS_BACKUP
+PFS V NONE
+$CONFIG
+paramdata APV140 ENRTL-RK
+paramdata APV140 VLE-IG
+paramdata APV140 VLE-RK
+paramdata APV140 VLE-HOC
+paramdata APV140 LLE-LIT
+paramdata APV140 LLE-ASPEN
+paramdata APV140 VLE-LIT
+paramdata APV140 BINARY
+paramdata APV140 HENRY-AP
+paramdata APV140 PITZER
+paramdata APV140 EOS-LIT
+paramdata APV140 SRK-ASPEN
+paramdata APV140 PC-SAFT
+paramdata APV140 POLYPCSF
+paramdata APV140 HYSYS
+paramdata APESV140 AP-EOS
+paramdata NISTV140 NIST-HOC
+paramdata NISTV140 NIST-IG
+paramdata NISTV140 NIST-RK
+paramdata NISTV140 NIST-EOS
+purebank APV140 PURE40
+purebank APV140 AQUEOUS
+purebank APV140 SOLIDS
+purebank APV140 INORGANIC
+purebank APESV140 AP-EOS
+purebank NISTV140 NIST-TRC
+regdbank 0
+ftn_check 1
+autoblockid 1
+autostreamid 1
+showblockid 1
+showstreamid 1
+autoplacement 1
+grid 2
+gridresolution 0.100000
+scale 0
+streamprefix 
+blockprefix B
+labelscale 1.000000
+qwformat %.0f
+wformat %.0f
+tempformat %.0f
+presformat %.0f
+flowformat %.0f
+strmqwformat %.0f
+strmwformat %.0f
+vflowformat %.0f
+mflowformat %.0f
+vfracformat %.0f
+pseudobatch 0
+partial 1
+animation 1
+runanyway 0
+globalqw 0
+globalw 0
+globaltemp 0
+globalpres 0
+globalflow 0
+globalstrmqw 0
+globalstrmw 0
+globalvflow 0
+globalmflow 0
+globalvfrac 0
+browserheight 6375
+browserwidth 9000
+browsertreewidth 2370
+polyplusenabled 1
+dynaplusenabled 1
+bfracenabled 1
+rtfenabled 1
+rspenabled 0
+pinchenabled 0
+linklimit 5000
+material_color 0
+material_style 0
+material_width 1
+heat_color 0
+heat_style 2
+heat_width 1
+heat_termid Q
+work_color 0
+work_style 1
+work_width 1
+work_termid W
+connections_color 9
+connections_style 3
+connections_width 1
+measurements_color 4
+measurements_style 3
+measurements_width 1
+power_color 10
+power_style 5
+power_width 1
+power_termid I
+displayeoconn 0
+displayeomeas 1
+displayeomeastype 2
+showeoviews 0
+eoautosave 1
+allow_system_userprops 0
+copy_estimation 1
+copy_retrieved 1
+purge_incomp_params 0
+set_default_biparams 0
+set_default_dataset1 0
+set_default_dataset0 1
+roottype 1
+exchangerfile 1
+streamformat 1
+runsettingfile 1
+usermodelfile 1
+fortranfile 0
+timeout 1000
+#
+$_APWNSHELL_SETTINGS
+<FileRootSettings><CaseFileSettings>&lt;CaseFileSettings xmlns="clr-namespace:AspenTech.AspenPlus.Infrastructure;assembly=AspenTech.AspenPlus.Infrastructure" /&gt;</CaseFileSettings><CommonShellSettings>&lt;CommonShellSettings xmlns="http://schemas.aspentech.com/xaml/presentation/visualisation/commonshell" xmlns:atapmaa="clr-namespace:AspenTech.AspenPlus.Modules.ApwnApplication;assembly=ApwnShell" xmlns:atapie="clr-namespace:AspenTech.AspenPlus.Infrastructure.Events;assembly=AspenTech.AspenPlus.Infrastructure" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:apmab="clr-namespace:AspenPlus.Modules.ApwnBrowser;assembly=ApwnShell" xmlns:cxv="http://schemas.aspentech.com/xaml/presentation/cxsviewmodel"&gt;&lt;CommonShellSettings.CurrentWorkspace&gt;&lt;ShellWorkspace Layout="&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;&amp;#xD;&amp;#xA;&amp;lt;xamDockManager version=&amp;quot;21.1.20211.27&amp;quot;&amp;gt;&amp;#xD;&amp;#xA;  &amp;lt;contentPanes&amp;gt;&amp;#xD;&amp;#xA;    &amp;lt;contentPane name=&amp;quot;_AnonymousScreen1&amp;quot; location=&amp;quot;Document&amp;quot; lastActivatedTime=&amp;quot;2025-11-24T16:25:03.7929421Z&amp;quot; /&amp;gt;&amp;#xD;&amp;#xA;  &amp;lt;/contentPanes&amp;gt;&amp;#xD;&amp;#xA;  &amp;lt;documents splitterOrientation=&amp;quot;Vertical&amp;quot;&amp;gt;&amp;#xD;&amp;#xA;    &amp;lt;splitPane splitterOrientation=&amp;quot;Vertical&amp;quot;&amp;gt;&amp;#xD;&amp;#xA;      &amp;lt;tabGroup selectedIndex=&amp;quot;0&amp;quot;&amp;gt;&amp;#xD;&amp;#xA;        &amp;lt;contentPane name=&amp;quot;_AnonymousScreen1&amp;quot; /&amp;gt;&amp;#xD;&amp;#xA;      &amp;lt;/tabGroup&amp;gt;&amp;#xD;&amp;#xA;    &amp;lt;/splitPane&amp;gt;&amp;#xD;&amp;#xA;  &amp;lt;/documents&amp;gt;&amp;#xD;&amp;#xA;&amp;lt;/xamDockManager&amp;gt;" NavigationGroupToSelect="Properties" IsNavigationPaneMinimized="False" IsRibbonMinimized="False"&gt;&lt;ShellWorkspace.Screens&gt;&lt;WorkspaceScreenData PaneName="_AnonymousScreen1" ScreenFactoryKey="ApwnFormContentFactory"&gt;&lt;WorkspaceScreenData.ScreenSubject&gt;&lt;atapmaa:ApwnFormScreenSubject Key="Results Summary.Run Status" NavigationGroupKey="Properties"&gt;&lt;atapmaa:ApwnFormScreenSubject.ShowFormArgs&gt;&lt;atapie:ShowFormEventArgs FormProgId="MMRun_Stat.MMRun_Status" FormKey="Results Summary.Run Status" Header="Results - Run Status" ResultsOnly="True" PathKey="Top.appModelV8.Results Summary"&gt;&lt;atapie:ShowFormEventArgs.Parameters&gt;&lt;s:String assembly:Key="extra_message_path"&gt;Run-Status&lt;/s:String&gt;&lt;s:String assembly:Key="id"&gt;Results Summary&lt;/s:String&gt;&lt;s:String assembly:Key="main"&gt;Top.appModelV8.Results Summary&lt;/s:String&gt;&lt;/atapie:ShowFormEventArgs.Parameters&gt;&lt;/atapie:ShowFormEventArgs&gt;&lt;/atapmaa:ApwnFormScreenSubject.ShowFormArgs&gt;&lt;atapmaa:ApwnFormScreenSubject.PlotwizardRule&gt;&lt;apmab:ApwnPlotwizardRule ContextPath="Top.appModelV8.Results Summary" /&gt;&lt;/atapmaa:ApwnFormScreenSubject.PlotwizardRule&gt;&lt;/atapmaa:ApwnFormScreenSubject&gt;&lt;/WorkspaceScreenData.ScreenSubject&gt;&lt;WorkspaceScreenData.ScreenState&gt;&lt;atapmaa:ApwnFormScreenState&gt;&lt;atapmaa:ApwnFormScreenState.Parameters&gt;&lt;cxv:CxvParameter Name="extra_message_path" Value="Run-Status" /&gt;&lt;cxv:CxvParameter Name="main" Value="Top.appModelV8.Results Summary" /&gt;&lt;cxv:CxvParameter Name="id" Value="Results Summary" /&gt;&lt;cxv:CxvParameter Name="extraComments_path" Value="Comments" /&gt;&lt;cxv:CxvParameter Name="extraDescription_path" Value="Input.DESCRIPTION" /&gt;&lt;cxv:CxvParameter Name="extraUnits_path" Value="Input.Unit Set" /&gt;&lt;cxv:CxvParameter Name="ParamVersionLabel" Value="Aspen Properties Version" /&gt;&lt;cxv:CxvParameter Name="selected_tab" Value="tab0" /&gt;&lt;/atapmaa:ApwnFormScreenState.Parameters&gt;&lt;/atapmaa:ApwnFormScreenState&gt;&lt;/WorkspaceScreenData.ScreenState&gt;&lt;/WorkspaceScreenData&gt;&lt;/ShellWorkspace.Screens&gt;&lt;/ShellWorkspace&gt;&lt;/CommonShellSettings.CurrentWorkspace&gt;&lt;CommonShellSettings.SavedWorkspaces&gt;&lt;ShellWorkspaceFolder /&gt;&lt;/CommonShellSettings.SavedWorkspaces&gt;&lt;/CommonShellSettings&gt;</CommonShellSettings></FileRootSettings>
+$_END_APWNSHELL_SETTINGS
+#
+
+$_SUMMARY_FILE
+ MMSUMMARY40.0                                                                  
+ IDSET RUNID (PROPERTIES) (114 *5)                                              
+ IDSET IT (PROPERTIES) (117 *6 119 *6 115 *1)                                   
+ LSET RUNID (%RUNID)                                                            
+ LSET IT (%IT)                                                                  
+ IDSET VERS (PROPERTIES) (345 *6 346 *6 347 *6 348 *6 355 *6)                   
+ LSET VERS (%VERS)                                                              
+ DSET RUN-STATUS VERS @VERS ( "40.0" "WIN-X64" "" "davib" "DAVEB-PC" )          
+ IDSET STRNAM (PROPERTIES) (1233 *6)                                            
+ LSET STRNAM (%STRNAM)                                                          
+ IDSET ID_STRPR (PROPERTIES) ( 454 *2 <119> 1236 *2 <125> 1237 *2 <29> 1238 *2  
+ <55> 1239 *2 <55> 1083 *6 1084 *6 )                                            
+ LSET L_STRPR (%ID_STRPR)                                                       
+ IDSET ID_GUID (PROPERTIES) ( 1270 *6 )                                         
+ LSET L_GUID (%ID_GUID)                                                         
+ IDSET STATUS (PROPERTIES) (125 *1 126 *1 127 *1 128 *1 129 *1 130 *1)          
+ LSET STATUS (%STATUS)                                                          
+ DSET RUN-STATUS STATUS @STATUS ( 8 * * * * * )                                 
+ DSET RUN-STATUS COMPSTAT @L_1 (0)                                              
+ DSET RUN-STATUS RUNID @RUNID ("_3132sfz")                                      
+ DSET RUN-STATUS IT @IT ( "NOVEMBER 24, 2025   1:31:33 P.M." "_3132sfz.inm" 2)  
+
+ENDTEXT;
+TimeStamp : "31219039 -865081660";
+
+Default as ComponentList; 
+Within Default
+  Components :["CARBO-01","ETHAN-01","METHA-01","PROPA-01"];
+EndWithin
+End
+
+Options
+  AbsoluteSingularityTol: 1.e-004;
+  AbsPerturb: 1.e-005;
+  AbsTearTol: 1.e-005;
+  AbsTol: 1.e-005;
+  AssignmentWarningsEnabled: True;
+  ChangeTol: 1.e-005;
+  CheckProcDerivs: "Off";
+  Compression: True;
+  CurrentUOMSet: "Metric";
+  Decomposer.ProgID: "AspenTech.Decomposer";
+  Decomposition.MultipleGroup: True;
+  DerivAbsTol: 1.e-003;
+  DerivRelTol: 0.1;
+  EqnTol: 1.e-005;
+  EquationSensCheck: False;
+  EquationSensTol: 10000000000.;
+  EstimationPrintLevel: "Medium";
+  EstimationReturntoBestPoint: False;
+  EstimationSolver: 2;
+  Estimator: 1;
+  ExplicitEventTolerance: 1.e-005;
+  Feasopt.MaxAbsStep: 10.;
+  Feasopt.MaxEval: 100;
+  Feasopt.MaxRelStep: 10.;
+  Feasopt.OptTol: 1.e-004;
+  Homotopy.InitialStep: 0.1;
+  Homotopy.MaximumStep: 1.;
+  Homotopy.MinimumStep: 1.e-002;
+  Homotopy.StepDecrement: 0.5;
+  Homotopy.StepIncrement: 10;
+  Integration.AbsErrorTol: 1.e-005;
+  Integration.AbsTearTol: 1.e-005;
+  Integration.DiscontinuityEventTol: 1.e-005;
+  Integration.EnforceMinStep: False;
+  Integration.IncSensErrors: False;
+  Integration.InitStepSize: 5.e-003;
+  Integration.ItplToComTime: True;
+  Integration.LocateIEvents: False;
+  Integration.MaxOrder: 5;
+  Integration.MaxStepSize: 1.;
+  Integration.MinStepSize: 1.e-003;
+  Integration.ProgID: "AspenTech.UnifiedIntegrator";
+  Integration.RcvTornVars: False;
+  Integration.ReInitAfterEE: False;
+  Integration.ReInitAfterIE: False;
+  Integration.RelErrorTol: 1.e-005;
+  Integration.RelTearTol: 1.e-005;
+  Integration.RewindToLastConvStep: False;
+  Integration.ShowHIErrors: 0;
+  Integration.ShowHTIErrors: 0;
+  Integration.StepRedFact: 0.5;
+  Integration.StepSize: 1.e-002;
+  Integration.StepSizeType: "Variable";
+  Integration.TestSAndAVars: False;
+  Integration.UsePrevAfterEE: False;
+  Integrator: "ImplicitEuler";
+  KeepCompiledEvaluationFiles: False;
+  LinearSolver: "MA48";
+  ListEquivalenceVariables: True;
+  LogLikelihood.MaxIter: 100;
+  LogLikelihood.SolTol: 1.e-004;
+  MA48.DropTol: 0.;
+  MA48.EnableRefineIter: True;
+  MA48.MaxRefineIter: 10;
+  MA48.PivotSearch: 3;
+  MA48.PivotTol: 1.e-050;
+  MA48.Repivot: 0;
+  MA48.UseTranspose: 0;
+  MaxTearIter: 100;
+  Nl2sol.AbsFuncTol: 9.999999999999999e-021;
+  Nl2sol.FalseConvTol: 0.;
+  Nl2sol.MaxIter: 50;
+  Nl2sol.RelFuncTol: 1.e-004;
+  Nl2sol.SolTol: 1.e-004;
+  NLASolver: "Standard";
+  Nonlinear.AbsPert: 1.e-005;
+  Nonlinear.BestOnFail: True;
+  Nonlinear.BoundClip: 1.e-006;
+  Nonlinear.BoundFrac: 1.;
+  Nonlinear.ConvCrit: "Residual";
+  Nonlinear.CreepIter: 0;
+  Nonlinear.CreepSize: 0.1;
+  Nonlinear.Dogleg: False;
+  Nonlinear.HiResidual: 0;
+  Nonlinear.HiVarSteps: 0;
+  Nonlinear.MathsPrint: 0;
+  Nonlinear.MaxDivSteps: 10;
+  Nonlinear.MaxFastNewtonSteps: 5;
+  Nonlinear.MaxIter: 100;
+  Nonlinear.MaxStepRed: 10;
+  Nonlinear.MaxVarStep: 50.;
+  Nonlinear.Method: "Mixed Newton";
+  Nonlinear.RangeFrac: 0.;
+  Nonlinear.SingPert: 1.e-002;
+  OptimizationObjFun: "Minimize";
+  OptimizationPrintLevel: "Medium";
+  Optimizer: 1;
+  PrintLevel: 2;
+  PropInfo: -1;
+  RelativeSingularityCheck: True;
+  RelativeSingularityTol: 1.e-002;
+  RelPerturb: 1.e-005;
+  RelTearTol: 1.e-005;
+  RelTol: 1.e-005;
+  RunMode: "SteadyState";
+  SaveFreeVariableValues: True;
+  Scaling: False;
+  SensErrorCheck: True;
+  SnapshotSettings.EnableDynInitialization: True;
+  SnapshotSettings.EnableFileSaved: False;
+  SnapshotSettings.EnableInitialization: True;
+  SnapshotSettings.EnableInitialSpec: True;
+  SnapshotSettings.EnableMaximum: True;
+  SnapshotSettings.EnableonReinitialization: False;
+  SnapshotSettings.EnableProblemEdit: True;
+  SnapshotSettings.EnableRegularSnapshot: False;
+  SnapshotSettings.EnableSteadyState: True;
+  SnapshotSettings.Interval: 2.;
+  SnapshotSettings.Maximum: 10;
+  SnapshotSettings.SaveConvergedOnly: True;
+  SnapshotSettings.TakeAutoSnapshots: True;
+  SyncSteps: "Full";
+  Tearing: "update";
+  TearUpdate: "Direct";
+  TimeSettings.CommunicationInterval: 1.e-002;
+  TimeSettings.CommunicationUnits: "Hours";
+  TimeSettings.DisplayUpdateInterval: 2000;
+  TimeSettings.EnablePauseAt: False;
+  TimeSettings.EnableStepFor: False;
+  TimeSettings.PauseAt: 0.;
+  TimeSettings.RealTimeSyncFactor: 0.;
+  TimeSettings.RecordHistory: False;
+  TimeSettings.StepFor: 0;
+  TimeSettings.TimeDisplayUnits: "Hours";
+  UseCompiledEvaluation: False;
+  UseSavedSnapshotOnLoad: False;
+  WatchGroup: 0;
+  WatchSubGroup: 0;
+  Wegstein.MaxAcceleration: 0.;
+  Wegstein.MinAcceleration: -5.;
+  OpenLASolver: "";
+  OpenNLASolver: "";
+  OpenOPTSolver: "";
+  OpenESTSolver: "";
+End
+Optimization
+  IsDynamic : FALSE;
+  ElementSizeBoundsAutomatic : TRUE;
+  EndTime : 1.000000000000000;
+  Control.FinalTime_Initial : 1.000000000000000;
+  Control.FinalTime_Upper : 2.000000000000000;
+  Control.FinalTime_Lower : 0.5000000000000000;
+  Control.FinalTime_IsFixed : TRUE;
+  Control.FinalTime_IsObjective : FALSE;
+  Control.Elements : 5;
+  Control.FixedInterval : TRUE;
+  Control.MovingElementsVarying : FALSE;
+  Control.PiecewiseLinear : FALSE;
+  Control(0) : 0.2000000000000000, 0.05000000000000000, 0.4000000000000000 ;
+  Control(1) : 0.2000000000000000, 0.05000000000000000, 0.4000000000000000 ;
+  Control(2) : 0.2000000000000000, 0.05000000000000000, 0.4000000000000000 ;
+  Control(3) : 0.2000000000000000, 0.05000000000000000, 0.4000000000000000 ;
+  Control(4) : 0.2000000000000000, 0.05000000000000000, 0.4000000000000000 ;
+End
+Estimation
+  CalcHeteroParams : TRUE;
+  ExperimentTimeUnit: "";
+End
+Homotopy
+ Enabled: FALSE;
+End
+SimulationAccessExtension
+  ENABLED: false;
+End
+OnLineLinks
+  Protocol: "OPC", 1;
+  //Server: "";
+  IO: Synchronous, Cached;
+  Bounds: Clip;
+  Quality: UseLast;
+  Update: 1000;
+  PrintLevel: 2;
+  Enabled: OFF;
+  Input Events : Before SS Run, After DYN Step, After INI Step, Before INI Run;
+  Output Events: After SS Run, After DYN Step, After INI Step, After INI Run;
+End

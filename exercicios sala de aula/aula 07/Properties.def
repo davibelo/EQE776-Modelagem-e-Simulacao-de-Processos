@@ -1,0 +1,10 @@
+INPUT: Properties.inm
+MODNAME: apmain
+RUNID: Properties
+NEW_RUNID: Properties
+OLD_RUNID: Properties
+PDF: Properties.aprpdf
+USERNAME: davib
+XMOD: C:\Program Files\AspenTech\Aspen Properties V14.0\Engine\xeq\APropMain
+SPONLY:
+DBCONN: _1903cbc.ads
