@@ -451,3 +451,11 @@ A análise de sensibilidade realizada fornece subsídios valiosos para a compree
 \end{itemize}
 
 Esses resultados estabelecem a base para o desenvolvimento de estratégias de controle preditivo não linear (NMPC) utilizando redes neurais, conforme objetivos futuros do projeto. Os modelos dinâmicos desenvolvidos em Aspen Plus Dynamics V14 permitirão gerar datasets para treinamento de redes neurais que capturem a dinâmica não linear do sistema, viabilizando controle avançado em tempo real considerando múltiplas variáveis manipuladas (carga térmica do refervedor, temperatura de alimentação) e múltiplos objetivos (maximização de recuperação de H\textsubscript{2}S, minimização de perda de NH\textsubscript{3}, minimização de consumo energético).
+
+
+
+Conclusao
+
+
+
+Os resultados obtidos evidenciam também uma implicação importante para futuras estratégias de controle da torre esgotadora. A análise das curvas revela a existência de dois regimes operacionais distintos, caracterizados por variações significativas no ganho estático entre a carga térmica do refervedor e a temperatura de topo. Essa mudança estrutural implica que a dinâmica da coluna não permanece aproximadamente linear em toda a faixa de operação. Como consequência, uma estratégia de controle PID implementada de forma direta e sintonizada apenas para o regime de alta sensibilidade (associado ao aumento rápido da recuperação de H\textsubscript{2}S) pode apresentar desempenho degradado ou mesmo tornar-se instável quando a operação se desloca para a região de baixa sensibilidade, observada após a recuperação completa de H\textsubscript{2}S. Esse comportamento reforça a necessidade de abordagens de controle mais robustas ou adaptativas em aplicações industriais que envolvem variações significativas nas condições de contaminação ou na carga térmica aplicada.
