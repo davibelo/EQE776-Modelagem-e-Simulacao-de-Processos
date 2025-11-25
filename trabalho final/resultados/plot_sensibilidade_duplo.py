@@ -1,5 +1,6 @@
 from pathlib import Path
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MultipleLocator
 import pandas as pd
 import re
 import unicodedata
@@ -46,13 +47,21 @@ def plot_metric(df, x_col, column_template, y_label, title, filename, mono=False
     ax.set_xlabel(x_col)
     ax.set_ylabel(y_label)
     ax.set_title(title)
-    ax.grid(True, linestyle="--", alpha=0.4)
+    ax.grid(True, linestyle="--", alpha=0.4, which='both')
     ax.legend()
 
-    x_min, x_max = x.min(), x.max()
-    x_ticks = np.arange(np.floor(x_min * 10) / 10, np.ceil(x_max * 10) / 10 + 0.1, 0.1)
-    ax.set_xticks(x_ticks)
-    ax.tick_params(axis='x', rotation=45)
+    ax.xaxis.set_major_locator(MultipleLocator(0.5))
+    ax.xaxis.set_minor_locator(MultipleLocator(0.1))
+
+    if "%" in y_label:
+        ax.yaxis.set_major_locator(MultipleLocator(10))
+        ax.yaxis.set_minor_locator(MultipleLocator(2))
+    elif "fundo" in y_label.lower():
+        ax.yaxis.set_major_locator(MultipleLocator(20))
+        ax.yaxis.set_minor_locator(MultipleLocator(5))
+    elif "topo" in y_label.lower():
+        ax.yaxis.set_major_locator(MultipleLocator(1))
+        ax.yaxis.set_minor_locator(MultipleLocator(0.5))
 
     fig.tight_layout()
     filepath = Path(filename)
@@ -105,14 +114,17 @@ def plot_dual_metric(df, x_col, h2s_template, nh3_template, title, filename, mon
     ax1.set_ylabel("Recuperação de H2S [%]", color="tab:blue")
     ax2.set_ylabel("Perda de NH3 [%]", color="tab:red")
     ax1.set_title(title)
-    ax1.grid(True, linestyle="--", alpha=0.4)
+    ax1.grid(True, linestyle="--", alpha=0.4, which='both')
     ax1.tick_params(axis='y', labelcolor="tab:blue")
     ax2.tick_params(axis='y', labelcolor="tab:red")
 
-    x_min, x_max = x.min(), x.max()
-    x_ticks = np.arange(np.floor(x_min * 10) / 10, np.ceil(x_max * 10) / 10 + 0.1, 0.1)
-    ax1.set_xticks(x_ticks)
-    ax1.tick_params(axis='x', rotation=45)
+    ax1.xaxis.set_major_locator(MultipleLocator(0.5))
+    ax1.xaxis.set_minor_locator(MultipleLocator(0.1))
+
+    ax1.yaxis.set_major_locator(MultipleLocator(10))
+    ax1.yaxis.set_minor_locator(MultipleLocator(2))
+    ax2.yaxis.set_major_locator(MultipleLocator(10))
+    ax2.yaxis.set_minor_locator(MultipleLocator(2))
 
     lines1, labels1 = ax1.get_legend_handles_labels()
     lines2, labels2 = ax2.get_legend_handles_labels()
@@ -169,14 +181,17 @@ def plot_dual_metric(df, x_col, h2s_template, nh3_template, title, filename, mon
     ax1.set_ylabel("Recuperação de H2S [%]", color="tab:blue")
     ax2.set_ylabel("Perda de NH3 [%]", color="tab:red")
     ax1.set_title(title)
-    ax1.grid(True, linestyle="--", alpha=0.4)
+    ax1.grid(True, linestyle="--", alpha=0.4, which='both')
     ax1.tick_params(axis='y', labelcolor="tab:blue")
     ax2.tick_params(axis='y', labelcolor="tab:red")
 
-    x_min, x_max = x.min(), x.max()
-    x_ticks = np.arange(np.floor(x_min * 10) / 10, np.ceil(x_max * 10) / 10 + 0.1, 0.1)
-    ax1.set_xticks(x_ticks)
-    ax1.tick_params(axis='x', rotation=45)
+    ax1.xaxis.set_major_locator(MultipleLocator(0.5))
+    ax1.xaxis.set_minor_locator(MultipleLocator(0.1))
+
+    ax1.yaxis.set_major_locator(MultipleLocator(10))
+    ax1.yaxis.set_minor_locator(MultipleLocator(2))
+    ax2.yaxis.set_major_locator(MultipleLocator(10))
+    ax2.yaxis.set_minor_locator(MultipleLocator(2))
 
     lines1, labels1 = ax1.get_legend_handles_labels()
     lines2, labels2 = ax2.get_legend_handles_labels()
