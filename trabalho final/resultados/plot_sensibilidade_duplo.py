@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import re
 import unicodedata
+import numpy as np
+
 
 DATA_PATH = Path(__file__).resolve().parent / "AnaliseSensibilidade.xlsx"
 SHEET_NAME = "Dados"
@@ -46,6 +48,140 @@ def plot_metric(df, x_col, column_template, y_label, title, filename, mono=False
     ax.set_title(title)
     ax.grid(True, linestyle="--", alpha=0.4)
     ax.legend()
+
+    x_min, x_max = x.min(), x.max()
+    x_ticks = np.arange(np.floor(x_min * 10) / 10, np.ceil(x_max * 10) / 10 + 0.1, 0.1)
+    ax.set_xticks(x_ticks)
+    ax.tick_params(axis='x', rotation=45)
+
+    fig.tight_layout()
+    filepath = Path(filename)
+    if not filepath.is_absolute():
+        filepath = OUTPUT_DIR / filepath
+    filepath.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(filepath, dpi=300)
+    plt.close(fig)
+
+
+def plot_dual_metric(df, x_col, h2s_template, nh3_template, title, filename, mono=False, cases=None):
+    fig, ax1 = plt.subplots(figsize=(10, 6))
+    x = df[x_col]
+    cases = list(cases) if cases is not None else list(range(1, 9))
+
+    ax2 = ax1.twinx()
+
+    for idx, case_idx in enumerate(cases):
+        h2s_col = h2s_template.format(case_idx)
+        nh3_col = nh3_template.format(case_idx)
+
+        if mono:
+            marker = MARKERS[idx % len(MARKERS)]
+            ax1.plot(
+                x,
+                df[h2s_col],
+                color="black",
+                linewidth=1,
+                marker=marker,
+                markersize=3,
+                linestyle="-",
+                label=f"H2S Caso {case_idx}",
+            )
+            ax2.plot(
+                x,
+                df[nh3_col],
+                color="gray",
+                linewidth=1,
+                marker=marker,
+                markersize=3,
+                linestyle="--",
+                label=f"NH3 Caso {case_idx}",
+            )
+        else:
+            color = COLOR_CYCLE[idx % len(COLOR_CYCLE)]
+            ax1.plot(x, df[h2s_col], linewidth=1.5, color=color, linestyle="-", label=f"H2S Caso {case_idx}")
+            ax2.plot(x, df[nh3_col], linewidth=1.5, color=color, linestyle="--", label=f"NH3 Caso {case_idx}")
+
+    ax1.set_xlabel(x_col)
+    ax1.set_ylabel("Recuperação de H2S [%]", color="tab:blue")
+    ax2.set_ylabel("Perda de NH3 [%]", color="tab:red")
+    ax1.set_title(title)
+    ax1.grid(True, linestyle="--", alpha=0.4)
+    ax1.tick_params(axis='y', labelcolor="tab:blue")
+    ax2.tick_params(axis='y', labelcolor="tab:red")
+
+    x_min, x_max = x.min(), x.max()
+    x_ticks = np.arange(np.floor(x_min * 10) / 10, np.ceil(x_max * 10) / 10 + 0.1, 0.1)
+    ax1.set_xticks(x_ticks)
+    ax1.tick_params(axis='x', rotation=45)
+
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+
+    fig.tight_layout()
+    filepath = Path(filename)
+    if not filepath.is_absolute():
+        filepath = OUTPUT_DIR / filepath
+    filepath.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(filepath, dpi=300)
+    plt.close(fig)
+
+
+def plot_dual_metric(df, x_col, h2s_template, nh3_template, title, filename, mono=False, cases=None):
+    fig, ax1 = plt.subplots(figsize=(10, 6))
+    x = df[x_col]
+    cases = list(cases) if cases is not None else list(range(1, 9))
+
+    ax2 = ax1.twinx()
+
+    for idx, case_idx in enumerate(cases):
+        h2s_col = h2s_template.format(case_idx)
+        nh3_col = nh3_template.format(case_idx)
+
+        if mono:
+            marker = MARKERS[idx % len(MARKERS)]
+            ax1.plot(
+                x,
+                df[h2s_col],
+                color="black",
+                linewidth=1,
+                marker=marker,
+                markersize=3,
+                linestyle="-",
+                label=f"H2S Caso {case_idx}",
+            )
+            ax2.plot(
+                x,
+                df[nh3_col],
+                color="gray",
+                linewidth=1,
+                marker=marker,
+                markersize=3,
+                linestyle="--",
+                label=f"NH3 Caso {case_idx}",
+            )
+        else:
+            color = COLOR_CYCLE[idx % len(COLOR_CYCLE)]
+            ax1.plot(x, df[h2s_col], linewidth=1.5, color=color, linestyle="-", label=f"H2S Caso {case_idx}")
+            ax2.plot(x, df[nh3_col], linewidth=1.5, color=color, linestyle="--", label=f"NH3 Caso {case_idx}")
+
+    ax1.set_xlabel(x_col)
+    ax1.set_ylabel("Recuperação de H2S [%]", color="tab:blue")
+    ax2.set_ylabel("Perda de NH3 [%]", color="tab:red")
+    ax1.set_title(title)
+    ax1.grid(True, linestyle="--", alpha=0.4)
+    ax1.tick_params(axis='y', labelcolor="tab:blue")
+    ax2.tick_params(axis='y', labelcolor="tab:red")
+
+    x_min, x_max = x.min(), x.max()
+    x_ticks = np.arange(np.floor(x_min * 10) / 10, np.ceil(x_max * 10) / 10 + 0.1, 0.1)
+    ax1.set_xticks(x_ticks)
+    ax1.tick_params(axis='x', rotation=45)
+
+    lines1, labels1 = ax1.get_legend_handles_labels()
+    lines2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(lines1 + lines2, labels1 + labels2, loc="best")
+
     fig.tight_layout()
     filepath = Path(filename)
     if not filepath.is_absolute():
@@ -147,6 +283,65 @@ def main():
                     mono=True,
                     cases=group["cases"],
                 )
+
+    h2s_template = "Recuperação H2S [%] - Caso {}"
+    nh3_template = "Perda NH3 [%] - Caso {}"
+
+    if GENERATE_COLOR:
+        plot_dual_metric(
+            df,
+            x_col,
+            h2s_template,
+            nh3_template,
+            "Carga térmica refervedor x Recuperação H2S e Perda NH3",
+            "color/q_ref_vs_h2s_nh3_dual.png",
+            mono=False,
+        )
+    if GENERATE_MONO:
+        plot_dual_metric(
+            df,
+            x_col,
+            h2s_template,
+            nh3_template,
+            "Carga térmica refervedor x Recuperação H2S e Perda NH3",
+            "mono/q_ref_vs_h2s_nh3_dual_mono.png",
+            mono=True,
+        )
+
+    for group in case_groups:
+        suffix = slugify(group["label"])
+        title = f"Carga térmica refervedor x Recuperação H2S e Perda NH3 - {group['label']}"
+        if CREATE_SUBFOLDERS:
+            color_subdir = f"color/{suffix}"
+            mono_subdir = f"mono/{suffix}"
+        else:
+            color_subdir = "color"
+            mono_subdir = "mono"
+
+        if GENERATE_COLOR:
+            filename_color = f"{color_subdir}/q_ref_vs_h2s_nh3_dual_{suffix}.png"
+            plot_dual_metric(
+                df,
+                x_col,
+                h2s_template,
+                nh3_template,
+                title,
+                filename_color,
+                mono=False,
+                cases=group["cases"],
+            )
+        if GENERATE_MONO:
+            filename_mono = f"{mono_subdir}/q_ref_vs_h2s_nh3_dual_{suffix}_mono.png"
+            plot_dual_metric(
+                df,
+                x_col,
+                h2s_template,
+                nh3_template,
+                title,
+                filename_mono,
+                mono=True,
+                cases=group["cases"],
+            )
 
 
 if __name__ == "__main__":
