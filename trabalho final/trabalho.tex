@@ -301,7 +301,7 @@ Para analisar a influência da carga térmica aplicada à coluna, considerando d
 
 As métricas utilizadas nas análises que virão a seguir foram definidas da seguinte forma: a recuperação de H\textsubscript{2}S corresponde à razão entre a quantidade de H\textsubscript{2}S direcionada ao gás ácido e o total presente na alimentação; já a perda de NH\textsubscript{3} corresponde à razão entre a quantidade de NH\textsubscript{3} arrastada para o gás ácido e o total introduzido na alimentação.
 
-\subsection{Resultados}
+\section{Resultados e Discussão}\label{sec:resultados}
 
 A Figura~\ref{fig:q_ref_vs_h2s_nh3_dual_influencia_contaminantes} e \ref{fig:q_ref_vs_t_topo_influencia_contaminantes} apresentam o comportamento geral da torre esgotadora de H\textsubscript{2}S em função da carga térmica do refervedor. Observa-se claramente a existência de um \textit{trade-off} operacional fundamental: o aumento da carga térmica promove maior vaporização de H\textsubscript{2}S (aumentando a recuperação), porém simultaneamente eleva a temperatura na torre, favorecendo também a vaporização de NH\textsubscript{3}.
 
@@ -327,8 +327,14 @@ Adicionalmente, a Figura~\ref{fig:q_ref_vs_t_topo_influencia_contaminantes} evid
 
 A combinação das Figuras~\ref{fig:q_ref_vs_h2s_nh3_dual_influencia_contaminantes} e \ref{fig:q_ref_vs_t_topo_influencia_contaminantes} revela, portanto, que a operação da torre apresenta dois regimes bem definidos: (i) um regime inicial de alta sensibilidade térmica, associado ao aumento rápido da recuperação de H\textsubscript{2}S, e (ii) um regime subsequente de baixa sensibilidade, que se estabelece após a recuperação atingir valores próximos ao máximo, quando a temperatura de topo se torna menos responsiva a incrementos de carga térmica.
 
+A Figura~\ref{fig:q_ref_vs_t_fundo_influencia_contaminantes} apresenta a variação da temperatura de fundo da torre esgotadora em função da carga térmica do refervedor para os casos de 1 a 4. Observa-se que, na região de operação considerada ótima (intervalo de cargas térmicas associado à recuperação praticamente completa de H\textsubscript{2}S e a perdas ainda moderadas de NH\textsubscript{3}), a temperatura de fundo não exibe um comportamento claramente linear em relação à carga térmica. Em outras palavras, o ganho estático aparente entre uma possível variável manipulada (carga térmica) e a temperatura de fundo não se mantém aproximadamente constante ao longo desse intervalo. Em cargas mais baixas, pequenos incrementos na carga térmica resultam em aumentos relativamente acentuados de temperatura, enquanto, à medida que a coluna se aproxima do limite de fervura, a mesma variação de carga produz incrementos progressivamente menores na temperatura de fundo. 
 
-
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/influencia_contaminantes/q_ref_vs_t_fundo_influencia_contaminantes.png}
+  \caption{Carga térmica x temperatura do fundo - Influência Contaminantes}
+  \label{fig:q_ref_vs_t_fundo_influencia_contaminantes}
+\end{figure}
 
 
 

@@ -7,21 +7,6 @@ O esquema de Tratamento de Águas Ácidas considerada neste trabalho é o esquem
 Nesse esquema de tratamento, a água ácida proveniente de diversas unidades da refinaria (hidrotratamento, FCC, coqueamento, etc.) é coletada e alimentada na primeira torre, a torre esgotadora de H\textsubscript{2}S. Esta coluna opera sob pressão moderada e utiliza vapor de esgotamento e um refervedor para promover a evaporação preferencial do H\textsubscript{2}S, que é mais volátil que a NH\textsubscript{3} nas condições operacionais típicas. O gás ácido de topo, rico em H\textsubscript{2}S e contendo alguma NH\textsubscript{3}, é enviado para a URE. A água de fundo, ainda contendo NH\textsubscript{3} e traços de H\textsubscript{2}S, é bombeada para a segunda torre, onde a NH\textsubscript{3} é removida.
 
 
-\subsection{Torre Esgotadora de H2S}
-
-A torre esgotadora de H\textsubscript{2}S é o foco principal deste trabalho. Trata-se de uma coluna de destilação com as seguintes características típicas:
-
-leftmargin=4em, itemsep=0pt
-  \item Número de estágios: 30 
-  \item Eficiência de Murphree (em toda a coluna): 70\%
-  \item Pressão de operação: [valor] bar
-  \item Alimentação: água ácida a [temperatura] e [pressão]
-  \item Vapor de despojamento: injetado no fundo da coluna
-  \item Refervedor: tipo [kettle/termossifão], carga térmica [valor] kW
-  \item Produto de topo: gás ácido para URE
-  \item Produto de fundo: água parcialmente tratada para segunda torre
-\end{itemize}
-
 \subsection{Desafios Operacionais}
 
 A operação da torre esgotadora apresenta os seguintes desafios:
@@ -34,57 +19,6 @@ A operação da torre esgotadora apresenta os seguintes desafios:
 \end{enumerate}
 
 
-% TODO: Detalhar parâmetros do GPSWAT utilizados e reações consideradas
-
-\subsubsection{Especificações do Processo}
-
-As principais especificações do modelo estático incluem:
-
-\begin{table}[H]
-  \centering
-  \caption{Especificações do modelo estático da torre esgotadora de H\textsubscript{2}S.}
-  \label{tab:spec_estatico}
-  \begin{tabular}{lcc}
-    \toprule
-    \textbf{Parâmetro} & \textbf{Valor} & \textbf{Unidade} \\
-    \midrule
-    Número de estágios & [valor] & - \\
-    Estágio de alimentação & [valor] & - \\
-    Pressão de topo & [valor] & bar \\
-    Pressão de fundo & [valor] & bar \\
-    Vazão de alimentação & [valor] & kg/h \\
-    Temperatura de alimentação & [valor] & \si{\celsius} \\
-    Vazão de vapor de despojamento & [valor] & kg/h \\
-    Razão de refluxo & [valor] & - \\
-    Carga térmica do refervedor & [valor] & kW \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-% TODO: Preencher valores após definição do caso base
-
-\subsubsection{Composição da Alimentação}
-
-A composição típica da água ácida de alimentação é apresentada na Tabela~\ref{tab:composicao_feed}.
-
-\begin{table}[H]
-  \centering
-  \caption{Composição típica da alimentação de água ácida.}
-  \label{tab:composicao_feed}
-  \begin{tabular}{lcc}
-    \toprule
-    \textbf{Componente} & \textbf{Concentração} & \textbf{Unidade} \\
-    \midrule
-    H\textsubscript{2}O & [valor] & wt\% \\
-    H\textsubscript{2}S & [valor] & ppm (w) \\
-    NH\textsubscript{3} & [valor] & ppm (w) \\
-    CO\textsubscript{2} & [valor] & ppm (w) \\
-    Outros & [valor] & ppm (w) \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-% TODO: Definir composição de referência e variações para estudo paramétrico
 
 
 
@@ -125,18 +59,7 @@ A inicialização do modelo dinâmico utilizou o estado estacionário convergido
   \item Tempo de estabelecimento após pequenas perturbações
 \end{enumerate}
 
-\subsection{Cenários de Simulação e Análise}\label{sec:cenarios}
 
-Para investigar o comportamento do sistema em torno do ponto crítico de operação (limite de fervura), foram definidos os seguintes cenários:
-
-\begin{enumerate}
-  \item \textbf{Caso Base}: Condições nominais de operação com composição de alimentação típica
-  \item \textbf{Variação de H\textsubscript{2}S}: Aumento/diminuição da concentração de H\textsubscript{2}S na alimentação em [valor]\%
-  \item \textbf{Variação de NH\textsubscript{3}}: Aumento/diminuição da concentração de NH\textsubscript{3} na alimentação em [valor]\%
-  \item \textbf{Variação de carga térmica}: Aumento/diminuição da carga do refervedor em [valor]\%
-  \item \textbf{Variação de vazão}: Aumento/diminuição da vazão de alimentação em [valor]\%
-  \item \textbf{Aproximação do limite de fervura}: Condições operacionais progressivamente mais severas até atingir o limite
-\end{enumerate}
 
 \subsection{Métricas de Desempenho}
 
@@ -150,43 +73,13 @@ leftmargin=4em, itemsep=0pt
   \item \textbf{Qualidade da água tratada}: concentração residual de H\textsubscript{2}S e NH\textsubscript{3} no fundo
 \end{itemize}
 
-\section{Resultados e Discussão}\label{sec:resultados}
 
-% TODO: Apresentar resultados das simulações estáticas e dinâmicas
 
-\subsection{Modelo Estático: Caso Base}
 
-[Apresentar resultados do caso base em regime permanente, perfis de composição, temperatura e pressão ao longo da coluna]
 
-% \begin{figure}[H]
-%   \centering
-%   % \includegraphics[width=0.8\linewidth]{perfil_temperatura.png}
-%   \caption{Perfil de temperatura ao longo da torre esgotadora de H\textsubscript{2}S — caso base.}
-%   \label{fig:perfil_temp}
-% \end{figure}
 
-% \begin{figure}[H]
-%   \centering
-%   % \includegraphics[width=0.8\linewidth]{perfil_composicao.png}
-%   \caption{Perfis de composição de H\textsubscript{2}S e NH\textsubscript{3} ao longo da coluna — caso base.}
-%   \label{fig:perfil_comp}
-% \end{figure}
 
-\subsection{Análise de Sensibilidade Paramétrica}
 
-[Apresentar resultados da análise de sensibilidade para variações de composição, carga térmica e vazão]
-
-\subsubsection{Efeito da Concentração de H2S na Alimentação}
-
-[Discutir como variações de H\textsubscript{2}S afetam recuperação, consumo energético e operação]
-
-\subsubsection{Efeito da Concentração de NH3 na Alimentação}
-
-[Discutir como variações de NH\textsubscript{3} afetam o arraste de NH\textsubscript{3} para o topo e o risco de fervura]
-
-\subsubsection{Efeito da Carga Térmica do Refervedor}
-
-[Analisar trade-offs entre carga térmica, recuperação de H\textsubscript{2}S e arraste de NH\textsubscript{3}]
 
 \subsection{Modelo Dinâmico: Resposta Transitória}
 
@@ -199,15 +92,6 @@ leftmargin=4em, itemsep=0pt
 %   \label{fig:resposta_dinamica}
 % \end{figure}
 
-\subsection{Identificação do Limite de Fervura}
-
-[Apresentar caracterização do ponto crítico de operação, sinais precursores de fervura, margem operacional segura]
-
-\subsection{Discussão dos Resultados}
-
-[Sintetizar principais descobertas, comparar com dados de literatura, discutir implicações práticas para operação de refinaria]
-
-\FloatBarrier
 
 \section{Conclusões}\label{sec:conclusoes}
 
@@ -282,14 +166,7 @@ Caso os resultados sejam promissores, estudos de viabilidade para implementaçã
 
 
 
-\subsubsection{Comportamento Geral do Sistema}
 
-A partir das Figuras \ref{fig:q_ref_vs_recuperacao_h2s} e \ref{fig:q_ref_vs_perda_nh3}, observa-se que existe um ponto operacional no qual a recuperação de H\textsubscript{2}S se torna completa. Acima desse ponto, contudo, passa a ocorrer perda de NH\textsubscript{3} para a corrente de gás ácido.
-
-
-
-
-As temperaturas de fundo e topo (Figuras~\ref{fig:q_ref_vs_t_fundo} e \ref{fig:q_ref_vs_t_topo}) apresentam comportamento esperado para colunas de destilação: aumento monotônico com a carga térmica. A temperatura de fundo varia aproximadamente entre 100 °C e 180 °C, enquanto a temperatura de topo mantém-se entre 60 °C e 110 °C, dependendo das condições operacionais. O ponto de operação crítico, onde ocorre o disparo acentuado no arraste de NH\textsubscript{3}, coincide com temperaturas de fundo superiores a aproximadamente 160 °C, sugerindo que o controle da temperatura de fundo é uma estratégia viável para evitar perda excessiva de amônia.
 
 \subsubsection{Influência dos contaminantes}
 
@@ -340,12 +217,7 @@ A temperatura de topo (Figura~\ref{fig:q_ref_vs_t_topo_influencia_contaminantes}
   \label{fig:q_ref_vs_perda_nh3_influencia_contaminantes}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.75\linewidth]{resultados/figuras/influencia_contaminantes/q_ref_vs_t_fundo_influencia_contaminantes.png}
-  \caption{Carga térmica x temperatura do fundo - Influência Contaminantes}
-  \label{fig:q_ref_vs_t_fundo_influencia_contaminantes}
-\end{figure}
+
 
 \begin{figure}[H]
   \centering
