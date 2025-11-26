@@ -375,7 +375,6 @@ Os perfis de temperatura de fundo (Figura~\ref{fig:q_ref_vs_t_fundo_influencia_v
   \label{fig:q_ref_vs_t_fundo_influencia_vazao_carga}
 \end{figure}
 
-
 \subsection{Influência da temperatura da carga}
 
 A análise dos Casos 1, 7 e 8 (Figuras~\ref{fig:q_ref_vs_h2s_nh3_dual_influencia_temperatura_carga} a \ref{fig:q_ref_vs_t_topo_influencia_temperatura_carga}) investiga o efeito da temperatura da corrente de alimentação sobre o desempenho da torre esgotadora. A temperatura da alimentação tem impacto significativo no balanço energético global da coluna, uma vez que alimentações mais quentes reduzem a demanda de energia do refervedor para atingir determinada condição de operação.
@@ -415,7 +414,11 @@ A operação da torre esgotadora apresenta um \textit{trade-off} fundamental ent
 
 Identificaram-se dois regimes operacionais distintos: (i) um regime inicial de alta sensibilidade térmica, onde a temperatura de topo responde fortemente a variações na carga térmica do refervedor, coincidindo com o aumento rápido da recuperação de H\textsubscript{2}S; e (ii) um regime de baixa sensibilidade, estabelecido após a recuperação completa de H\textsubscript{2}S, onde incrementos adicionais na carga térmica resultam predominantemente no aumento da perda de NH\textsubscript{3}.
 
-A razão H\textsubscript{2}S/NH\textsubscript{3} na alimentação mostrou-se determinante para o comportamento térmico do topo da coluna, com casos de mesma razão apresentando perfis de temperatura sobrepostos. Variações na vazão e temperatura de alimentação deslocam as curvas de operação conforme esperado pelo balanço energético, sem alterar qualitativamente o comportamento do sistema.
+A razão H\textsubscript{2}S/NH\textsubscript{3} na alimentação mostrou-se determinante para o comportamento térmico do topo da coluna, com casos de mesma razão apresentando perfis de temperatura sobrepostos.
+
+A vazão de alimentação exerce influência direta sobre o ponto de operação ótimo: aumentos de vazão deslocam a curva de recuperação para maiores cargas térmicas, exigindo maior energia no refervedor para atingir a mesma recuperação de H\textsubscript{2}S. Por outro lado, reduções de vazão permitem alcançar a recuperação máxima com menor carga térmica, deslocando o ponto de máxima recuperação com mínima perda de NH\textsubscript{3} para valores inferiores de energia.
+
+Similarmente, a temperatura da corrente de alimentação afeta significativamente o balanço energético da torre: alimentações mais quentes reduzem a demanda de carga térmica do refervedor para atingir determinada recuperação de H\textsubscript{2}S, deslocando o ponto ótimo de operação para menores cargas térmicas. Alimentações mais frias, por sua vez, requerem maior fornecimento de energia no refervedor, deslocando o ponto ótimo para valores superiores. Essas observações têm implicações práticas relevantes para a operação da UTAA, uma vez que variações nas condições de alimentação, comuns em ambiente industrial, exigem ajustes correspondentes na carga térmica para manter a operação próxima ao ponto de máxima recuperação de H\textsubscript{2}S com mínima perda de NH\textsubscript{3}.
 
 O modelo desenvolvido constitui uma base sólida para trabalhos futuros envolvendo simulação dinâmica em Aspen Plus Dynamics e o desenvolvimento de estratégias de controle preditivo baseado em modelo (MPC), incluindo abordagens com redes neurais (NN NMPC) para otimização em tempo real da operação da UTAA.
 
