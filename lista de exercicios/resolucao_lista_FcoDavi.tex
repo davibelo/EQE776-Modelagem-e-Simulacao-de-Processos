@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage[margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -121,7 +122,7 @@ O sistema diferencial foi integrado no intervalo $0 \leq t \leq 20\ \mathrm{h}$ 
 
 \lstinputlisting[caption={Script Python utilizado para a integração numérica da Questão 1.},label={lst:python-q1}]{solucao_questao1.py}
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{figuras/questao1_niveis.png}
   \caption{Perfis temporais simulados dos níveis $h_1$ e $h_2$ durante 20 horas.}
@@ -224,7 +225,7 @@ O sistema diferencial foi integrado em $0 \leq t \leq 60\ \mathrm{min}$ empregan
 
 \lstinputlisting[caption={Script Python utilizado para a integração numérica da Questão 2.},label={lst:python-q2}]{solucao_questao2.py}
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{figuras/questao2_tanque.png}
   \caption{Perfis temporais simulados do nível $h$ e das frações mássicas $x_A$, $x_B$ e $x_C$ durante 60 minutos.}
@@ -301,7 +302,7 @@ O sistema de equações ordinais foi integrado em $0 \leq t \leq 15\ \mathrm{min
 
 \lstinputlisting[caption={Script Python utilizado para a integração numérica da Questão 3.},label={lst:python-q3}]{solucao_questao3.py}
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{figuras/questao3_reator.png}
   \caption{Perfis temporais simulados da temperatura, concentrações e conversão do reagente A durante 15 minutos de batelada.}
@@ -396,7 +397,7 @@ O sistema de EDOs foi integrado no intervalo $0 \leq t \leq 5$ (unidades de temp
 
 \lstinputlisting[caption={Script Python utilizado para a integração numérica da Questão 4.},label={lst:python-q4}]{solucao_questao4.py}
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth]{figuras/questao4_reator_dispersao.png}
   \caption{Perfis temporais simulados da concentração de alimentação $C_{\text{alim}}$ e das concentrações em diferentes posições axiais do reator ($z=0{,}25$, $z=0{,}50$, $z=0{,}75$ e $z=1{,}00$) durante 5 unidades de tempo adimensionais.}
