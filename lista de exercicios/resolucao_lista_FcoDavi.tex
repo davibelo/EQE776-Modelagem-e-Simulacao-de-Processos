@@ -221,7 +221,7 @@ O sistema de equações diferenciais finais é
 com condições iniciais $m_A(0) = 20\ \mathrm{kg}$, $m_B(0) = 20\ \mathrm{kg}$ e $m_C(0) = 40\ \mathrm{kg}$.
 
 \subsection*{Resolução numérica}
-O sistema diferencial foi integrado em $0 \leq t \leq 60\ \mathrm{min}$ empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo equivalente a $0{,}01\ \mathrm{min}$. A implementação registra também as trajetórias discretizadas $(t, h, x_A, x_B, x_C)$ em arquivo auxiliar para rastreabilidade.
+O sistema diferencial foi integrado no intervalo $0 \leq t \leq 60\ \mathrm{min}$ empregando o método de Runge--Kutta explícito de quarta/quinta ordem com passo adaptativo (\texttt{solve\_ivp} do SciPy, método padrão \texttt{RK45}), impondo passo máximo de $0{,}01\ \mathrm{min}$ (equivalente a $0{,}6\ \mathrm{s}$). A solução contínua obtida foi posteriormente amostrada de forma uniforme em 100 pontos ao longo do intervalo de simulação, gerando as trajetórias discretizadas $(t, h, x_A, x_B, x_C)$ registradas em arquivo auxiliar para rastreabilidade.
 
 \lstinputlisting[caption={Script Python utilizado para a integração numérica da Questão 2.},label={lst:python-q2}]{solucao_questao2.py}
 
@@ -298,7 +298,7 @@ A conversão do reagente A é definida como
 onde $C_{A0} = 0{,}5\ \mathrm{mol\,L^{-1}}$ é a concentração inicial de A.
 
 \subsection*{Resolução numérica}
-O sistema de equações ordinais foi integrado em $0 \leq t \leq 15\ \mathrm{min}$ empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo equivalente a $0{,}01\ \mathrm{min}$. A implementação registra também as trajetórias discretizadas $(t, T, C_A, C_B, C_C, C_D, X_A)$ em arquivo auxiliar para rastreabilidade.
+O sistema diferencial foi integrado no intervalo $0 \leq t \leq 15\ \mathrm{min}$ empregando o método de Runge--Kutta explícito de quarta/quinta ordem com passo adaptativo (\texttt{solve\_ivp} do SciPy, método padrão \texttt{RK45}), impondo passo máximo de $0{,}01\ \mathrm{min}$ (equivalente a $0{,}6\ \mathrm{s}$). A solução contínua obtida foi posteriormente amostrada de forma uniforme em 100 pontos ao longo do intervalo de simulação, gerando as trajetórias discretizadas $(t, T, C_A, C_B, C_C, C_D, X_A)$ registradas em arquivo auxiliar para rastreabilidade.
 
 \lstinputlisting[caption={Script Python utilizado para a integração numérica da Questão 3.},label={lst:python-q3}]{solucao_questao3.py}
 
@@ -393,7 +393,7 @@ A equação de evolução para o último ponto é então
 O sistema resultante consiste em $N$ equações diferenciais ordinárias acopladas, sujeitas à condição inicial $C_i(0) = 0$ para todo $i$.
 
 \subsection*{Resolução numérica}
-O sistema de EDOs foi integrado no intervalo $0 \leq t \leq 5$ (unidades de tempo adimensionais) empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo de $0{,}01$. A cada instante de tempo, a concentração de alimentação $C_{\text{alim}}$ é recalculada segundo \eqref{eq:calim-q4}, utilizando a concentração na posição de saída do reator $C(t,1)$. A implementação registra também as trajetórias discretizadas $(t, C_{\text{alim}}, C_{z=0{,}25}, C_{z=0{,}50}, C_{z=0{,}75}, C_{z=1})$ em arquivo auxiliar para rastreabilidade.
+O sistema de EDOs foi integrado no intervalo $0 \leq t \leq 5$ (unidades de tempo adimensionais) empregando o método de Runge--Kutta explícito de quarta/quinta ordem com passo adaptativo (\texttt{solve\_ivp} do SciPy, método padrão \texttt{RK45}), impondo passo máximo de $0{,}01$. A cada instante de tempo, a concentração de alimentação $C_{\text{alim}}$ é recalculada segundo \eqref{eq:calim-q4}, utilizando a concentração na posição de saída do reator $C(t,1)$. A solução contínua obtida foi posteriormente amostrada de forma uniforme em 100 pontos ao longo do intervalo de simulação, gerando as trajetórias discretizadas $(t, C_{\text{alim}}, C_{z=0{,}25}, C_{z=0{,}50}, C_{z=0{,}75}, C_{z=1})$ registradas em arquivo auxiliar para rastreabilidade.
 
 \lstinputlisting[caption={Script Python utilizado para a integração numérica da Questão 4.},label={lst:python-q4}]{solucao_questao4.py}
 

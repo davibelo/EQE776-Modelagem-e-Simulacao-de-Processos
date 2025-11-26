@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  26 NOV 2025 10:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  26 NOV 2025 10:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -340,10 +340,7 @@ Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
 ) (C:\Users\davib\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count321
-) (resolucao_lista_FcoDavi.aux
-Package babel Info: 'portuguese' activates 'portuges' shorthands.
-(babel)             Reported  on input line 8.
-)
+) (resolucao_lista_FcoDavi.aux)
 \openout1 = `resolucao_lista_FcoDavi.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
@@ -423,6 +420,8 @@ Package hyperref Info: Link coloring OFF on input line 53.
 \@outlinefile=\write3
 \openout3 = `resolucao_lista_FcoDavi.out'.
 
+Package babel Info: 'portuguese' activates 'portuges' shorthands.
+(babel)             Reported  on input line 53.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 63.
  (C:\Users\davib\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -432,6 +431,13 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 63.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
+LaTeX Warning: Reference `tab:dados-q1' on page 1 undefined on input line 68.
+
+
+LaTeX Warning: Reference `eq:area1' on page 1 undefined on input line 100.
+
+
+
 [1{C:/Users/davib/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}
 
 ]
@@ -439,33 +445,44 @@ Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on in
  (solucao_questao1.py
 
 [2])
-<figuras/questao1_niveis.png, id=77, 433.62pt x 289.08pt>
+<figuras/questao1_niveis.png, id=75, 433.62pt x 289.08pt>
 File: figuras/questao1_niveis.png Graphic file (type png)
 <use figuras/questao1_niveis.png>
 Package pdftex.def Info: figuras/questao1_niveis.png  used on input line 127.
 (pdftex.def)             Requested size: 328.82707pt x 219.22668pt.
 
 
+LaTeX Warning: Reference `tab:dados-q2' on page 3 undefined on input line 135.
+
+
+
 [3 <./figuras/questao1_niveis.png>]
 
 [4] (solucao_questao2.py
 
-[5])
+[5]
 
-[6]
-<figuras/questao2_tanque.png, id=218, 433.62pt x 433.62pt>
+[6])
+<figuras/questao2_tanque.png, id=213, 433.62pt x 433.62pt>
 File: figuras/questao2_tanque.png Graphic file (type png)
 <use figuras/questao2_tanque.png>
 Package pdftex.def Info: figuras/questao2_tanque.png  used on input line 230.
 (pdftex.def)             Requested size: 328.82707pt x 328.84004pt.
 
 
-[7 <./figuras/questao2_tanque.png>] (solucao_questao3.py
+[7 <./figuras/questao2_tanque.png>]
 
-[8]
+LaTeX Warning: Reference `eq:rd-q3' on page 8 undefined on input line 263.
+
+
+LaTeX Warning: Reference `eq:ri-q3' on page 8 undefined on input line 263.
+
+
+
+[8] (solucao_questao3.py
 
 [9])
-<figuras/questao3_reator.png, id=313, 433.62pt x 578.16pt>
+<figuras/questao3_reator.png, id=301, 433.62pt x 578.16pt>
 File: figuras/questao3_reator.png Graphic file (type png)
 <use figuras/questao3_reator.png>
 Package pdftex.def Info: figuras/questao3_reator.png  used on input line 307.
@@ -476,12 +493,32 @@ Package pdftex.def Info: figuras/questao3_reator.png  used on input line 307.
 
 [11 <./figuras/questao3_reator.png>]
 
-[12] (solucao_questao4.py
+LaTeX Warning: Reference `tab:dados-q4' on page 12 undefined on input line 333.
+
+
+LaTeX Warning: Reference `eq:edp-q4' on page 12 undefined on input line 355.
+
+
+LaTeX Warning: Reference `eq:cc1-q4' on page 12 undefined on input line 362.
+
+
+LaTeX Warning: Reference `eq:cc1-q4' on page 12 undefined on input line 374.
+
+
+LaTeX Warning: Reference `eq:cc2-q4' on page 12 undefined on input line 384.
+
+
+
+[12]
+
+LaTeX Warning: Reference `eq:calim-q4' on page 13 undefined on input line 396.
+
+(solucao_questao4.py
 
 [13]
 
 [14])
-<figuras/questao4_reator_dispersao.png, id=476, 578.16pt x 578.16pt>
+<figuras/questao4_reator_dispersao.png, id=463, 578.16pt x 578.16pt>
 File: figuras/questao4_reator_dispersao.png Graphic file (type png)
 <use figuras/questao4_reator_dispersao.png>
 Package pdftex.def Info: figuras/questao4_reator_dispersao.png  used on input line 402.
@@ -493,6 +530,13 @@ Package pdftex.def Info: figuras/questao4_reator_dispersao.png  used on input li
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-06-09>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `resolucao_lista_FcoDavi.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
@@ -503,11 +547,11 @@ Here is how much of TeX's memory you used:
  42794 multiletter control sequences out of 15000+600000
  641819 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,79p,749b,2221s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,922b,2221s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0900.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0500.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\davib\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/davib/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on resolucao_lista_FcoDavi.pdf (15 pages, 930090 bytes).
+Output written on resolucao_lista_FcoDavi.pdf (15 pages, 929122 bytes).
 PDF statistics:
- 920 PDF objects out of 1000 (max. 8388607)
+ 910 PDF objects out of 1000 (max. 8388607)
  399 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
