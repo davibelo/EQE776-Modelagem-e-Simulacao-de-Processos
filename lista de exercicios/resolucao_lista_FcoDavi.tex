@@ -17,7 +17,6 @@
 % Estilo para códigos em Python
 \lstset{
   language=Python,
-  inputencoding=utf8/latin1,
   extendedchars=true,
   basicstyle=\ttfamily\small,
   keywordstyle=\color{blue!70!black},
@@ -111,7 +110,7 @@ com condições iniciais $h_1(0) = 3\ \mathrm{m}$ e $h_2(0) = 2\ \mathrm{m}$.
 \subsection*{Resolução numérica}
 O sistema diferencial foi integrado em $0 \leq t \leq 20\ \mathrm{h}$ empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo equivalente a $10\ \mathrm{s}$ após conversão interna de unidades no script de apoio. A implementação registra também as trajetórias discretizadas $(t, h_1, h_2)$ em arquivo auxiliar para rastreabilidade.
 
-\lstinputlisting[caption={Script Python utilizado para a integracao numerica da Questao 1.},label={lst:python-q1}]{solucao_questao1.py}
+\lstinputlisting[caption={Script Python utilizado para a integração numérica da Questão 1.},label={lst:python-q1}]{solucao_questao1.py}
 
 \begin{figure}[ht]
   \centering
@@ -214,7 +213,7 @@ com condições iniciais $m_A(0) = 20\ \mathrm{kg}$, $m_B(0) = 20\ \mathrm{kg}$ 
 \subsection*{Resolução numérica}
 O sistema diferencial foi integrado em $0 \leq t \leq 60\ \mathrm{min}$ empregando o método Runge--Kutta de quarta/quinta ordem adaptativo (\texttt{solve\_ivp} do SciPy) com passo máximo equivalente a $0{,}01\ \mathrm{min}$. A implementação registra também as trajetórias discretizadas $(t, h, x_A, x_B, x_C)$ em arquivo auxiliar para rastreabilidade.
 
-\lstinputlisting[caption={Script Python utilizado para a integracao numerica da Questao 2.},label={lst:python-q2}]{solucao_questao2.py}
+\lstinputlisting[caption={Script Python utilizado para a integração numérica da Questão 2.},label={lst:python-q2}]{solucao_questao2.py}
 
 \begin{figure}[ht]
   \centering
