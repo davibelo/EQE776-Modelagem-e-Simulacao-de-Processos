@@ -294,7 +294,9 @@ Para analisar a influência da carga térmica aplicada à coluna, considerando d
   \item Caso 3: Máximo H\textsubscript{2}S / 50\% NH\textsubscript{3} (Composição Mássica H\textsubscript{2}S 3500ppm, NH\textsubscript{3} 1500ppm)
   \item Caso 4: 50\% H\textsubscript{2}S / 50\% NH\textsubscript{3} (Composição Mássica H\textsubscript{2}S 1750ppm, NH\textsubscript{3} 1500ppm)
   \item Caso 5: Vazão Mássica de alimentação reduzida em 5\%
-  \item Caso 6: Vazão Mássica de alimentação aumentada em 10\%
+  \item Caso 6: Vazão Mássica de alimentação aumentada em 5\%
+  \item Caso 7: Temperatura de operação reduzida em 2,5\%
+  \item Caso 8: Temperatura de operação aumentada em 2,5\%
 \end{itemize}
 
 \subsubsection{Métricas utilizadas}
@@ -342,10 +344,36 @@ A Figura~\ref{fig:q_ref_vs_t_fundo_influencia_contaminantes} apresenta a variaç
 
 Adicionalmente, analisando a Figura~\ref{fig:q_ref_vs_h2s_nh3_dual_influencia_contaminantes}, verifica-se que, nos casos em que a razão H\textsubscript{2}S/NH\textsubscript{3} foi mantida constante (casos 1 e 4), o ponto de máxima recuperação de H\textsubscript{2}S permaneceu próximo a 2,3 Gcal/h, apesar das diferenças notáveis no início das curvas.
 
-As curvas de temperatura de fundo (Figura~\ref{fig:q_ref_vs_t_fundo_influencia_contaminantes} e Figura~\ref{fig:q_ref_vs_t_topo_influencia_contaminantes}) exibem comportamentos semelhantes entre os quatro casos, indicando que a presença de contaminantes em concentrações típicas não afeta substancialmente o perfil térmico da torre.
+A temperatura de topo (Figura~\ref{fig:q_ref_vs_t_topo_influencia_contaminantes}) organiza-se em dois padrões distintos: as curvas dos casos 1 e 4 se sobrepõem, assim como as dos casos 2 e 3, formando dois grupos bem definidos. Ressalta-se que os casos 1 e 4 compartilham a mesma razão H\textsubscript{2}S/NH\textsubscript{3} na alimentação, indicando que essa razão tem papel relevante no comportamento térmico do topo da coluna.
 
-Entretanto, a temperatura de topo (Figura~\ref{fig:q_ref_vs_t_topo_influencia_contaminantes}) apresenta diferenças mais pronunciadas entre os casos, particularmente na faixa de carga térmica de 2,3 a 3,5 Gcal/h, onde os cenários com maiores concentrações de contaminantes mostram temperaturas de topo ligeiramente mais baixas. No entanto, não se observou diferença significativa entre os casos 1 e 4, que compartilham a mesma razão H\textsubscript{2}S/NH\textsubscript{3}.
+\subsubsection{Influência da vazão de carga}
 
+A análise dos Casos 1, 5 e 6 (Figuras~\ref{fig:q_ref_vs_h2s_nh3_dual_influencia_vazao_carga} a \ref{fig:q_ref_vs_t_fundo_influencia_vazao_carga}) investiga o efeito de variações na vazão mássica de alimentação, mantendo-se constante a composição e temperatura.
+
+A Figura~\ref{fig:q_ref_vs_h2s_nh3_dual_influencia_vazao_carga} evidencia que o aumento da vazão de alimentação (Caso 6, +5\%) desloca a curva de recuperação para a direita, indicando que é necessária maior carga térmica no refervedor para atingir determinado nível de recuperação de H\textsubscript{2}S. Esse comportamento é esperado, pois uma maior vazão mássica implica maior quantidade absoluta de H\textsubscript{2}S a ser vaporizada, demandando mais energia. Por outro lado, a redução da vazão (Caso 5, -5\%) desloca a curva para a esquerda, permitindo atingir recuperação completa com menor carga térmica.
+
+Os perfis de temperatura de fundo (Figura~\ref{fig:q_ref_vs_t_fundo_influencia_vazao_carga}) demonstram que, para uma mesma carga térmica, vazões menores resultam em temperaturas de fundo mais elevadas, coerente com a menor quantidade de massa a ser aquecida para uma mesma energia. A temperatura de topo (Figura~\ref{fig:q_ref_vs_t_topo_influencia_vazao_carga}) segue tendência similar, porém com menor amplitude de variação, principalmente na região após a recuperação completa de H\textsubscript{2}S.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/influencia_vazao_carga/q_ref_vs_h2s_nh3_dual_influencia_vazao_carga.png}
+  \caption{Carga térmica x recuperação de H\textsubscript{2}S e perda de NH\textsubscript{3}}
+  \label{fig:q_ref_vs_h2s_nh3_dual_influencia_vazao_carga}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/influencia_vazao_carga/q_ref_vs_t_topo_influencia_vazao_carga.png}
+  \caption{Carga térmica x Temperatura do topo da coluna}
+  \label{fig:q_ref_vs_t_topo_influencia_vazao_carga}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{resultados/figuras/color/influencia_vazao_carga/q_ref_vs_t_fundo_influencia_vazao_carga.png}
+  \caption{Carga térmica x temperatura do fundo - Influência Vazão da Carga}
+  \label{fig:q_ref_vs_t_fundo_influencia_vazao_carga}
+\end{figure}
 
 \appendix
 
