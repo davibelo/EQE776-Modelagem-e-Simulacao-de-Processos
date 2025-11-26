@@ -409,6 +409,16 @@ Os perfis de temperatura de fundo (Figura~\ref{fig:q_ref_vs_t_fundo_influencia_t
 
 \section{Conclusões}\label{sec:conclusoes}
 
+Este trabalho desenvolveu e analisou um modelo estático de uma torre esgotadora de H\textsubscript{2}S para tratamento de águas ácidas em refinarias, utilizando o Aspen Plus V14 com o modelo termodinâmico GPSWAT. Os resultados obtidos permitem as seguintes conclusões:
+
+A operação da torre esgotadora apresenta um \textit{trade-off} fundamental entre a recuperação de H\textsubscript{2}S e a perda de NH\textsubscript{3} para o gás ácido. A análise de sensibilidade revelou que a recuperação de H\textsubscript{2}S atinge valores próximos a 100\% para cargas térmicas em torno de 2,3--2,4 Gcal/h, com perdas de NH\textsubscript{3} entre 2 e 4\% nos casos estudados.
+
+Identificaram-se dois regimes operacionais distintos: (i) um regime inicial de alta sensibilidade térmica, onde a temperatura de topo responde fortemente a variações na carga térmica do refervedor, coincidindo com o aumento rápido da recuperação de H\textsubscript{2}S; e (ii) um regime de baixa sensibilidade, estabelecido após a recuperação completa de H\textsubscript{2}S, onde incrementos adicionais na carga térmica resultam predominantemente no aumento da perda de NH\textsubscript{3}.
+
+A razão H\textsubscript{2}S/NH\textsubscript{3} na alimentação mostrou-se determinante para o comportamento térmico do topo da coluna, com casos de mesma razão apresentando perfis de temperatura sobrepostos. Variações na vazão e temperatura de alimentação deslocam as curvas de operação conforme esperado pelo balanço energético, sem alterar qualitativamente o comportamento do sistema.
+
+O modelo desenvolvido constitui uma base sólida para trabalhos futuros envolvendo simulação dinâmica em Aspen Plus Dynamics e o desenvolvimento de estratégias de controle preditivo baseado em modelo (MPC), incluindo abordagens com redes neurais (NN NMPC) para otimização em tempo real da operação da UTAA.
+
 
 
 \section{Reprodutibilidade}
