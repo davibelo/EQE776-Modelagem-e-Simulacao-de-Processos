@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  26 NOV 2025 09:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.7.12)  26 NOV 2025 09:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -333,8 +333,7 @@ Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
 ) (C:\Users\davib\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count320
-)
-No file resolucao_lista_FcoDavi.aux.
+) (resolucao_lista_FcoDavi.aux)
 \openout1 = `resolucao_lista_FcoDavi.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
@@ -355,7 +354,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 43.
 LaTeX Font Info:    ... okay on input line 43.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 43.
 LaTeX Font Info:    ... okay on input line 43.
-(C:\Users\davib\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+ (C:\Users\davib\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count321
 \scratchdimen=\dimen177
@@ -724,10 +723,10 @@ Package rerunfilecheck Info: Checksums for `resolucao_lista_FcoDavi.out':
 (rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 14757 strings out of 468221
- 225611 string characters out of 5432891
+ 14760 strings out of 468221
+ 225794 string characters out of 5432891
  1242546 words of memory out of 5000000
- 42697 multiletter control sequences out of 15000+600000
+ 42698 multiletter control sequences out of 15000+600000
  641819 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,12n,79p,749b,2185s stack positions out of 10000i,1000n,20000p,200000b,200000s
