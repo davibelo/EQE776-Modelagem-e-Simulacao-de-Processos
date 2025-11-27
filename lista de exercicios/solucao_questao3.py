@@ -69,9 +69,9 @@ ax3.legend()
 ax3.grid(True)
 
 plt.tight_layout()
-plt.savefig("figuras/questao3_reator.png", dpi=300)
+plt.savefig("lista de exercicios/figuras/questao3_reator.png", dpi=300)
 
-with open("figuras/questao3_reator.dat", "w", encoding="utf-8") as f:
+with open("lista de exercicios/figuras/questao3_reator.dat", "w", encoding="utf-8") as f:
     f.write("tempo_min T_K CA CB CC CD XA\n")
     for t, temp, ca, cb, cc, cd, xa in zip(t_min, T, CA, CB, CC, CD, XA):
         f.write(f"{t:.6f} {temp:.6f} {ca:.6f} {cb:.6f} {cc:.6f} {cd:.6f} {xa:.6f}\n")

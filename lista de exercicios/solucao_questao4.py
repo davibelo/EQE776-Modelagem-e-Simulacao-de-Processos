@@ -82,9 +82,9 @@ ax2.legend()
 ax2.grid(True)
 
 plt.tight_layout()
-plt.savefig("figuras/questao4_reator_dispersao.png", dpi=300)
+plt.savefig("lista de exercicios/figuras/questao4_reator_dispersao.png", dpi=300)
 
-with open("figuras/questao4_reator_dispersao.dat", "w", encoding="utf-8") as f:
+with open("lista de exercicios/figuras/questao4_reator_dispersao.dat", "w", encoding="utf-8") as f:
     f.write("tempo C_alim C_z025 C_z050 C_z075 C_z100\n")
     for t, ca, c1, c2, c3, c4 in zip(t_vals, C_alim_vals, C_025, C_050, C_075, C_100):
         f.write(f"{t:.6f} {ca:.6f} {c1:.6f} {c2:.6f} {c3:.6f} {c4:.6f}\n")

@@ -73,9 +73,9 @@ ax2.legend()
 ax2.grid(True)
 
 plt.tight_layout()
-plt.savefig("figuras/questao2_tanque.png", dpi=300)
+plt.savefig("lista de exercicios/figuras/questao2_tanque.png", dpi=300)
 
-with open("figuras/questao2_tanque.dat", "w", encoding="utf-8") as f:
+with open("lista de exercicios/figuras/questao2_tanque.dat", "w", encoding="utf-8") as f:
     f.write("tempo_min h_m xA xB xC\n")
     for t, hval, xa, xb, xc in zip(t_min, h, xA, xB, xC):
         f.write(f"{t:.6f} {hval:.6f} {xa:.6f} {xb:.6f} {xc:.6f}\n")

@@ -44,9 +44,9 @@ plt.ylabel("Nível (m)")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("figuras/questao1_niveis.png", dpi=300)
+plt.savefig("lista de exercicios/figuras/questao1_niveis.png", dpi=300)
 
-with open("figuras/questao1_niveis.dat", "w", encoding="utf-8") as f:
+with open("lista de exercicios/figuras/questao1_niveis.dat", "w", encoding="utf-8") as f:
     f.write("tempo_h h1_m h2_m\n")
     for t, hv1, hv2 in zip(t_hours, h1, h2):
         f.write(f"{t:.6f} {hv1:.6f} {hv2:.6f}\n")
