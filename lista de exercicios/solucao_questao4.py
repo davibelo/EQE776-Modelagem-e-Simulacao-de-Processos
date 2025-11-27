@@ -44,7 +44,7 @@ sol = solve_ivp(
     dense_output=True
 )
 
-t_vals = np.linspace(0.0, T_sim, 300)
+t_vals = np.linspace(0.0, T_sim, 100)
 C_all = sol.sol(t_vals)
 
 z_vals = np.linspace(0.0, 1.0, N)
