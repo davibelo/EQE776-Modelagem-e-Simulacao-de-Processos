@@ -389,6 +389,7 @@ onde $C_{\text{left}}$ é obtido de \eqref{eq:cc1-q4} utilizando diferenças fin
 \begin{equation}
   C_{\text{left}} = C_{\text{alim}} - \frac{1}{Pe}\,\frac{C_1 - C_{\text{alim}}}{\Delta z}. \label{eq:cleft-q4}
 \end{equation}
+Note que $C_0$ permanece associado ao nó físico de entrada da malha, enquanto $C_{\text{left}}$ representa um ponto fantasma fora do domínio calculado, introduzido apenas para que a condição de contorno mista em $z=0$ seja satisfeita de modo consistente com as aproximações por diferenças finitas das derivadas.
 
 \textbf{Pontos internos ($i=1,2,\ldots,N-2$):} A equação discretizada no interior do domínio é
 \begin{equation}
