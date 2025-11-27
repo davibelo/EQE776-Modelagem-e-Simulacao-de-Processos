@@ -324,11 +324,25 @@ As condições de contorno são
   C(t,0) - \frac{1}{Pe}\,\frac{\partial C(t,z)}{\partial z}\bigg|_{z=0} &= C_{\text{alim}}, \label{eq:cc1-q4} \\
   \frac{\partial C(t,z)}{\partial z}\bigg|_{z=1} &= 0, \label{eq:cc2-q4}
 \end{align}
-onde $C_{\text{alim}}$ é a concentração de alimentação do reator, obtida a partir do balanço no ponto de mistura:
+onde $C_{\text{alim}}$ é a concentração de alimentação do reator.
+
+Considerando o nó de mistura entre a corrente fresca ($Q_F, C_F$) e a corrente de reciclo ($Q_{\text{rec}}, C(t,1)$), o balanço algébrico fornece a vazão molar (ou mássica) de reagente que entra no reator,
+\begin{equation}
+  \dot{n}_A^{\text{mix}} = Q_F C_F + Q_{\text{rec}} C(t,1),
+\end{equation}
+e a vazão total que sai do misturador é
+\begin{equation}
+  \dot{n}^{\text{mix}} = Q_F + Q_{\text{rec}}.
+\end{equation}
+Assim, a concentração efetiva que alimenta o reator é a razão entre a vazão de reagente e a vazão total,
+\begin{equation}
+  C_{\text{alim}} = \frac{\dot{n}_A^{\text{mix}}}{\dot{n}^{\text{mix}}} = \frac{Q_F C_F + Q_{\text{rec}} C(t,1)}{Q_F + Q_{\text{rec}}}.
+\end{equation}
+Substituindo $Q_{\text{rec}} = R Q_F$, obtém-se a expressão utilizada:
 \begin{equation}
   C_{\text{alim}} = \frac{Q_F C_F + R Q_F C(t,1)}{Q_F (1 + R)}, \label{eq:calim-q4}
 \end{equation}
-sendo $R$ a razão de reciclo ($R = Q_{\text{rec}}/Q_F$), $Q_F$ a vazão de entrada e $C_F$ a concentração na corrente de alimentação fresca.
+ sendo $R$ a razão de reciclo ($R = Q_{\text{rec}}/Q_F$), $Q_F$ a vazão de entrada e $C_F$ a concentração na corrente de alimentação fresca.
 
 Os parâmetros fornecidos são resumidos na Tabela~\ref{tab:dados-q4}.
 
