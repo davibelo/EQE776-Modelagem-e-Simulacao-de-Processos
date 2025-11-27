@@ -381,7 +381,7 @@ de onde se obtém
 \begin{equation}
   C_0 = \frac{Pe\,\Delta z\,C_{\text{alim}} + C_1}{Pe\,\Delta z + 1}. \label{eq:c0-q4}
 \end{equation}
-Entretanto, para fins de implementação numérica, pode-se também expressar a derivada em função de $C_{\text{alim}}$ diretamente. Utilizando a aproximação por diferenças avançadas na posição $z=0$, obtém-se:
+Para implementar numericamente as derivadas no primeiro nó físico, introduz-se um ponto fantasma imediatamente a montante de $z=0$, representado por $C_{\text{left}}$, que assegura a aplicação direta da condição de contorno mista no esquema de diferenças finitas. Utilizando diferenças avançadas, obtém-se a equação evolutiva
 \begin{equation}
   \frac{dC_0}{dt} = -\frac{C_0 - C_{\text{left}}}{\Delta z} + \frac{1}{Pe}\,\frac{C_1 - 2C_0 + C_{\text{left}}}{(\Delta z)^2} - Da\,C_0, \label{eq:dc0-q4}
 \end{equation}
@@ -400,9 +400,9 @@ Note que $C_0$ permanece associado ao nó físico de entrada da malha, enquanto 
 \begin{equation*}
   \frac{C_N - C_{N-1}}{\Delta z} = 0 \quad \Rightarrow \quad C_N = C_{N-1}.
 \end{equation*}
-A equação de evolução para o último ponto é então
+Introduzindo um ponto fantasma $C_{\text{right}}$ imediatamente a jusante de $z=1$, satisfazendo $C_{\text{right}} = C_{N-1}$, obtém-se a equação de evolução para o último nó físico (aqui denotado por $C_N$):
 \begin{equation}
-  \frac{dC_N}{dt} = -\frac{C_N - C_{N-1}}{\Delta z} + \frac{1}{Pe}\,\frac{C_{N-1} - 2C_N + C_{N-1}}{(\Delta z)^2} - Da\,C_N. \label{eq:dcn-q4}
+  \frac{dC_N}{dt} = -\frac{C_N - C_{N-1}}{\Delta z} + \frac{1}{Pe}\,\frac{C_{\text{right}} - 2C_N + C_{N-1}}{(\Delta z)^2} - Da\,C_N. \label{eq:dcn-q4}
 \end{equation}
 
 O sistema resultante consiste em $N$ equações diferenciais ordinárias acopladas, sujeitas à condição inicial $C_i(0) = 0$ para todo $i$.
