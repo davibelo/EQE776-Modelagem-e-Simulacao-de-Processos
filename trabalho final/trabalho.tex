@@ -281,12 +281,27 @@ A especificação da corrente de água tratada de alimentação na torre esgotad
   \item Composition: Mass Fraction: NH\textsubscript{3} 5E-6\% (5ppm) H\textsubscript{2}O 100\%  
 \end{itemize}
 
-Essa alimentação de água tratada no estágio 7 serve como acréscimo de um refluxo líquido ao refluxo gerado pelo "pumparound" além de uma seção de lavagem interna para remoção adicional de NH\textsubscript{3}.
+Essa alimentação de água tratada no estágio 7 serve como acréscimo de um refluxo líquido ao refluxo gerado pelo \textit{pumparound} além de uma seção de lavagem interna para remoção adicional de NH\textsubscript{3}.
 
+Na Figura~\ref{fig:fluxograma}, é apresentado o fluxograma construído no Aspen Plus.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{simulacao/flowsheet.png}
+  \caption{Fluxograma configurado no Aspen Plus}
+  \label{fig:fluxograma}
+\end{figure}
 
 \subsubsection{Análise de Sensibilidade}
 
-Utilizou-se a ferramenta de sensibilidade do Aspen Plus (\textit{Model Analysis Tool - Sensibility}) para aplicar uma variação na carga térmica do refervedor da torre esgotadora de H\textsubscript{2}S entre 2 e 4.8 com um número de 15 pontos.
+Utilizou-se a ferramenta de sensibilidade do Aspen Plus (\textit{Model Analysis Tool - Sensibility}) para aplicar uma variação na carga térmica do refervedor da torre esgotadora de H\textsubscript{2}S entre 2 e 4.8 com um número de 15 pontos, conforme pode ser visto na Figura~\ref{fig:ferramenta_sensibilidade}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{simulacao/sensibility.png}
+  \caption{Ferramenta da análise de sensibilidade do Aspen Plus}
+  \label{fig:ferramenta_sensibilidade}
+\end{figure}
 
 Para analisar a influência da carga térmica aplicada à coluna, considerando diferentes concentrações de contaminantes na alimentação e variações na vazão mássica de alimentação, foram definidos oito casos de estudo:
 
@@ -304,10 +319,6 @@ Para analisar a influência da carga térmica aplicada à coluna, considerando d
 Para cada cenário, a ferramenta registrou temperaturas de topo e de fundo, além das vazões mássicas de H\textsubscript{2}S, NH\textsubscript{3} e H\textsubscript{2}O na alimentação e nos produtos.
 
 A partir desses dados, calcularam-se as métricas de recuperação de H\textsubscript{2}S (fração enviada ao gás ácido em relação ao total alimentado) e de perda de NH\textsubscript{3} (fração arrastada com o gás ácido frente ao total introduzido).
-
-
-
-
 
 \section{Resultados e Discussão}\label{sec:resultados}
 
