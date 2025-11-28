@@ -286,6 +286,8 @@ Essa alimentação de água tratada no estágio 7 serve como acréscimo de um re
 
 \subsubsection{Análise de Sensibilidade}
 
+Utilizou-se a ferramenta de sensibilidade do Aspen Plus (\textit{Model Analysis Tool - Sensibility}) para aplicar uma variação na carga térmica do refervedor da torre esgotadora de H\textsubscript{2}S entre 2 e 4.8 com um número de 15 pontos.
+
 Para analisar a influência da carga térmica aplicada à coluna, considerando diferentes concentrações de contaminantes na alimentação e variações na vazão mássica de alimentação, foram definidos seis casos de estudo:
 
 \begin{itemize}[leftmargin=4em, itemsep=0pt]
@@ -299,9 +301,11 @@ Para analisar a influência da carga térmica aplicada à coluna, considerando d
   \item Caso 8: Temperatura de operação aumentada em 2,5\%
 \end{itemize}
 
+A ferramenta de sensibilidade do Aspen Plus (\textit{Model Analysis Tool - Sensibility}) foi executada para cada um dos 8 casos descritos acima e foram registrados dados como temperatura de topo, temperatura de fundo, vazões mássicas de H\textsubscript{2}S, NH\textsubscript{3} e H\textsubscript{2}O na alimentação e nas saídas da coluna (topo e fundo). 
+
 \subsubsection{Métricas utilizadas}
 
-As métricas utilizadas nas análises que virão a seguir foram definidas da seguinte forma: a recuperação de H\textsubscript{2}S corresponde à razão entre a quantidade de H\textsubscript{2}S direcionada ao gás ácido e o total presente na alimentação; já a perda de NH\textsubscript{3} corresponde à razão entre a quantidade de NH\textsubscript{3} arrastada para o gás ácido e o total introduzido na alimentação.
+Com os dados de vazões mássicas das correntes obtidos da ferramenta de sensibilidade do Aspen Plus, foram calculadas as seguintes métricas: recuperação de H\textsubscript{2}S correspondendo à razão entre a quantidade de H\textsubscript{2}S direcionada ao gás ácido e o total presente na alimentação; já a perda de NH\textsubscript{3} correspondendo à razão entre a quantidade de NH\textsubscript{3} arrastada para o gás ácido e o total introduzido na alimentação.
 
 ok\section{Resultados e Discussão}\label{sec:resultados}
 
