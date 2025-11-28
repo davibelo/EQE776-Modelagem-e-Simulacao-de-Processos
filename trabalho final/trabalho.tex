@@ -204,12 +204,6 @@ Para este trabalho, simulação de uma torre esgotadora de H\textsubscript{2}S e
   \item Implementação no Aspen Plus é bem documentada, facilitando integração com módulos estáticos e dinâmicos.
 \end{itemize}
 
-\subsection{Simulação Dinâmica de Colunas de Destilação}
-
-A simulação dinâmica de colunas de destilação tem sido amplamente estudada na literatura, com ênfase em aspectos como convergência numérica e inicialização de modelos. Trabalhos como o de Secchi et al.\ (1993) \cite{secchi1993} apresentam modelagens matemáticas rigorosas para processos de destilação, destacando a necessidade de métodos numéricos eficientes para resolver as equações diferenciais e algébricas que descrevem o comportamento dinâmico das colunas.
-
-A inicialização de modelos dinâmicos a partir de soluções estacionárias é uma prática consolidada para aumentar a robustez e acelerar a convergência. Conforme discutido em modelos simplificados para colunas binárias \cite{vieira2001}, perfis estacionários de composição, temperatura e pressão obtidos por simuladores estáticos podem ser transferidos para o modelo dinâmico, reduzindo discrepâncias iniciais e mitigando o risco de divergência do integrador. Essa estratégia é especialmente recomendada para modelos de equilíbrio de estágio, em que a solução estacionária fornece um ponto de partida fisicamente consistente para a simulação transitória.
-
 \section{Metodologia}\label{sec:metodologia}
 
 \subsection{Estratégia de Simulação}
