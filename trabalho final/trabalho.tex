@@ -199,8 +199,8 @@ Limitações e cuidados:
 Para este trabalho, simulação de uma torre esgotadora de H\textsubscript{2}S em uma UTAA de refinaria, o GPSWAT é apropriado pelos seguintes motivos:
 \begin{itemize}[leftmargin=4em, itemsep=0pt]
   \item As condições operacionais da torre (60–180 °C; 5-7 bar) estão dentro dos limites de validação do modelo.
-  \item Os componentes principais (H\textsubscript{2}O, H\textsubscript{2}S, NH\textsubscript{3}, CO\textsubscript{2}) estão contemplados no modelo.
-  \item As concentrações típicas de entrada (H\textsubscript{2}S: 500–5000 ppm; NH\textsubscript{3}: 1000–10000 ppm; CO\textsubscript{2}: 100–2000 ppm) enquadram-se nas faixas de aplicabilidade.
+  \item Os componentes principais (H\textsubscript{2}O, H\textsubscript{2}S, NH\textsubscript{3}) estão contemplados no modelo.
+  \item As concentrações típicas de entrada (H\textsubscript{2}S: máx 3500 ppm; NH\textsubscript{3}: máx 3000 ppm) enquadram-se nas faixas de aplicabilidade.
   \item Implementação no Aspen Plus é bem documentada, facilitando integração com módulos estáticos e dinâmicos.
 \end{itemize}
 
@@ -307,8 +307,8 @@ Para analisar a influência da carga térmica aplicada à coluna, considerando d
   \item Caso 4: 50\% H\textsubscript{2}S / 50\% NH\textsubscript{3} (Composição Mássica H\textsubscript{2}S 1750ppm, NH\textsubscript{3} 1500ppm)
   \item Caso 5: Vazão Mássica de alimentação reduzida em 5\%
   \item Caso 6: Vazão Mássica de alimentação aumentada em 5\%
-  \item Caso 7: Temperatura de operação reduzida em 2,5\%
-  \item Caso 8: Temperatura de operação aumentada em 2,5\%
+  \item Caso 7: Temperatura de alimentação reduzida em 2,5\%
+  \item Caso 8: Temperatura de alimentação aumentada em 2,5\%
 \end{itemize}
 
 Para cada cenário, a ferramenta registrou temperaturas de topo e de fundo, além das vazões mássicas de H\textsubscript{2}S, NH\textsubscript{3} e H\textsubscript{2}O na alimentação e nos produtos.
