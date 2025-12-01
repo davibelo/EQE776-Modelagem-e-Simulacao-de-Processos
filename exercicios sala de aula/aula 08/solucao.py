@@ -94,6 +94,41 @@ plt.tight_layout()
 plt.savefig("exercicios sala de aula/aula 08/van_der_vusse_reator.png", dpi=300)
 plt.show()
 
+# Gráficos individuais para cada concentração
+fig_individual, axes = plt.subplots(2, 2, figsize=(12, 8))
+
+# CA individual
+axes[0, 0].plot(t_min, Ca, color='blue', linewidth=2)
+axes[0, 0].set_xlabel("Tempo (min)")
+axes[0, 0].set_ylabel("Concentração CA (mol/L)")
+axes[0, 0].set_title("Concentração de A")
+axes[0, 0].grid(True)
+
+# CB individual
+axes[0, 1].plot(t_min, Cb, color='green', linewidth=2)
+axes[0, 1].set_xlabel("Tempo (min)")
+axes[0, 1].set_ylabel("Concentração CB (mol/L)")
+axes[0, 1].set_title("Concentração de B")
+axes[0, 1].grid(True)
+
+# CC individual
+axes[1, 0].plot(t_min, Cc, color='orange', linewidth=2)
+axes[1, 0].set_xlabel("Tempo (min)")
+axes[1, 0].set_ylabel("Concentração CC (mol/L)")
+axes[1, 0].set_title("Concentração de C")
+axes[1, 0].grid(True)
+
+# CD individual
+axes[1, 1].plot(t_min, Cd, color='purple', linewidth=2)
+axes[1, 1].set_xlabel("Tempo (min)")
+axes[1, 1].set_ylabel("Concentração CD (mol/L)")
+axes[1, 1].set_title("Concentração de D")
+axes[1, 1].grid(True)
+
+plt.tight_layout()
+plt.savefig("exercicios sala de aula/aula 08/concentracoes_individuais.png", dpi=300)
+plt.show()
+
 # Salvar dados
 with open("exercicios sala de aula/aula 08/van_der_vusse_reator.dat", "w", encoding="utf-8") as f:
     f.write("tempo_min CA CB CC CD XA\n")
