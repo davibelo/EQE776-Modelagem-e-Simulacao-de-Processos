@@ -4,7 +4,12 @@ import matplotlib.pyplot as plt
 
 # Parâmetros do processo
 Ca_in = 0.05  # mol/L
+Cb_in = 0.0   # mol/L
+Cc_in = 0.0   # mol/L
+Cd_in = 0.0   # mol/L 
+
 Qin = 250.0   # L/min
+Qout = 250.0  # L/min (assumindo estado estacionário)
 V = 1000.0    # L
 k1 = 0.5      # min⁻¹
 k2 = 0.2      # min⁻¹
@@ -17,25 +22,25 @@ Cc0 = 0.0     # mol/L
 Cd0 = 0.0     # mol/L
 
 # Tempo de residência
-tau = V / Qin  # min
+tau = V / Qout  # min
 
 # Tempo de simulação
 T_sim = 20.0  # min
 
 def model(t, y):
     Ca, Cb, Cc, Cd = y
-    
+
     # Taxas de reação
     r1 = k1 * Ca
     r2 = k2 * Cb
     r3 = k3 * Ca**2
-    
-    # Equações diferenciais do reator CSTR
-    dCadt = (Qin/V) * (Ca_in - Ca) - r1 - 2*r3
-    dCbdt = (Qin/V) * (0 - Cb) + r1 - r2
-    dCcdt = (Qin/V) * (0 - Cc) + r2
-    dCddt = (Qin/V) * (0 - Cd) + r3
-    
+
+    # Equações diferenciais do reator CSTR com Qin e Qout
+    dCadt = (1/V)*(Qin*Ca_in - Qout*Ca - r1*V - 2*r3*V)
+    dCcdt = (1/V)*(Qin*Cb_in - Qout*Cc + r1*V - r2*V)
+    dCbdt = (1/V)*(Qin*Cc_in - Qout*Cb + r2*V)
+    dCddt = (1/V)*(Qin*Cd_in - Qout*Cd + r3*V)
+
     return [dCadt, dCbdt, dCcdt, dCddt]
 
 # Solução do sistema de EDOs
