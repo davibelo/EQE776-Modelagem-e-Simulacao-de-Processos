@@ -22,7 +22,7 @@ Cc0 = 0.0     # mol/L
 Cd0 = 0.0     # mol/L
 
 # Tempo de residência
-tau = V / Qout  # min
+tau = V / Qin  # min
 
 # Tempo de simulação
 T_sim = 20.0  # min
