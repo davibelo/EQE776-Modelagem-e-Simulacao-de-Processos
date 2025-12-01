@@ -37,8 +37,8 @@ def model(t, y):
 
     # Equações diferenciais do reator CSTR com Qin e Qout
     dCadt = (1/V)*(Qin*Ca_in - Qout*Ca - r1*V - 2*r3*V)
-    dCcdt = (1/V)*(Qin*Cb_in - Qout*Cc + r1*V - r2*V)
-    dCbdt = (1/V)*(Qin*Cc_in - Qout*Cb + r2*V)
+    dCbdt = (1/V)*(Qin*Cb_in - Qout*Cb + r1*V - r2*V)
+    dCcdt = (1/V)*(Qin*Cc_in - Qout*Cc + r2*V)
     dCddt = (1/V)*(Qin*Cd_in - Qout*Cd + r3*V)
 
     return [dCadt, dCbdt, dCcdt, dCddt]
