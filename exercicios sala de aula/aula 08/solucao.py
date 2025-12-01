@@ -90,6 +90,7 @@ ax2.legend()
 ax2.grid(True)
 ax2.set_title("Conversão de A")
 
+plt.subplots_adjust(hspace=0.4)
 plt.tight_layout()
 plt.savefig("exercicios sala de aula/aula 08/van_der_vusse_reator.png", dpi=300)
 plt.show()
