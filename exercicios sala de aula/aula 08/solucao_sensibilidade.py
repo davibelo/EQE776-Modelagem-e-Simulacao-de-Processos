@@ -16,7 +16,7 @@ k3 = 0.2             # min⁻¹·L·mol⁻¹
 
 # Configuração da análise de sensibilidade
 aq_min = 150.0       # L/min
-aq_max = 350.0       # L/min
+aq_max = 500.0       # L/min
 num_casos = 20       # quantidade de cenários
 
 def steady_state_equations(concentrations, Qin):
