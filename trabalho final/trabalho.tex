@@ -420,7 +420,7 @@ Os perfis de temperatura de fundo (Figura~\ref{fig:q_ref_vs_t_fundo_influencia_t
 
 Este trabalho desenvolveu e analisou um modelo estático de uma torre esgotadora de H\textsubscript{2}S para tratamento de águas ácidas em refinarias, utilizando o Aspen Plus V14 com o modelo termodinâmico GPSWAT. Os resultados obtidos permitem as seguintes conclusões:
 
-A operação da torre esgotadora apresenta um \textit{trade-off} fundamental entre a recuperação de H\textsubscript{2}S e a perda de NH\textsubscript{3} para o gás ácido. A análise de sensibilidade revelou que a recuperação de H\textsubscript{2}S atinge valores próximos a 100\% para cargas térmicas em torno de 2,3--2,4 Gcal/h, com perdas de NH\textsubscript{3} entre 2 e 4\% nos casos estudados.
+A simulação mostrou excelente seletividade do projeto para remoção de  H\textsubscript{2}S como mínimas perdas de NH\textsubscript{3} para o gás ácido caso a carga térmica do refervedor esteja ajustada correntamente.
 
 Identificaram-se dois regimes operacionais distintos: (i) um regime inicial de alta sensibilidade térmica, onde a temperatura de topo responde fortemente a variações na carga térmica do refervedor, coincidindo com o aumento rápido da recuperação de H\textsubscript{2}S; e (ii) um regime de baixa sensibilidade, estabelecido após a recuperação completa de H\textsubscript{2}S, onde incrementos adicionais na carga térmica resultam predominantemente no aumento da perda de NH\textsubscript{3}.
 
@@ -429,6 +429,8 @@ A razão H\textsubscript{2}S/NH\textsubscript{3} na alimentação mostrou-se det
 A vazão de alimentação exerce influência direta sobre o ponto de operação ótimo: aumentos de vazão deslocam a curva de recuperação para maiores cargas térmicas, exigindo maior energia no refervedor para atingir a mesma recuperação de H\textsubscript{2}S. Por outro lado, reduções de vazão permitem alcançar a recuperação máxima com menor carga térmica, deslocando o ponto de máxima recuperação com mínima perda de NH\textsubscript{3} para valores inferiores de energia.
 
 Similarmente, a temperatura da corrente de alimentação afeta significativamente o balanço energético da torre: alimentações mais quentes reduzem a demanda de carga térmica do refervedor para atingir determinada recuperação de H\textsubscript{2}S, deslocando o ponto ótimo de operação para menores cargas térmicas. Alimentações mais frias, por sua vez, requerem maior fornecimento de energia no refervedor, deslocando o ponto ótimo para valores superiores. Essas observações têm implicações práticas relevantes para a operação da UTAA, uma vez que variações nas condições de alimentação, comuns em ambiente industrial, exigem ajustes correspondentes na carga térmica para manter a operação próxima ao ponto de máxima recuperação de H\textsubscript{2}S com mínima perda de NH\textsubscript{3}.
+
+Foi possível observar um ganho estático constante entre a carga térmica do refervedor e a temperatura de topo da torre para razões H\textsubscript{2}S/NH\textsubscript{3} na alimentação e nas variações de vazão e temperatura da alimentação.
 
 O modelo desenvolvido constitui uma base sólida para trabalhos futuros envolvendo simulação dinâmica em Aspen Plus Dynamics e o desenvolvimento de estratégias de controle preditivo baseado em modelo (MPC), incluindo abordagens com redes neurais (NN NMPC) para otimização em tempo real da operação da UTAA.
 
