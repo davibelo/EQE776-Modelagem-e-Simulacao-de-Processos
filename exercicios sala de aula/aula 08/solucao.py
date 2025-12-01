@@ -67,13 +67,19 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 10))
 
 # Concentrações vs tempo
 ax1.plot(t_min, Ca, label="CA", color='blue')
-ax1.plot(t_min, Cb, label="CB", color='green')
 ax1.plot(t_min, Cc, label="CC", color='orange')
-ax1.plot(t_min, Cd, label="CD", color='purple')
 ax1.set_xlabel("Tempo (min)")
-ax1.set_ylabel("Concentração (mol/L)")
-ax1.legend()
+ax1.set_ylabel("Concentração CA e CC (mol/L)")
+ax1.legend(loc='upper left')
 ax1.grid(True)
+
+# Segunda escala para CB e CD
+ax1_twin = ax1.twinx()
+ax1_twin.plot(t_min, Cb, label="CB", color='green')
+ax1_twin.plot(t_min, Cd, label="CD", color='purple')
+ax1_twin.set_ylabel("Concentração CB e CD (mol/L)")
+ax1_twin.legend(loc='upper right')
+
 ax1.set_title("Concentrações no Reator de Van der Vusse")
 
 # Conversão vs tempo
