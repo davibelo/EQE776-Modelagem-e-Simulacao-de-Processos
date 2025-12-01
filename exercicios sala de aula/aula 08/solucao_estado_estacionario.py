@@ -69,3 +69,4 @@ print(f"Resíduo eq1: {residuals[0]:.2e}")
 print(f"Resíduo eq2: {residuals[1]:.2e}")
 print(f"Resíduo eq3: {residuals[2]:.2e}")
 print(f"Resíduo eq4: {residuals[3]:.2e}")
+
