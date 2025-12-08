@@ -56,10 +56,10 @@ def plot_metric(df, x_col, column_template, y_label, title, filename, mono=False
     if "%" in y_label:
         ax.yaxis.set_major_locator(MultipleLocator(10))
         ax.yaxis.set_minor_locator(MultipleLocator(2))
-    elif "fundo" in y_label.lower():
+    elif "topo" in y_label.lower():
         ax.yaxis.set_major_locator(MultipleLocator(20))
         ax.yaxis.set_minor_locator(MultipleLocator(5))
-    elif "topo" in y_label.lower():
+    elif "fundo" in y_label.lower():
         ax.yaxis.set_major_locator(MultipleLocator(1))
         ax.yaxis.set_minor_locator(MultipleLocator(0.5))
 
